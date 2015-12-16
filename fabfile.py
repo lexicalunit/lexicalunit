@@ -31,6 +31,8 @@ def export():
     """Exports repository's master branch to a temporary workspace."""
     with lcd(repo_root):
         local('git archive master | tar -x -C ' + workspace)
+        with lcd('shares'):
+            local('rsync -av private ' + os.path.join(workspace, 'shares'))
 
 
 @task
