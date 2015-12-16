@@ -1,0 +1,163 @@
+\documentclass[12pt, tweaklist, line]{res}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    urlcolor=blue
+}
+% Change global itemize settings
+\let\tempone\itemize
+\let\temptwo\enditemize
+\renewenvironment{itemize}{\tempone\vspace{-.15in}\setlength{\topsep}{0pt}\setlength{\itemsep}{3pt}\vspace{-.15in}}{\temptwo}
+
+% Macros
+\def\Cplusplus{{\rm C\raise.5ex\hbox{\small ++}}}
+\def\first{{\raise.5ex\hbox{\small st}}}
+\def\second{{\raise.5ex\hbox{\small nd}}}
+\def\third{{\raise.5ex\hbox{\small rd}}}
+\def\fourth{{\raise.5ex\hbox{\small th}}}
+
+% Use only a bit more of the page than the default
+\addtolength{\oddsidemargin}{-0.50in}
+\addtolength{\voffset}{-0.50in}
+\addtolength{\textwidth}{0.90in}
+\addtolength{\textheight}{1.70in}
+
+\begin{document}
+
+% <Header>
+
+\begin{resume}
+
+% Experience
+\section{Experience}
+\begin{format}
+  \employer{l}\location{r}\\
+  \title{l}\dates{r}\\
+  \body\\
+\end{format}
+
+% RMN
+\employer{\textbf{RetailMeNot, Inc.}}
+\title{Software Engineer II - Data \& Products}
+\location{Austin, TX}
+\dates{April 2014 -- Present}
+\begin{position}
+\begin{itemize}
+\item Instrumented iOS application with event tracking and built new Products centric UI feature
+\item Prototyped a ``Buy Now'' button using \href{https://stripe.com/}{Stripe.js}, a cross-device embeddable payment form
+% \item cerebro-deploy fabric based AWS deployment
+% \item storm topology
+% \item kinesis autoscaling
+\item Implemented a realtime high availability data pipeline for a constellation of RMN properties
+\item Optimized Veg-o-Matic, our data slicing and reporting tool for A/B testing
+\item Architected aggregation service built on \href{http://druid.io/}{Druid.io}, an OLAP realtime datastore
+% \item Primarily wrote Python ETL code leveraging our MasterMind framework % TODO: Change "Primarily" here
+% \item Built and maintained other internal data oriented products for Business Intelligence division
+\end{itemize}
+\end{position}
+
+% Adometry
+\employer{\textbf{Adometry, Inc.} (\textbf{Adometry by Google})}
+\title{Senior Software Developer - Data Sciences}
+\location{Austin, TX}
+\dates{March 2012 -- February 2014}
+\begin{position}
+\begin{itemize}
+\item Leveraged sophisticated data mining techniques to solve big data analytics problems
+\item Sharpened \Cplusplus~and Python skills by attending PyCon, PyData, and \Cplusplus~conferences
+\item Designed and implemented robust Web API resources using Flask, gunicorn, and Nginx
+\item Collaborated with research and sales teams to produce client driven SaaS products
+\end{itemize}
+\end{position}
+
+% ARL
+\employer{\textbf{Applied Research Laboratories: UT}}
+\title{Engineering Scientist Associate - ATL}
+\location{Austin, TX}
+\dates{August 2006 -- February 2012}
+\begin{position}
+\begin{itemize}
+\item Designed HFA sonar display currently deployed on approximately 75\% of US submarines % TODO: remove 75% stat
+\item Implemented a target tracking and feature classification system for mine avoidance
+\item Wrote real-time simulation software for stress testing, debugging, and Navy certification
+% \item Devised a VCS to manage security classifications across more than a dozen projects
+% \item Developed a high level of proficiency with modern \Cplusplus~techniques and design
+% \item Traveled to remote contractor sites to integrate ARL software with other US Navy systems
+% \item Used Doxygen to generate project and source level documentation for a 3000 KLOC project
+% \item Spent significant time working on Gnome, KDE, Motif, and Windows environments
+% \item Developed Xlib, Xt, and GTK applications
+% \item Built internal tools such as byteswap, bundle, router
+% \item Worked with CORBA based DSS system
+% \item Was heavily involved in development on the DDG 1000 Zumwalt class Destroyer
+% \item Collaborated with NSWC:PC on HFWB
+% \item Often worked very closely with Lockheed Martin on ARCI development
+\end{itemize}
+\end{position}
+
+% SCAL
+\employer{\textbf{Special Core Analysis Laboratories, Inc.}}
+\title{Software Engineer}
+\location{Midland, TX}
+\dates{December 2003 -- January 2006}
+\begin{position}
+\begin{itemize}
+\item Programmed interfaces to data acquisition modules for lab machines
+% \item Designed a mobile desorption oven as well as porosity and core gamma systems
+\end{itemize}
+\end{position}
+
+% Open Source
+\section{Open Source}
+\begin{itemize}
+\vspace{.55in} % why do I need to manually put vertical space here?
+% \item OSS contributions in the form of PRs and such to Atom packages and bokeh and JSONSchemaValidation...
+\item \href{http://pancake.lexicalunit.com}{pancake-master}: A dynamic webpage for Master Pancake showtimes
+\item \href{https://atom.io/packages/multi-wrap-guide}{multi-wrap-guide}: Multiple wrap guides for the Atom editor%, \href{http://blog.atom.io/2015/08/06/new-package-roundup.html}{featured in a github blog post}
+\item \href{http://nanodbc.lexicalunit.com}{nanodbc}: A very small, portable, and featureful \Cplusplus~wrapper for ODBC
+\item \href{https://github.com/lexicalunit/setup}{setup}: Personalized machine configuration management system
+\item \href{https://atom.io/packages/event-watch}{event-watch}: Recurring event watch plugin for the Atom editor
+\item \href{https://github.com/lexicalunit/dict}{\Cplusplus~dict}: Proof-of-concept \Cplusplus~dict class with Python-like features
+\end{itemize}
+
+\pagebreak
+
+% Education
+\section{Education}
+\begin{format}
+  \employer{l}\location{r}\\
+  \title{l}\dates{r}\\
+  \body\\
+\end{format}
+
+% TAMU
+\employer{\textbf{Texas A\&M University}}
+\title{Bachelor of Science in Computer Science}
+\location{College Station, TX}
+\dates{August 2001 -- May 2006}
+\begin{position}
+% GPA: 3.4\\
+\begin{itemize}
+% \item Minors in Linguistics and Mathematics
+\item Implemented a buddy-system memory manager, and multi-level feedback process scheduler
+\item Coded in assembly for MIPS processor and modeled a pipelined processor in Verilog
+\end{itemize}
+\end{position}
+
+% Skills
+\section{Skills}
+
+~\\ % why is this necessary to get skills section to correctly format?
+
+\begin{itemize}
+\item \textbf{Languages:} Python, \Cplusplus, Zsh/Bash, CoffeeScript, JavaScript, Objective-C, C, \LaTeX
+\item \textbf{Tools:} git, Atom, Clang, CMake, JIRA, PagerDuty, Doxygen, GCC, buildbot, X Code
+\item \textbf{Databases:} Storm, Druid.io, Vertica, MongoDB, Greenplum, PostgreSQL, SQL Server
+\item \textbf{Libraries:} Boost, fabric, yaml, GTK, Flask, cppunit, SQLAlchemy
+\item \textbf{Markup:} YAML, HTML/CSS/LESS, Markdown, Confluence Wiki, mediawiki
+\item \textbf{Operating Systems:} OS X, Linux (RedHat and Debian based), Windows
+\end{itemize}
+
+\end{resume}
+\end{document}

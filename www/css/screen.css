@@ -1,0 +1,30 @@
+/* col-md */
+@media screen and (min-width:768px) {
+    /*.icon {
+        border: 1px solid red;
+    }*/
+
+    .dryguy_wrapper {
+        position: absolute;
+        top: 1em;
+        right: 1em;
+    }
+}
+
+/* col-md */
+@media screen and (min-width:992px) {
+    /*.icon {
+        border: 1px solid green;
+    }*/
+}
+
+/* col-lg */
+@media screen and (min-width:1200px) {
+    /*.icon {
+        border: 1px solid blue;
+    }*/
+
+    .rio {
+        max-width: 1024px;
+    }
+}

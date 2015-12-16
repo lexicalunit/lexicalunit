@@ -1,0 +1,7 @@
+*.log
+*.pyc
+/publish.yaml
+/resume/built.tex
+/resume/resume.synctex.gz
+/resume/resume.yaml
+/shares/private/*

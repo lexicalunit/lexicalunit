@@ -1,0 +1,85 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: "Gill Sans", sans;
+    background-color: black;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.title {
+    font-size: 50pt;
+}
+
+.icons {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.icons a:hover {
+    color: violet;
+    text-decoration: none;
+}
+
+.icon img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.icon_description {
+    display: block;
+    font-size: 9pt;
+    font-family: monospace;
+}
+
+.colorful {
+    /* http://www.colorzilla.com/gradient-editor/ */
+    background: rgb(0,0,0); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(0,0,0,1) 0%, rgba(168,104,252,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,1)), color-stop(100%,rgba(168,104,252,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(0,0,0,1) 0%,rgba(168,104,252,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(0,0,0,1) 0%,rgba(168,104,252,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(0,0,0,1) 0%,rgba(168,104,252,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(0,0,0,1) 0%,rgba(168,104,252,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#a868fc',GradientType=0 ); /* IE6-9 */
+}
+
+.invis {
+    display: none;
+}
+
+.title {
+    width: 100%;
+    text-align: center;
+    font-family: sans-serif;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.pic {
+    display: block;
+    margin-top: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1em;
+}
+
+.icon {
+    padding: 10px 0;
+    /*border: 1px solid yellow;*/
+}
+
+.dryguy_wrapper {
+    position: relative;
+    width: 200px;
+    bottom: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: right;
+}

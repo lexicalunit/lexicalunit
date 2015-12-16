@@ -1,0 +1,6 @@
+DirectoryIndex aresume.pdf
+
+<Files ~ ".*\.tex">
+Order Allow,Deny
+Deny from all
+</Files>
