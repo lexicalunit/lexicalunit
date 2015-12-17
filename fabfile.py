@@ -15,7 +15,7 @@ log = logging.getLogger()
 repo_root = local('git rev-parse --show-toplevel', capture=True)
 workspace = local('mktemp -d', capture=True)
 conf_file = 'publish.yaml'
-ignore = ['.git', 'fabfile.py']
+ignore = ['.git', 'fabfile.py', 'README.md']
 
 try:
     conf = yaml.load(open(os.path.join(repo_root, conf_file), 'rb').read())
