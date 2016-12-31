@@ -62,12 +62,12 @@ with open("resume.tex", "r") as f:
             elif line.startswith('\employer'):
                 lines[lineno] = r'\employer{\textbf{Workplace}}'
         data = '\n'.join(lines)
-print(data, file=open("built.tex", "wb"))
+print(data, file=open("built.tex", "w"))
 
 # run LaTeX processing
 p = Popen(['/Library/TeX/texbin/pdflatex', '--file-line-error' '--synctex=1'],
           stdout=PIPE, stdin=PIPE, stderr=STDOUT)
-out, err = p.communicate(input=data)
+out, err = p.communicate(input=data.encode("utf-8"))
 
 # show LaTeX processing output
 print(out)
