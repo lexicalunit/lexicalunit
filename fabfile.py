@@ -1,13 +1,12 @@
 import logging
 import os
-import yaml
-
-from fabric.api import lcd, cd, task, local, put, run
+from functools import partial
 from shutil import rmtree
 
-from fabric.api import env
+import yaml
+
+from fabric.api import cd, env, lcd, local, put, run, task
 from fabric.contrib.project import rsync_project
-from functools import partial
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -31,8 +30,6 @@ def export():
     """Exports repository's master branch to a temporary workspace."""
     with lcd(repo_root):
         local('git archive master | tar -x -C ' + workspace)
-        with lcd('shares'):
-            local('rsync -av private ' + os.path.join(workspace, 'shares'))
 
 
 @task
@@ -41,8 +38,11 @@ def publish():
     export()
 
     remote_dir = conf['mainwebsite_html']
-    sync = partial(rsync_project, remote_dir=remote_dir, exclude=ignore,
-                   extra_opts="-e 'ssh -l {}'".format(conf['user']))
+    sync = partial(
+        rsync_project,
+        remote_dir=remote_dir,
+        exclude=ignore,
+        extra_opts="-e 'ssh -l {}'".format(conf['user']))
 
     try:
         with lcd(workspace):
