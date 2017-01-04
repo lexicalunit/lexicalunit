@@ -54,7 +54,7 @@ def publish():
             sync(local_dir='darwi', delete=True)
             sync(local_dir='shares', delete=False)
             with cd(remote_dir):
-                put('index.html', 'index.html', mode=0755)
+                put('index.html', 'index.html', mode=0o755)
                 run('chmod 777 shares')
                 run('chmod 777 shares/thumbs')
     except:
