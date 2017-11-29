@@ -4,7 +4,6 @@ from functools import partial
 from shutil import rmtree
 
 import yaml
-
 from fabric.api import cd, env, lcd, local, put, run, task
 from fabric.contrib.project import rsync_project
 
@@ -54,7 +53,7 @@ def publish():
             sync(local_dir='darwi', delete=True)
             sync(local_dir='shares', delete=False)
             with cd(remote_dir):
-                put('index.html', 'index.html', mode=0755)
+                put('index.html', 'index.html', mode=0o755)
                 run('chmod 777 shares')
                 run('chmod 777 shares/thumbs')
     except:
