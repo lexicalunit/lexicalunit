@@ -4,7 +4,6 @@ from __future__ import print_function
 
 import logging
 import os
-import re
 import sys
 from subprocess import PIPE, STDOUT, Popen
 
