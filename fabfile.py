@@ -5,7 +5,7 @@ from shutil import rmtree
 
 import yaml
 
-from fabric.api import cd, env, lcd, local, put, run, task
+from fabric.api import cd, env, lcd, local, put, task
 from fabric.contrib.project import rsync_project
 
 logging.basicConfig(level=logging.DEBUG)
