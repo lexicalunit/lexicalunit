@@ -5,12 +5,12 @@ function toggle() {
         $('.top').addClass('invis');
         $('.bottom').removeClass('invis');
         $('.dryguy').attr('src', 'www/img/dryguy-stare.png');
-        $('body').addClass('colorful');
+        $('.content').addClass('colorful');
     } else {
         $('.top').removeClass('invis');
         $('.bottom').addClass('invis');
         $('.dryguy').attr('src', 'www/img/dryguy.gif');
-        $('body').removeClass('colorful');
+        $('.content').removeClass('colorful');
     }
 }
 
