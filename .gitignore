@@ -1,6 +1,4 @@
 *.log
-*.pyc
-/publish.yaml
 /resume/built.tex
 /resume/resume.pdf
 /resume/resume.synctex.gz
