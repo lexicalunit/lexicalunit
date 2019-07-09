@@ -1,9 +1,18 @@
 @media screen and (min-width:800px) {
-    .dryguy_wrapper {
-        position: absolute;
-        top: 1em;
-        right: 1em;
-        max-height: 70px;
-        padding: 0;
-    }
+  .dryguy_wrapper {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    max-height: 70px;
+    padding: 0;
+  }
+
+  .icon {
+    padding-top: 0;
+  }
+
+  .icons {
+    display: flex;
+    justify-content: center;
+  }
 }
