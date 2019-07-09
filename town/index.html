@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>English Town Names</title>
+    <style>
+    a, a:visited, a:hover {
+      color: black;
+      text-decoration: none;
+    }
+    </style>
+    <script src="fitty.min.js"></script>
+    <script>
+      bridges = [
+        ' and ',
+        ' St ',
+        ' upon ',
+        '-in-',
+        '-on-',
+        '-under-',
+        '-upon-',
+      ]
+      tails = [
+        ' Cary',
+        ' Castle',
+        ' City',
+        ' Cross',
+        ' Forum',
+        ' Ham',
+        ' Marsh',
+        ' Stoke',
+        ' Town',
+        ' Tracey',
+      ]
+      nonstarters = [
+        "\'s ",
+      ]
+      starters = [
+        'Great ',
+        'Little',
+        'Long ',
+      ]
+      parts = [
+        ' and ',
+        ' Cary',
+        ' Castle',
+        ' City',
+        ' Cross',
+        ' Forum',
+        ' Ham',
+        ' Marsh',
+        ' St ',
+        ' Stoke',
+        ' Street',
+        ' Town',
+        ' Tracey',
+        ' upon ',
+        '-in-',
+        '-on-',
+        '-under-',
+        '-upon-',
+        'abi',
+        'ager',
+        'apple',
+        'aru',
+        'ash',
+        'ay',
+        'bam',
+        'bar',
+        'bark',
+        'beb',
+        'bec',
+        'berk',
+        'birk',
+        'ble',
+        'bore',
+        'bridge',
+        'bur',
+        'burgh',
+        'bury',
+        'by',
+        'can',
+        'caster',
+        'cay',
+        'cham',
+        'chester',
+        'church',
+        'cot',
+        'cup',
+        'd',
+        'dale',
+        'dar',
+        'del',
+        'e',
+        'ester',
+        'ey',
+        'field',
+        'flit',
+        'ford',
+        'fro',
+        'grave',
+        'gray',
+        'grove',
+        'ham',
+        'har',
+        'head',
+        'hill',
+        'hunt',
+        'hyde',
+        'ing',
+        'ip',
+        'ivy',
+        'ken',
+        'king',
+        'land',
+        'le',
+        'leigh',
+        'les',
+        'ley',
+        'Little',
+        'Long ',
+        'maid',
+        'maiden',
+        'malt',
+        'mex',
+        'middle',
+        'min',
+        'mouth',
+        'ness',
+        'nor',
+        'oo',
+        'over',
+        'per',
+        'port',
+        'ria',
+        'row',
+        'sea',
+        'sey',
+        'sham',
+        'shire',
+        'shot',
+        'side',
+        'sted',
+        'stoke',
+        'strat',
+        'th',
+        'thames',
+        'tle',
+        'ton',
+        'try',
+        'tweed',
+        'ulph',
+        'well',
+        'wen',
+        'wich',
+        'wick',
+        'wold',
+        'wood',
+        'worth',
+        'yard',
+        'ye',
+        "'s ",
+      ]
+
+      let town = ''
+
+      let bridged = false;
+      function getPart(i, size) {
+        let part
+        while(true) {
+          part = parts[Math.floor(Math.random() * parts.length)]
+          if (bridges.includes(part)) {
+            if (bridged || i === 0 || i === size - 1) continue
+            else bridged = true
+          }
+          if (tails.includes(part) && i !== size - 1) continue
+          if (nonstarters.includes(part) && i === 0) continue
+          if (starters.includes(part) && i !== 0) continue
+          if (town[town.length - 1] === ' ' && part[0] === '-') continue
+          if (town[town.length - 1] === '-' && part[0] === ' ') continue
+          if (town[town.length - 1] === ' ' && part[0] === "'") continue
+          if (town[town.length - 1] === '-' && part[0] === "'") continue
+          break
+        }
+        if (i === 0 || town[town.length - 1] === ' ') {
+          part = part.replace(/^\w/, c => c.toUpperCase())
+        }
+        return part
+      }
+
+      window.onload = () => {
+        const size = Math.floor(Math.random() * 3) + 3
+        for (let i = 0; i < size; i++) {
+          town += getPart(i, size)
+        }
+        document.getElementById('display').innerText = town
+        fitty('#display')
+      }
+    </script>
+  </head>
+  <body style="overflow: scroll;">
+  <div style="width: 100%; height: 100%;">
+    <a id="display" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: sans-serif; text-align: center; padding: 10px;" href="index.html" />
+  </div>
+  </body>
+</html>
