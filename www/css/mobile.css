@@ -13,8 +13,6 @@ body {
 
 a {
   display: block;
-  width: 100%;
-  height: 100%;
   color: white;
   text-decoration: none;
 }
@@ -29,6 +27,10 @@ a {
   list-style: none;
 }
 
+.icons a, a.source {
+  transition: all .2s ease-in-out;
+}
+
 .icons a:hover, a.source:hover {
   color: violet;
   text-decoration: none;
@@ -40,23 +42,18 @@ a {
   padding-top: 20px;
 }
 
-.icon img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .icon_description {
   display: block;
-  text-align: center;
   font-family: monospace;
   font-size: 9pt;
+  text-align: center;
+  width: 100%;
 }
 
 .content {
+  margin: 0;
   min-height: 100%;
   padding: 0;
-  margin: 0;
 }
 
 .colorful {
@@ -99,13 +96,29 @@ a {
   bottom: 1em;
   margin-left: auto;
   margin-right: auto;
+  padding-top: 20px;
   position: relative;
   text-align: right;
   width: 200px;
-  padding-top: 20px;
 }
 
 .img-responsive {
-  width: 60%;
   height: auto;
+  width: 60%;
 }
+
+.icon-img {
+  height: 72px;
+  position: relative;
+}
+.icon-img img {
+  position: absolute;
+  left: 0;
+  transition: opacity .2s ease-in-out;
+}
+
+.icon-img img.violet { opacity: 0; }
+a.hovered .icon-img img.violet { opacity: 1; }
+
+.icon-img img.white { opacity: 1; }
+a.hovered .icon-img img.white { opacity: 0; }
