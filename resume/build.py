@@ -36,7 +36,7 @@ ANON_HEADER = r"""
 \end{center}
 \vspace{-.2in}
 \begin{tabular*}{7.0in}{l@{\extracolsep{\fill}}r}
-    \hspace{-1.5cm}Austin, TX & \href{mailto:resume@lexicalunit.com}{resume@lexicalunit.com} \\
+    \hspace{-1.5cm}Portland, OR & \href{mailto:resume@lexicalunit.com}{resume@lexicalunit.com} \\
 \end{tabular*}
 \hrulefill
 """
@@ -80,6 +80,6 @@ assert os.path.isfile('texput.pdf')
 os.remove('texput.log')
 
 # output
-OUTPUT = conf['real_resume_install_path'] if BUILD_REAL else 'aresume.pdf'
+OUTPUT = os.path.expanduser(conf['real_resume_install_path'] if BUILD_REAL else 'aresume.pdf')
 os.rename('texput.pdf', OUTPUT)
 print('built {}'.format(OUTPUT))

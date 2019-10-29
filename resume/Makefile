@@ -4,4 +4,4 @@ all:
 
 .PHONY: clean
 clean:
-	rm -f built.tex resume.synctex.gz
+	rm -f built.tex resume.synctex.gz resume.aux resume.fdb_latexmk resume.fls
