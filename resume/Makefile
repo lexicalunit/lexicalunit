@@ -1,6 +1,8 @@
 all:
 	./build.py
 	./build.py --real
+	./build.py --digital
+	./build.py --real --digital
 
 .PHONY: clean
 clean:

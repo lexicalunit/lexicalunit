@@ -17,6 +17,7 @@ logging.basicConfig(level=logging.DEBUG)
 log = logging.getLogger()
 
 BUILD_REAL = '--real' in sys.argv
+BUILD_DIGITAL = '--digital' in sys.argv
 CONF_FILE = 'resume.yaml'
 
 try:
@@ -41,6 +42,13 @@ ANON_HEADER = r"""
 \hrulefill
 """
 
+# digital optimization (vs the default: print optimization)
+DIGITAL_PREAMBLE = r"""
+% sans-serif font is better for digital, but serif is better for print
+\usepackage{gillius}
+\renewcommand{\familydefault}{\sfdefault}
+"""
+
 # generate LaTeX source
 with open("resume.tex", "r") as f:
     data = f.read()
@@ -48,6 +56,9 @@ with open("resume.tex", "r") as f:
         data = data.replace("% <Header>", REAL_HEADER)
     else:
         data = data.replace("% <Header>", ANON_HEADER)
+
+    if BUILD_DIGITAL:
+        data = data.replace("% <Digital>", DIGITAL_PREAMBLE)
 
     if not BUILD_REAL:
         lines = data.split('\n')
@@ -81,5 +92,7 @@ os.remove('texput.log')
 
 # output
 OUTPUT = os.path.expanduser(conf['real_resume_install_path'] if BUILD_REAL else 'aresume.pdf')
+if BUILD_DIGITAL:
+    OUTPUT = OUTPUT[:-4] + '-digital' + OUTPUT[-4:]
 os.rename('texput.pdf', OUTPUT)
 print('built {}'.format(OUTPUT))
