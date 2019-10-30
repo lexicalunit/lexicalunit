@@ -10,6 +10,42 @@
       color: black;
       text-decoration: none;
     }
+    .button {
+      user-select: none;
+      box-shadow: inset 0px 1px 0px 0px #ffffff;
+      background: linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+      background-color: #ffffff;
+      border-radius: 6px;
+      border: 1px solid #dcdcdc;
+      display: inline-block;
+      cursor: pointer;
+      color: #666666;
+      font-family: Arial;
+      font-size: xx-large;
+      font-weight: bold;
+      padding: 6px 24px;
+      text-decoration: none;
+      text-shadow: 0px 1px 0px #ffffff;
+    }
+    .button:hover {
+      background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+      background-color: #f6f6f6;
+    }
+    .button:active {
+      position: relative;
+      top: 1px;
+    }
+    .note {
+      position: fixed;
+      font-weight: lighter;
+      color: #666666;
+      bottom: 0;
+      padding-bottom: 2em;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+      text-align: center;
+    }
     </style>
     <script src="fitty.min.js"></script>
     <script>
@@ -198,11 +234,35 @@
         document.getElementById('display').innerText = town
         fitty('#display')
       }
+
+      function copy() {
+        // copy the text
+        const temp = document.createElement('input')
+        temp.value = document.getElementById('display').text
+        document.body.appendChild(temp)
+        temp.select()
+        document.execCommand('copy')
+        temp.remove()
+
+        // notify user
+        const button = document.getElementById('copy')
+        const orig = button.textContent
+        button.textContent = 'Copied!'
+        button.style.pointerEvents = 'none';
+        button.style.cursor = 'default';
+        setTimeout(() => {
+          button.textContent = orig
+          button.style.pointerEvents = 'auto';
+          button.style.cursor = 'pointer';
+        }, 1200)
+      }
     </script>
   </head>
   <body style="overflow: scroll;">
-  <div style="width: 100%; height: 100%;">
-    <a id="display" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: sans-serif; text-align: center; padding: 10px;" href="index.html" />
-  </div>
+    <a onclick="copy()" id="copy" class="button">Copy to clipboard</a><br />
+    <div class="note">Click town name to generate another one!</div>
+    <div style="width: 100%; height: 100%;">
+      <a id="display" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: sans-serif; text-align: center; padding: 10px;" href="index.html" />
+    </div>
   </body>
 </html>
