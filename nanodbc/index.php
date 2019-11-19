@@ -1,5 +1,5 @@
 <?php
 
-header("Location: http://lexicalunit.github.io/nanodbc/");
+header("Location: http://nanodbc.github.io/nanodbc/");
 
 ?>
