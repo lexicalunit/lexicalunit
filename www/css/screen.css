@@ -15,4 +15,9 @@
     display: flex;
     justify-content: center;
   }
+
+  .title a:hover {
+    color: violet;
+    transition: all .2s ease-in-out;
+  }
 }

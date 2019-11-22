@@ -6,7 +6,7 @@ html, body {
 
 body {
   background-color: black;
-  font-family: "Gill Sans", sans;
+  font-family: 'Inconsolata', monospace;
   overflow-x: hidden;
   overflow-y: scroll;
 }
@@ -44,7 +44,6 @@ a {
 
 .icon_description {
   display: block;
-  font-family: monospace;
   font-size: 9pt;
   text-align: center;
   width: 100%;
@@ -73,7 +72,6 @@ a {
 }
 
 .title {
-  font-family: sans-serif;
   font-weight: bold;
   letter-spacing: 3px;
   text-align: center;
