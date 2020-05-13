@@ -18,7 +18,7 @@ a {
 }
 
 .title {
-  font-size: 50pt;
+  font-size: 30pt;
 }
 
 .icons {
@@ -75,6 +75,12 @@ a {
   font-weight: bold;
   letter-spacing: 3px;
   text-align: center;
+}
+
+.title .violet-filter {
+  font-size: 15pt;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .source, .pic {

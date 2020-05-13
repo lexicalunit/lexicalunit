@@ -16,8 +16,39 @@
     justify-content: center;
   }
 
+  .title {
+    font-size: 50pt;
+  }
+
+  .title .violet-filter {
+    font-size: 30pt;
+  }
+
   .title a:hover {
     color: violet;
-    transition: all .2s ease-in-out;
+
+    /* I can't get transition to work on emjoi colorization, so disable it. */
+    /* transition: all .2s ease-in-out; */
+  }
+
+  /* add colorization to emjoi on hover */
+  .title:hover .violet-filter {
+    background: #000;
+    position: relative;
+    display: inline-block;
+  }
+  .title:hover .violet-filter span {
+    filter: brightness(1);
+  }
+  .title:hover .violet-filter:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: violet;
+    mix-blend-mode: darken;
+    z-index: 1;
   }
 }
