@@ -9,6 +9,7 @@ git archive master | tar -x -C "$wd"
 cd "$wd"
 
 rsync -av --chmod=a+r --rsh=ssh .htaccess "$PUSER@$PHOST:$PDEST"
+rsync -av --chmod=a+r --rsh=ssh favicon.ico "$PUSER@$PHOST:$PDEST"
 
 rsync -av --chmod=a+r --rsh=ssh darwi "$PUSER@$PHOST:$PDEST"
 rsync -av --chmod=a+r --rsh=ssh github "$PUSER@$PHOST:$PDEST"
