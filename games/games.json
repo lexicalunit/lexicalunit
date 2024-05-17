@@ -36,7 +36,7 @@
         "year": 1997
     },
     {
-        "desc": "A brutally difficult game that rewards patience and skill.",
+        "desc": "A brutally difficult game that rewards patience and skill. Also one of the best soundtracks in any game ever.",
         "hero": "hero-celeste.jpg",
         "title": "Celeste",
         "year": 2018
@@ -72,7 +72,7 @@
         "year": 1996
     },
     {
-        "desc": "The best isometric CRPG ever made. Features little to no combat. Every decision matters.",
+        "desc": "The best isometric CRPG ever made. Features little to no combat. Every decision matters. Incredible voice acting for all dialog too!",
         "hero": "hero-disco-elysium.jpg",
         "title": "Disco Elysium",
         "year": 2019
@@ -109,7 +109,7 @@
     },
     {
         "desc": "The best run and gun game ever made. Contra games wish they were this much fun.",
-        "hero": "hero-.jpg",
+        "hero": "hero-gunstar-heroes.jpg",
         "title": "Gunstar Heroes",
         "year": 1993
     },
@@ -133,7 +133,7 @@
     },
     {
         "desc": "The best multiplayer experience I've ever had in my life. Some of the most beautiful visuals as well.",
-        "hero": "hero-.jpg",
+        "hero": "hero-journey.jpg",
         "title": "Journey",
         "year": 2012
     },
@@ -193,7 +193,7 @@
     },
     {
         "desc": "The most fluid and fast paced Metriod game. Also the characterization of Samus in this game is the best in the series.",
-        "hero": "hero-.jpg",
+        "hero": "hero-metroid-dread.jpg",
         "title": "Metroid: Dread",
         "year": 2021
     },
@@ -246,7 +246,7 @@
         "year": 2023
     },
     {
-        "desc": "The best CRPG made with modern sensibilities and a great story.",
+        "desc": "This game provides the same feeling as playing a classic Baldur's Gate game but updated in every possible way. For one thing the combat system is actually good! Some of the most fun I've had in the CRPG genre.",
         "hero": "hero-pillars-of-eternity-2.jpg",
         "title": "Pillars of Eternity 2: Deadfire",
         "year": 2020
@@ -301,7 +301,7 @@
     },
     {
         "desc": "The peak of city building simulation games.",
-        "hero": "hero-cimcity-2000.jpg",
+        "hero": "hero-simcity-2000.jpg",
         "title": "SimCity: 2000",
         "year": 1993
     },
@@ -361,7 +361,7 @@
     },
     {
         "desc": "The art and animations in this game are some of the best ever made. The gameplay is also top notch.",
-        "hero": "hero-super-mario-wonder.jpg",
+        "hero": "hero-super-mario-bros-wonder.jpg",
         "title": "Super Mario Brows. Wonder",
         "year": 2023
     },
@@ -409,7 +409,7 @@
     },
     {
         "desc": "Almost as good as the original with really amazing dungeon design and satisfying combat.",
-        "hero": "hero-.jpg",
+        "hero": "hero-zelda-albw.jpg",
         "title": "Zelda: A Link Between Worlds",
         "year": 2013
     },

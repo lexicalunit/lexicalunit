@@ -13,7 +13,7 @@
         flex-direction: column;
       }
       .container {
-        max-width: 500px;
+        max-width: 470px;
         padding: 32px;
         margin: 10px auto;
         border: 1px solid #eee;
@@ -98,6 +98,11 @@
         box-shadow: #fff 2px 2px 0 0, #000 2px 2px 0 1px;
         transform: translate(2px, 2px);
       }
+      img {
+        margin: 5px auto;
+        display: block;
+        border: 1px solid black;
+      }
     </style>
     <script>
       let asc = false;
@@ -125,7 +130,7 @@
             <ul class="alternating-colors">
               ${
                 games.sort(sorter).map((game) => {
-                  return `<li><strong>${game.title.replace(/ /g, ' ')} — ${game.year}</strong><img src="${game.hero}" /><p>${game.desc}</p></li>`;
+                  return `<li><strong>${game.title.replace(/ /g, ' ')} — ${game.year}</strong><img src="/www/img/games/${game.hero}" /><p>${game.desc}</p></li>`;
                 }).join('')
               }
             </ul>

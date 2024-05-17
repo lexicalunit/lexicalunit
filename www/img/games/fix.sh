@@ -1,7 +1,5 @@
 #!/bin/bash -ue
 
-echo "$0"
-
 for i in *; do
     if [[ $i == $(basename "$0") || $i == hero-* ]]; then
         continue
