@@ -12,6 +12,10 @@
         display: flex;
         flex-direction: column;
       }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
       .container {
         max-width: 470px;
         padding: 32px;
@@ -130,7 +134,19 @@
             <ul class="alternating-colors">
               ${
                 games.sort(sorter).map((game) => {
-                  return `<li><strong>${game.title.replace(/ /g, ' ')} — ${game.year}</strong><img src="/www/img/games/${game.hero}" /><p>${game.desc}</p></li>`;
+                  const query = `"${game.title}" game trailer site:youtube.com`;
+                  const link = (
+                    `https://www.google.com/search?` +
+                    `&btnI=I%27m+Feeling+Lucky&gbv=1&` +
+                    `q=${encodeURIComponent(query)}`
+                  );
+                  return (
+                      `<li><a href="${link}" rel="noreferrer noopener" target="_blank">` +
+                      `<strong>${game.title} — ${game.year}</strong>` +
+                      `<img alt="${game.title}" src="/www/img/games/${game.hero}" />` +
+                      `<p>${game.desc}</p>` +
+                      `</a></li>`
+                  );
                 }).join('')
               }
             </ul>
