@@ -21,3 +21,6 @@ rsync -av --chmod=a+r --rsh=ssh games "$PUSER@$PHOST:$PDEST"
 rsync -av --chmod=a+r --rsh=ssh www "$PUSER@$PHOST:$PDEST"
 
 rsync -av --chmod=a+r --rsh=ssh index.html "$PUSER@$PHOST:$PDEST"
+
+# To copy specific additional files, use:
+# PUSER="..." PHOST="..." rsync -av --chmod=a+r --rsh=ssh /path/to/file "$PUSER@$PHOST:/path/to/dest"
