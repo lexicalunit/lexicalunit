@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Best of the Best</title>
+    <style>
+      /* page styles */
+      @import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+      body {
+        font-family: "Space Mono", monospace;
+        display: flex;
+        flex-direction: column;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      * {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizelegibility;
+        letter-spacing: -0.25px;
+      }
+
+      /* main styles */
+      main .container {
+        max-width: 470px;
+        padding: 32px;
+        margin: 10px auto;
+        border: 1px solid #eee;
+        box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.06);
+      }
+      main ul {
+        padding-left: 5px;
+        list-style-type: none;
+      }
+      main li {
+        color: #4F4F4F;
+        margin-left: 16px;
+        margin-top: 24px;
+        position: relative;
+        font-size: 16px;
+        line-height: 20px;
+        border-radius: 5px;
+        padding: 1px 1px 1px 10px;
+      }
+      main li:hover {
+        background-color: #f0f0f0;
+      }
+      main li:before {
+        content: "";
+        display: block;
+        height: 10px;
+        width: 10px;
+        border-radius: 50%;
+        border: 2px solid #ddd;
+        position: absolute;
+        top: 4px;
+        left: -20px;
+      }
+      strong, h2 {
+        color: #292929;
+      }
+      main ul.alternating-colors li:nth-child(odd):before {
+        border-color: #ff8772;
+      }
+      main ul.alternating-colors li:nth-child(even):before {
+        border-color: #9dd0ff;
+      }
+      button {
+        appearance: button;
+        width: 100%;
+        background-color: #000;
+        background-image: none;
+        border: 1px solid #000;
+        border-radius: 4px;
+        box-shadow: #fff 4px 4px 0 0,#000 4px 4px 0 1px;
+        box-sizing: border-box;
+        color: #fff;
+        cursor: pointer;
+        display: block;
+        margin: 0;
+        overflow: visible;
+        text-align: center;
+        text-transform: none;
+        touch-action: manipulation;
+        user-select: none;
+        -webkit-user-select: none;
+        /* vertical-align: middle; */
+        white-space: nowrap;
+      }
+      button:focus {
+        text-decoration: none;
+      }
+      button:hover {
+        text-decoration: none;
+      }
+      button:active {
+        box-shadow: rgba(0, 0, 0, .125) 0 3px 5px inset;
+        outline: 0;
+      }
+      button:not([disabled]):active {
+        box-shadow: #fff 2px 2px 0 0, #000 2px 2px 0 1px;
+        transform: translate(2px, 2px);
+      }
+      img {
+        margin: 5px auto;
+        display: block;
+        border: 1px solid black;
+      }
+
+      /* Sticky header styles */
+      .sticky-header a:hover {
+        color: #ff8772;
+      }
+      .sticky-header {
+        font-family: Inconsolata, monospace;
+        position: sticky;
+        top: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        z-index: 1000;
+        border-radius: 4px;
+      }
+      .sticky-header .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+      }
+      .sticky-header h1 {
+        font-size: 1.5rem;
+      }
+      .sticky-header nav ul {
+        list-style: none;
+        display: flex;
+        gap: 30px;
+      }
+      .sticky-header nav ul li a {
+        color: #fff;
+        text-decoration: none;
+      }
+      @media (max-width: 768px) {
+        .sticky-header h1 {
+          font-size: 1.2rem;
+        }
+        .sticky-header nav ul {
+          flex-direction: column;
+          gap: 10px;
+        }
+      }
+    </style>
+    <script>
+      let asc = false;
+      let data = [];
+
+      async function fetchData() {
+        if (data.length === 0) {
+          const response = await fetch('data.json');
+          data = await response.json();
+        }
+        return data
+      }
+
+      async function renderPage() {
+        const data = await fetchData();
+
+        const pageTitle = document.querySelector("title");
+        pageTitle.innerHTML = data.title;
+
+        const header = document.querySelector("h2");
+        header.innerHTML = data.title;
+
+        const items = data.items;
+
+        displayList()
+        populateList();
+      }
+
+      function displayList() {
+        const output = document.querySelector('.output');
+        if (!output.querySelector("ul")) {
+          output.innerHTML = `<ul class="alternating-colors"></ul>`;
+        }
+
+        const button = document.querySelector('button');
+        button.innerHTML = asc ? '▲' : '▼';
+
+        const ul = document.querySelector(".output ul");
+        ul.style.display = "flex";
+        ul.style.flexDirection = asc ? "column" : "column-reverse";
+      }
+
+      function populateList() {
+        const sortedItems = [...data.items].sort((a, b) => asc ? a.year - b.year : b.year - a.year);
+        const fragment = document.createDocumentFragment();
+        const ul = document.querySelector(".output ul");
+
+        sortedItems.forEach(item => {
+          if (item.include === false) return;
+          const li = document.createElement("li");
+          const query = `"${item.title}" ${data.query}`;
+          const link = (
+            `https://www.google.com/search?` +
+            `&btnI=I%27m+Feeling+Lucky&gbv=1&` +
+            `q=${encodeURIComponent(query)}`
+          );
+          li.innerHTML = `
+            <a href="${link}" target="_blank" rel="noopener noreferrer">
+              <strong>${item.title} — ${item.year}</strong>
+              <img alt="${item.title}" src="${data.images}/${item.hero}" />
+              <p>${item.desc}</p>
+            </a>
+          `;
+          fragment.appendChild(li);
+        });
+
+        ul.appendChild(fragment);
+      }
+
+      function toggleSort() {
+        asc = !asc;
+        displayList();
+      }
+
+      window.addEventListener("DOMContentLoaded", renderPage);
+    </script>
+  </head>
+  <body>
+    <header class="sticky-header">
+      <div class="container">
+        <h1>Lexical Unit</h1>
+        <nav>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/games">Best Games</a></li>
+            <li><a href="/anime">Best Anime</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="container">
+        <h2 style="display: inline-block;">Best of the Best</h2>
+        <button onclick="toggleSort()"></button>
+        <div class="output"></div>
+      </div>
+    </main>
+  </body>
+</html>
