@@ -1,0 +1,457 @@
+{
+  "images": "/www/img/games",
+  "items": [
+    {
+      "desc": "Cozy game about exploring a colorful island and making friends with other animals.",
+      "hero": "hero-a-short-hike.jpg",
+      "title": "A Short Hike",
+      "year": 2019
+    },
+    {
+      "desc": "Secrets laden metroidvania with a beautiful pixelated art style and addicting gameplay.",
+      "hero": "hero-animal-well.jpg",
+      "title": "Animal Well",
+      "year": 2024
+    },
+    {
+      "desc": "No other RPG provides as much freedom and choice.",
+      "hero": "hero-baldurs-gate-3.jpg",
+      "title": "Baldur's Gate 3",
+      "year": 2023
+    },
+    {
+      "desc": "The best translation of classic 2E AD&D rules to a video game.",
+      "hero": "hero-baldurs-gate-2.jpg",
+      "title": "Baldur's Gate II: Shadows of Amn",
+      "year": 2000
+    },
+    {
+      "desc": "No other game makes you feel as much like Batman.",
+      "hero": "hero-batman-arkham-city.jpg",
+      "title": "Batman: Arkham City",
+      "year": 2011
+    },
+    {
+      "desc": "One of the games that established the metroidvania genre and still remains one of the best.",
+      "hero": "hero-castlevania-symphony-of-the-night.jpg",
+      "title": "Castlevania: Symphony of the Night",
+      "year": 1997
+    },
+    {
+      "desc": "A brutally difficult game that rewards patience and skill. Also one of the best soundtracks in any game ever.",
+      "hero": "hero-celeste.jpg",
+      "title": "Celeste",
+      "year": 2018
+    },
+    {
+      "desc": "An incredible soundtrack by Yasunori Mitsuda and a story that spans multiple dimensions.",
+      "hero": "hero-chrono-cross.jpg",
+      "title": "Chrono Cross",
+      "year": 1999
+    },
+    {
+      "desc": "One of the few retro JRPGs that is actually good and remains fun to play even today.",
+      "hero": "hero-chrono-trigger.jpg",
+      "title": "Chrono Trigger",
+      "year": 1995
+    },
+    {
+      "desc": "The best Contra game. Fast paced side-scrolling action shooter with impressive bosses and challenging levels.",
+      "hero": "hero-contra-hard-corps.jpg",
+      "title": "Contra: Hard Corps",
+      "year": 1994
+    },
+    {
+      "desc": "A darker more brutal expression of the classic Zelda formula of puzzle based dungeons and exploration.",
+      "hero": "hero-darksiders.jpg",
+      "title": "Darksiders",
+      "year": 2010
+    },
+    {
+      "desc": "Hilarious game of setting up traps to kill unsuspecting adventurers.",
+      "hero": "hero-tecmos-deception.jpg",
+      "title": "Tecmo's Deception",
+      "year": 1996
+    },
+    {
+      "desc": "The best isometric CRPG ever made. Features little to no combat. Every decision matters. Incredible voice acting for all dialog too!",
+      "hero": "hero-disco-elysium.jpg",
+      "title": "Disco Elysium",
+      "year": 2019
+    },
+    {
+      "desc": "Intricately designed and highly vertical levels that are are a joy to navigate.",
+      "hero": "hero-dishonored-2.jpg",
+      "title": "Dishonored 2",
+      "year": 2016
+    },
+    {
+      "desc": "The best combat system in any CRPG with an engrossing story and characters too.",
+      "hero": "hero-divinity-original-sin-2.jpg",
+      "title": "Divinity: Original Sin 2",
+      "year": 2017
+    },
+    {
+      "desc": "Single best Final Fantasy game ever made with a truly beautiful world, story and characters.",
+      "hero": "hero-final-fantasy-ix.jpg",
+      "title": "Final Fantasy IX",
+      "year": 2000
+    },
+    {
+      "desc": "Most rewarding Fire Emblem game with well designed maps and interesting character builds.",
+      "hero": "hero-fire-emblem-awakening.jpg",
+      "title": "Fire Emblem: Awakening",
+      "year": 2012
+    },
+    {
+      "desc": "Of all the classic JRPGs from the 3D era, this one has the most engaging combat system, best soundtrack, and most likeable characters.",
+      "hero": "hero-grandia-ii.jpg",
+      "title": "Grandia II",
+      "year": 2000
+    },
+    {
+      "desc": "The best run and gun game ever made. Contra games wish they were this much fun.",
+      "hero": "hero-gunstar-heroes.jpg",
+      "title": "Gunstar Heroes",
+      "year": 1993
+    },
+    {
+      "desc": "Difficult but rewarding isomeric twitch based combat game with amazing visuals and music.",
+      "hero": "hero-hyper-light-drifter.jpg",
+      "title": "Hyper Light Drifter",
+      "year": 2016
+    },
+    {
+      "desc": "A game that constantly surprises you with its creativity and how deep the rabbit hole goes.",
+      "hero": "hero-inscryption.jpg",
+      "title": "Inscryption",
+      "year": 2021
+    },
+    {
+      "desc": "A short little side-scrolling platforming horror game with unexpected twists and detailed environmental storytelling.",
+      "hero": "hero-inside.jpg",
+      "title": "Inside",
+      "year": 2016
+    },
+    {
+      "desc": "The best multiplayer experience I've ever had in my life. Some of the most beautiful visuals as well.",
+      "hero": "hero-journey.jpg",
+      "title": "Journey",
+      "year": 2012
+    },
+    {
+      "desc": "A stealth platformer with a great soundtrack, unique visual style, and some of the best fast paced gameplay ever.",
+      "hero": "hero-katana-zero.jpg",
+      "title": "Katana ZERO",
+      "year": 2019
+    },
+    {
+      "desc": "A perfect distillation of the Kirby formula into a 3D space. Tremendously enjoyable and charming.",
+      "hero": "hero-kirby-and-the-forgotten-land.jpg",
+      "title": "Kirby and the Forgotten Land",
+      "year": 2022
+    },
+    {
+      "desc": "The classic Kirby platforming experience that's still fun to play today.",
+      "hero": "hero-kirbys-adventure.jpg",
+      "title": "Kirby's Adventure",
+      "year": 1993
+    },
+    {
+      "desc": "A golf game that's more about puzzle solving than golf. A unique and fun experience.",
+      "hero": "hero-kirbys-dream-course.jpg",
+      "title": "Kirby's Dream Course",
+      "year": 1995
+    },
+    {
+      "desc": "The Mass Effect game with the best combat and most interesting characters.",
+      "hero": "hero-mass-effect-2.jpg",
+      "title": "Mass Effect 2",
+      "year": 2010
+    },
+    {
+      "desc": "The best Mega Man game ever made. You want to replay it over and over again just to see how fast you can beat it. Fast paced satisfying movement and interesting weapons that can be used in multiple ways.",
+      "hero": "hero-mega-man-x.jpg",
+      "title": "Mega Man X",
+      "year": 1993
+    },
+    {
+      "desc": "A fun Mega Man game but most notable for allowing you to play as Zero.",
+      "hero": "hero-mega-man-x4.jpg",
+      "title": "Mega Man X4",
+      "year": 1997
+    },
+    {
+      "desc": "The game which most perfectly makes you feel like you are Samus Aran. I've never played a game with more satisfying motion controls.",
+      "hero": "hero-metroid-prime-3.jpg",
+      "title": "Metroid Prime 3: Corruption",
+      "year": 2007
+    },
+    {
+      "desc": "Incredibly immersive gameplay and world building. The level of environmental detail is unmatched.",
+      "hero": "hero-metroid-prime.jpg",
+      "title": "Metroid Prime",
+      "year": 2002
+    },
+    {
+      "desc": "The most fluid and fast paced Metriod game. Also the characterization of Samus in this game is the best in the series.",
+      "hero": "hero-metroid-dread.jpg",
+      "title": "Metroid: Dread",
+      "year": 2021
+    },
+    {
+      "desc": "Allows for infinite creativity and exploration. The best sandbox game ever made.",
+      "hero": "hero-minecraft.jpg",
+      "title": "Minecraft",
+      "year": 2011
+    },
+    {
+      "desc": "One of the most unique platformers ever made. Every level is a joy to discover. Some of the best boss battles in any game ever.",
+      "hero": "hero-mischief-makers.jpg",
+      "title": "Mischief Makers",
+      "year": 1997
+    },
+    {
+      "desc": "The best game in the Mother series. A game that's both hilarious and touching.",
+      "hero": "hero-earthbound.jpg",
+      "title": "Mother 2 (EarthBound)",
+      "year": 1995
+    },
+    {
+      "desc": "More emotionally impactful than EarthBound with a more interesting combat system.",
+      "hero": "hero-mother-3.jpg",
+      "title": "Mother 3",
+      "year": 2006
+    },
+    {
+      "desc": "The best Zelda-like game ever made. Fun but simple combat and interesting characters.",
+      "hero": "hero-okami.jpg",
+      "title": "Okami",
+      "year": 2006
+    },
+    {
+      "desc": "One of the top 3 games ever made. A knowledge based exploration and physics game that you will forever wish you could play again for the first time.",
+      "hero": "hero-outer-wilds.jpg",
+      "title": "Outer Wilds",
+      "year": 2019
+    },
+    {
+      "desc": "Short and creepy horror game that doesn't overstay its welcome.",
+      "hero": "hero-pt.jpg",
+      "title": "P.T.",
+      "year": 2014
+    },
+    {
+      "desc": "The best Pikmin game offering the most diverse gameplay, puzzles, and environments.",
+      "hero": "hero-pikmin-4.jpg",
+      "title": "Pikmin 4",
+      "year": 2023
+    },
+    {
+      "desc": "This game provides the same feeling as playing a classic Baldur's Gate game but updated in every possible way. For one thing the combat system is actually good! Some of the most fun I've had in the CRPG genre.",
+      "hero": "hero-pillars-of-eternity-2.jpg",
+      "title": "Pillars of Eternity 2: Deadfire",
+      "year": 2020
+    },
+    {
+      "desc": "Of all CRPGs, this one has the best story and characters. Too bad the combat is terrible.",
+      "hero": "hero-planescape-torment.jpg",
+      "title": "Planescape: Torment",
+      "year": 1999
+    },
+    {
+      "desc": "Hilarious first-person puzzle game with a great story and characters. The sequel is also excellent.",
+      "hero": "hero-portal.jpg",
+      "title": "Portal",
+      "year": 2007
+    },
+    {
+      "desc": "Very satisfying 3D platformer with a unique time manipulation mechanic.",
+      "hero": "hero-prince-of-persia-the-sands-of-time.jpg",
+      "title": "Prince of Persia: The Sands of Time",
+      "year": 2003
+    },
+    {
+      "desc": "The 3D game with the most satisfying movement ever made.",
+      "hero": "hero-pseudoregalia.jpg",
+      "title": "Pseudoregalia",
+      "year": 2023
+    },
+    {
+      "desc": "Wonderfully unique game that never ceases to surprise you or make you laugh. The sequel is also good and has better moment-to-moment gameplay too.",
+      "hero": "hero-psychonauts.jpg",
+      "title": "Psychonauts",
+      "year": 2005
+    },
+    {
+      "desc": "The best retro Action JRPG ever made. Some of the best music in any game ever. A satisfying combat system and lots of replayability.",
+      "hero": "hero-seiken-densetsu-3.jpg",
+      "title": "Seiken Densetsu 3 (Trials of Mana)",
+      "year": 1995
+    },
+    {
+      "desc": "One of the top 3 games ever made. No other game has made me feel as many emotions as strongly as this one. A beautifully haunting story and world with amazing gameplay and music.",
+      "hero": "hero-shadow-of-the-colossus.jpg",
+      "title": "Shadow of the Colossus",
+      "year": 2005
+    },
+    {
+      "desc": "The most fast paced and fluid side scrolling action retro game ever made. Some great music as well.",
+      "hero": "hero-shinobi-iii.jpg",
+      "title": "Shinobi III: Return of the Ninja Master",
+      "year": 1993
+    },
+    {
+      "desc": "The peak of city building simulation games.",
+      "hero": "hero-simcity-2000.jpg",
+      "title": "SimCity: 2000",
+      "year": 1993
+    },
+    {
+      "desc": "A movement based 3D platformer with crunchy combat and a world you want to explore.",
+      "hero": "hero-solar-ash.jpg",
+      "title": "Solar Ash",
+      "year": 2021
+    },
+    {
+      "desc": "The best classic Sonic game with the best levels, music, and bosses.",
+      "hero": "hero-sonic-3-knuckles.jpg",
+      "title": "Sonic 3 & Knuckles",
+      "year": 1994
+    },
+    {
+      "desc": "The best modern Sonic game which does its best to capture the spirit of the classic games while adding new mechanics and equally amazing music.",
+      "hero": "hero-sonic-mania.jpg",
+      "title": "Sonic Mania",
+      "year": 2017
+    },
+    {
+      "desc": "The best roguelike platformer ever made. Every run is different and exciting.",
+      "hero": "hero-spelunky.jpg",
+      "title": "Spelunky HD",
+      "year": 2013
+    },
+    {
+      "desc": "A deep any enjoyable metroidvania with relaxing, meditative gameplay.",
+      "hero": "hero-steamworld-dig-2.jpg",
+      "title": "SteamWorld Dig 2",
+      "year": 2017
+    },
+    {
+      "desc": "More of an activity than a game. A great way to relax and unwind.",
+      "hero": "hero-steamworld-dig.jpg",
+      "title": "SteamWorld Dig",
+      "year": 2013
+    },
+    {
+      "desc": "Some of the best music in any video game ever. A classic side-scrolling beat 'em up.",
+      "hero": "hero-streets-of-rage-2.jpg",
+      "title": "Streets of Rage 2",
+      "year": 1992
+    },
+    {
+      "desc": "Like the classic games before it but with modern sensibilities, one of the best beat 'em ups ever made.",
+      "hero": "hero-streets-of-rage-4.jpg",
+      "title": "Streets of Rage 4",
+      "year": 2020
+    },
+    {
+      "desc": "A fast pasted combat-focused metroidvania with a unique art style.",
+      "hero": "hero-strider.jpg",
+      "title": "Strider",
+      "year": 2014
+    },
+    {
+      "desc": "The art and animations in this game are some of the best ever made. The gameplay is also top notch.",
+      "hero": "hero-super-mario-bros-wonder.jpg",
+      "title": "Super Mario Brows. Wonder",
+      "year": 2023
+    },
+    {
+      "desc": "Getting 100% in this game is fun, challenging, and rewarding. One of the best Mario platformers ever made.",
+      "hero": "hero-yoshis-island.jpg",
+      "title": "Super Mario World 2: Yoshi's Island",
+      "year": 1995
+    },
+    {
+      "desc": "A true classic that still holds up today. Perfect level design and controls make the game a joy to replay.",
+      "hero": "hero-super-mario-world.jpg",
+      "title": "Super Mario World",
+      "year": 1990
+    },
+    {
+      "desc": "The best game ever made. A perfect blend of exploration and combat. Timeless music and perfect environmental storytelling.",
+      "hero": "hero-super-metroid.jpg",
+      "title": "Super Metroid",
+      "year": 1994
+    },
+    {
+      "desc": "The best fighting game ever made. Easy to learn, hard to master.",
+      "hero": "hero-super-smash-bros-melee.jpg",
+      "title": "Super Smash Bros. Melee",
+      "year": 2001
+    },
+    {
+      "desc": "The best abstract puzzle game ever made. A simple mechanic that is endlessly deep.",
+      "hero": "hero-tetris-attack.jpg",
+      "title": "Tetris Attack",
+      "year": 1995
+    },
+    {
+      "desc": "The best first person RPG ever made. Morrowind has the most unique setting and characters of any RPG I've ever played.",
+      "hero": "hero-morrowind.jpg",
+      "title": "The Elder Scrolls III: Morrowind",
+      "year": 2002
+    },
+    {
+      "desc": "A beautiful and touching game with impressive environments to explore and puzzles to solve.",
+      "hero": "hero-the-last-guardian.jpg",
+      "title": "The Last Guardian",
+      "year": 2016
+    },
+    {
+      "desc": "Almost as good as the original with really amazing dungeon design and satisfying combat.",
+      "hero": "hero-zelda-albw.jpg",
+      "title": "Zelda: A Link Between Worlds",
+      "year": 2013
+    },
+    {
+      "desc": "Another engrossing first person puzzle game that is more about thinking your way through a problem than twitch reflexes.",
+      "hero": "hero-the-talos-principle.jpg",
+      "title": "The Talos Principle",
+      "year": 2014
+    },
+    {
+      "desc": "The best first person shooter ever made. The speed and fluidity of movement in this game is what makes it so fun.",
+      "hero": "hero-tribes.jpg",
+      "title": "Tribes: StarSiege Craft",
+      "year": 1998
+    },
+    {
+      "desc": "So many secrets to discover! A game that rewards exploration and experimentation. The combat system is difficult to master but very satisfying.",
+      "hero": "hero-tunic.jpg",
+      "title": "Tunic",
+      "year": 2022
+    },
+    {
+      "desc": "A unique twist on the SRPG formula which lets you control individual units in real time. The art style is also very unique and beautiful.",
+      "hero": "hero-valkyria-chronicles.jpg",
+      "title": "Valkyria Chronicles",
+      "year": 2008
+    },
+    {
+      "desc": "The best 2D Zelda game ever made. The most interesting overworld and dungeons. Great music and graphics for the time.",
+      "hero": "hero-zelda-alttp.jpg",
+      "title": "Zelda: A Link to the Past",
+      "year": 1991
+    },
+    {
+      "desc": "The best 3D Zelda game ever made. Being able to rewind time and only having 3 days to save the world adds a lot of tension and urgency to the game.",
+      "hero": "hero-zelda-majoras-mask.jpg",
+      "title": "Zelda: Majora's Mask",
+      "year": 2000
+    }
+  ],
+  "query": "game trailer site:youtube.com",
+  "title": "Best Games"
+}

@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Best of the Best</title>
+    <title>Best Games</title>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
       body {
@@ -120,72 +120,50 @@
         return data
       }
 
-      async function renderPage() {
+      async function renderList() {
         const data = await fetchData();
-
-        const pageTitle = document.querySelector("title");
-        pageTitle.innerHTML = data.title;
-
-        const header = document.querySelector("h1");
-        header.innerHTML = data.title;
-
-        const items = data.items;
-
-        displayList()
-        populateList();
-      }
-
-      function displayList() {
         const output = document.querySelector('.output');
-        if (!output.querySelector("ul")) {
-          output.innerHTML = `<ul class="alternating-colors"></ul>`;
-        }
-
         const button = document.querySelector('button');
+        const sorter = (
+          asc ?
+          (a, b) => a.year < b.year ? -1 : (a.year > b.year ? 1 : 0) :
+          (a, b) => a.year > b.year ? -1 : (a.year < b.year ? 1 : 0)
+        );
         button.innerHTML = asc ? '▲' : '▼';
-
-        const ul = document.querySelector(".output ul");
-        ul.style.display = "flex";
-        ul.style.flexDirection = asc ? "column" : "column-reverse";
-      }
-
-      function populateList() {
-        const sortedItems = [...data.items].sort((a, b) => asc ? a.year - b.year : b.year - a.year);
-        const fragment = document.createDocumentFragment();
-        const ul = document.querySelector(".output ul");
-
-        sortedItems.forEach(item => {
-          const li = document.createElement("li");
-          const query = `"${item.title}" ${data.query}`;
-          const link = (
-            `https://www.google.com/search?` +
-            `&btnI=I%27m+Feeling+Lucky&gbv=1&` +
-            `q=${encodeURIComponent(query)}`
-          );
-          li.innerHTML = `
-            <a href="${link}" target="_blank" rel="noopener noreferrer">
-              <strong>${item.title} — ${item.year}</strong>
-              <img alt="${item.title}" src="${data.images}/${item.hero}" />
-              <p>${item.desc}</p>
-            </a>
+        output.innerHTML = `
+            <ul class="alternating-colors">
+              ${
+                data.sort(sorter).map((datum) => {
+                  const query = `"${datum.title}" game trailer site:youtube.com`;
+                  const link = (
+                    `https://www.google.com/search?` +
+                    `&btnI=I%27m+Feeling+Lucky&gbv=1&` +
+                    `q=${encodeURIComponent(query)}`
+                  );
+                  return (
+                      `<li><a href="${link}" rel="noreferrer noopener" target="_blank">` +
+                      `<strong>${datum.title} — ${datum.year}</strong>` +
+                      `<img alt="${datum.title}" src="/www/img/games/${datum.hero}" />` +
+                      `<p>${datum.desc}</p>` +
+                      `</a></li>`
+                  );
+                }).join('')
+              }
+            </ul>
           `;
-          fragment.appendChild(li);
-        });
-
-        ul.appendChild(fragment);
       }
 
       function toggleSort() {
         asc = !asc;
-        displayList();
+        renderList();
       }
 
-      window.addEventListener("DOMContentLoaded", renderPage);
+      window.addEventListener("DOMContentLoaded", renderList);
     </script>
   </head>
   <body>
     <div class="container">
-      <h1 style="display: inline-block;">Best of the Best</h1>
+      <h1 style="display: inline-block;">Best Games</h1>
       <button onclick="toggleSort()"></button>
       <div class="output"></div>
     </div>
