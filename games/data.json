@@ -450,6 +450,12 @@
       "hero": "hero-zelda-majoras-mask.jpg",
       "title": "Zelda: Majora's Mask",
       "year": 2000
+    },
+    {
+      "desc": "Every Fumito Ueda game is a masterpiece and a work of art. This is where he started and it still holds up today.",
+      "hero": "hero-ico.jpg",
+      "title": "Ico",
+      "year": 2001
     }
   ],
   "query": "game trailer site:youtube.com",
