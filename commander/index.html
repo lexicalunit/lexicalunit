@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Command Name Search</title>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.1.0"></script>
+    <script>
+      const commander_names = []
+
+      fetch('commander_names.txt')
+        .then(response => response.text())
+        .then(text => text.split('\n').forEach(line => {commander_names.push({"name": line})}))
+        .then(() => window.fuse = new Fuse(commander_names, {keys: ['name']}))
+      .catch(error => console.error('Error loading file:', error))
+
+      window.onload = () => {
+        const search = document.getElementById('search')
+        const suggestion = document.getElementById('suggestion')
+        search.addEventListener('input', function() {
+          const query = search.value
+          const best = window.fuse.search(query)[0].item.name
+          suggestion.innerHTML = best
+        })
+      }
+    </script>
+    <style>
+      #main {
+        width: 600px;
+        height: 300px;
+        text-align: center;
+        border: 1px solid black;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      #search {
+        height: 50px;
+        font-size: 24px;
+        margin: 10px;
+      }
+      #suggestion {
+        height: 50px;
+        font-size: 24px;
+        margin: 10px;
+        border: 1px solid black;
+        background-color: lightgray;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 2em;
+      }
+      h1 {
+        font-family: sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <h1>Begin typing a commander's name:</h1>
+      <input type="text" id="search" />
+      <div id="suggestion"></div>
+    </div>
+  </body>
+</html>
