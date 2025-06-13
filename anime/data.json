@@ -56,6 +56,12 @@
       "year": 1999
     },
     {
+      "desc": "Over 1000 episodes and finally with an ending in sight. I love the characters and world building in this show. Absolutely worth the time to watch it.",
+      "hero": "hero-one-piece.jpg",
+      "title": "One Piece",
+      "year": 1999
+    },
+    {
       "desc": "Along with the sequel, Banner of the Stars, some of the best space opera anime ever made.",
       "hero": "hero-crest-of-the-stars.jpg",
       "title": "Crest of the Stars",
@@ -146,6 +152,12 @@
       "year": 2016
     },
     {
+      "desc": "A love letter to animation itself. Mob is one of the best characters in all of anime. We could all learn something from his view on humanity and life.",
+      "hero": "hero-mob-psycho-100.jpg",
+      "title": "Mob Pyscho 100",
+      "year": 2016
+    },
+    {
       "desc": "One of my favorite directors, Makoto Shinkai, made this beautiful movie about love and time travel.",
       "hero": "hero-your-name.jpg",
       "title": "Your Name",
@@ -207,10 +219,21 @@
       "year": 2023
     },
     {
-      "desc": "Note: I need to watch this show all the way through before I can recommend it.",
+      "desc": "A political intrigue set in a harem starting a young woman who just wants to be left alone to study poisons. Brilliant storylines that tie together in surprising ways and loveable characters.",
+      "hero": "hero-the-apothecary-diaries.jpg",
+      "title": "The Apothecary Diaries",
+      "year": 2023
+    },
+    {
+      "desc": "I can't take my eyes off the beautiful animation, color, and style in this show. I absolutely love the completely out-there premise coupled with the very relatable characters.",
       "hero": "hero-dandadan.jpg",
-      "include": false,
       "title": "Dandadan",
+      "year": 2024
+    },
+    {
+      "desc": "Perfect world building with a focus on character development. I can't wait to see where this show goes next.",
+      "hero": "hero-delicious-in-dungeon.jpg",
+      "title": "Delicious in Dungeon",
       "year": 2024
     }
   ],
