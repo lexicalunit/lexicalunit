@@ -1,4 +1,4 @@
-@media screen and (min-width:800px) {
+@media screen and (min-width: 800px) {
   .dryguy_wrapper {
     position: absolute;
     top: 1em;
@@ -7,13 +7,31 @@
     padding: 0;
   }
 
+  .hamburger {
+    width: 50px;
+    height: 50px;
+  }
+
+  .hamburger span {
+    width: 30px;
+  }
+
+  .menu-panel {
+    width: auto;
+    padding-left: 35px;
+    padding-right: 35px;
+  }
+
   .icon {
     padding-top: 0;
   }
 
-  .icons {
-    display: flex;
-    justify-content: center;
+  .menu-icons {
+    display: block;
+  }
+
+  .menu-icons .icon {
+    padding: 12px 10px;
   }
 
   .title {

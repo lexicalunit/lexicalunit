@@ -1,134 +1,163 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Lexical Unit</title>
 
-    <link type="text/css" href="www/css/mobile.css" rel="stylesheet">
-    <link type="text/css" href="www/css/screen.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
+    <link type="text/css" href="www/css/mobile.css" rel="stylesheet" />
+    <link type="text/css" href="www/css/screen.css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Inconsolata&display=block"
+      rel="stylesheet"
+    />
 
     <!-- Google Analytics -->
     <script>
       (function (i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-          (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date(); a = s.createElement(o),
-          m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-      ga('create', 'UA-1586655-1', 'auto');
-      ga('send', 'pageview');
+        i["GoogleAnalyticsObject"] = r;
+        ((i[r] =
+          i[r] ||
+          function () {
+            (i[r].q = i[r].q || []).push(arguments);
+          }),
+          (i[r].l = 1 * new Date()));
+        ((a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]));
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m);
+      })(
+        window,
+        document,
+        "script",
+        "https://www.google-analytics.com/analytics.js",
+        "ga",
+      );
+      ga("create", "UA-1586655-1", "auto");
+      ga("send", "pageview");
     </script>
     <!-- End Google Analytics -->
   </head>
   <body>
     <div class="content">
+      <!-- hamburger menu button -->
+      <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- slide-out menu -->
+      <nav class="menu-panel">
+        <ul class="menu-icons">
+          <li class="icon">
+            <a title="Github" href="http://github.lexicalunit.com">
+              <div class="icon-img" style="width: 83px">
+                <img alt="Github" src="www/img/github.png" />
+                <img alt="Github" src="www/img/github.png" />
+              </div>
+              <span class="icon_description">github</span>
+            </a>
+          </li>
+          <li class="icon">
+            <a title="Spellbot" href="https://spellbot.io/">
+              <div class="icon-img" style="width: 70px">
+                <img alt="Spellbot" src="www/img/spellbot.png" />
+                <img alt="Spellbot" src="www/img/spellbot.png" />
+              </div>
+              <span class="icon_description">spellbot</span>
+            </a>
+          </li>
+          <li class="icon">
+            <a title="nanodbc" href="http://nanodbc.lexicalunit.com">
+              <div class="icon-img" style="width: 62px">
+                <img alt="Nanodbc" src="www/img/nano.png" />
+                <img alt="Nanodbc" src="www/img/nano.png" />
+              </div>
+              <span class="icon_description">nanodbc</span>
+            </a>
+          </li>
+          <li class="icon">
+            <a title="Pancake Master" href="http://pancake.lexicalunit.com">
+              <div class="icon-img" style="width: 65px">
+                <img alt="Pancake Master" src="www/img/alamo.png" />
+                <img alt="Pancake Master" src="www/img/alamo.png" />
+              </div>
+              <span class="icon_description">pancake</span>
+            </a>
+          </li>
+          <li class="icon">
+            <a title="Best Games" href="/games">
+              <div class="icon-img" style="width: 100px">
+                <img alt="Best Games" src="www/img/games.png" />
+                <img alt="Best Games" src="www/img/games.png" />
+              </div>
+              <span class="icon_description">best&nbsp;games</span>
+            </a>
+          </li>
+          <li class="icon">
+            <a title="Best Anime" href="/anime">
+              <div class="icon-img" style="width: 100px">
+                <img alt="Best Anime" src="www/img/anime.png" />
+                <img alt="Best Anime" src="www/img/anime.png" />
+              </div>
+              <span class="icon_description">best&nbsp;anime</span>
+            </a>
+          </li>
+          <li class="icon">
+            <a title="English Towns" class="town" href="/town">
+              <div class="icon-img" style="width: 103px">
+                <img alt="English Town Names" src="www/img/uk.png" />
+                <img alt="English Town Names" src="www/img/uk.png" />
+              </div>
+              <span class="icon_description">english&nbsp;towns</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
 
       <!-- title-->
       <div class="icon title text-left">
         <a href="resume/aresume-digital.pdf" title="Resume">
-          <!-- <span class="violet-filter"><span>📃</span></span> -->Lexical&nbsp;Unit
+          Lexical&nbsp;Unit
         </a>
       </div>
 
-      <!-- menu icons -->
-      <ul class="icons">
-        <li class="icon">
-          <a title="Github" onmouseover="hover(this)" onmouseout="unhover(this)" href="http://github.lexicalunit.com">
-            <div class="icon-img" style="width: 83px">
-              <img alt="Github" class="violet" src="www/img/vgithub.png" />
-              <img alt="Github" class="white" src="www/img/github.png" />
-            </div>
-            <span class="icon_description">github</span>
-          </a>
-        </li>
-        <li class="icon">
-          <a title="Spellbot" onmouseover="hover(this)" onmouseout="unhover(this)" href="https://spellbot.io/">
-            <div class="icon-img" style="width: 70px">
-              <img alt="Spellbot" class="violet" src="www/img/vspellbot.png" />
-              <img alt="Spellbot" class="white" src="www/img/spellbot.png" />
-            </div>
-            <span class="icon_description">spellbot</span>
-          </a>
-        </li>
-        <li class="icon">
-          <a title="nanodbc" onmouseover="hover(this)" onmouseout="unhover(this)" href="http://nanodbc.lexicalunit.com">
-            <div class="icon-img" style="width: 62px">
-              <img alt="Nanodbc" class="violet" src="www/img/vnano.png" />
-              <img alt="Nanodbc" class="white" src="www/img/nano.png" />
-            </div>
-            <span class="icon_description">nanodbc</span>
-          </a>
-        </li>
-        <li class="icon">
-          <a title="Pancake Master" onmouseover="hover(this)" onmouseout="unhover(this)" href="http://pancake.lexicalunit.com">
-            <div class="icon-img" style="width: 65px">
-              <img alt="Pancake Master" class="violet" src="www/img/valamo.png" />
-              <img alt="Pancake Master" class="white" src="www/img/alamo.png" />
-            </div>
-            <span class="icon_description">pancake</span>
-          </a>
-        </li>
-        <li class="icon">
-          <a title="Best Games" onmouseover="hover(this)" onmouseout="unhover(this)" href="/games">
-            <div class="icon-img" style="width: 100px" >
-              <img alt="Best Games" class="violet" src="www/img/vgames.png" />
-              <img alt="Best Games" class="white" src="www/img/games.png" />
-            </div>
-            <span class="icon_description">best&nbsp;games</span>
-          </a>
-        </li>
-        <li class="icon">
-          <a title="Best Anime" onmouseover="hover(this)" onmouseout="unhover(this)" href="/anime">
-            <div class="icon-img" style="width: 100px" >
-              <img alt="Best Anime" class="violet" src="www/img/vanime.png" />
-              <img alt="Best Anime" class="white" src="www/img/anime.png" />
-            </div>
-            <span class="icon_description">best&nbsp;anime</span>
-          </a>
-        </li>
-        <!-- <li class="icon">
-          <a title="Atom Packages" onmouseover="hover(this)" onmouseout="unhover(this)" href="https://atom.io/users/lexicalunit">
-            <div class="icon-img" style="width: 68px">
-              <img alt="Atom Packages" class="violet" src="www/img/vatom.png" />
-              <img alt="Atom Packages" class="white" src="www/img/atom.png" />
-            </div>
-            <span class="icon_description">atom</span>
-          </a>
-        </li> -->
-        <li class="icon">
-          <a title="English Towns" class="town" onmouseover="hover(this)" onmouseout="unhover(this)" href="/town">
-            <div class="icon-img" style="width: 103px">
-              <img alt="English Town Names" class="violet" src="www/img/vuk.png" />
-              <img alt="English Town Names" class="white" src="www/img/uk.png" />
-            </div>
-            <span class="icon_description">english&nbsp;towns</span>
-          </a>
-        </li>
-      </ul>
-
       <!-- top layer, rio image -->
       <div class="top">
-        <img class="pic rio img-responsive" alt="rio" src="www/img/rio.jpg" />
+        <img
+          class="pic main-image img-responsive"
+          alt="rio"
+          src="www/img/rio.jpg"
+        />
       </div>
 
-      <!-- bottom layer, godzilla -->
+      <!-- bottom layer, alternate image -->
       <div class="bottom invis">
-        <img class="pic godzilla img-responsive" alt="godzilla" src="www/img/godzilla.gif" />
-        <a class="source" href="http://logan-niblock.tumblr.com/post/86289678989/my-loop-is-up-for-this-month-the-theme-was">logan-niblock.tumblr.com</a>
+        <img
+          class="pic alt-image img-responsive"
+          alt="tycho"
+          src="www/img/tycho.jpeg"
+        />
       </div>
 
       <!-- dryguy button -->
       <div class="dryguy_wrapper">
-        <a onclick="toggle();" href="#">
+        <a onclick="toggle()" href="#">
           <img class="dryguy" alt="dryguy" src="www/img/dryguy.gif" />
           <span class="invis">source: http://mother3.fobby.net</span>
         </a>
       </div>
 
+      <!-- résumé link -->
+      <a class="resume-link" href="resume/aresume-digital.pdf" title="Resume"
+        >Résumé</a
+      >
+
+      <!-- alt-image subtitle -->
+      <div class="subtitle invis">Tycho</div>
     </div>
 
     <script type="text/javascript" src="www/js/jquery.min.js"></script>

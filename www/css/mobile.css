@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -6,9 +7,122 @@ html, body {
 
 body {
   background-color: black;
-  font-family: 'Inconsolata', monospace;
+  font-family: "Inconsolata", monospace;
   overflow-x: hidden;
   overflow-y: scroll;
+}
+
+/* Hamburger Menu Button */
+.hamburger {
+  position: fixed;
+  top: 1em;
+  left: 1em;
+  z-index: 1000;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.hamburger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  transition: all 0.3s ease-in-out;
+  border-radius: 2px;
+}
+
+.hamburger:hover span {
+  background-color: violet;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Menu Panel */
+.menu-panel {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: auto;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.95);
+  z-index: 999;
+  transition: left 0.3s ease-in-out;
+  overflow-y: auto;
+  border-right: 2px solid violet;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.menu-panel.open {
+  left: 0;
+}
+
+.menu-icons {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  padding-top: 80px;
+}
+
+.menu-icons .icon {
+  padding: 8px 5px;
+}
+
+.menu-icons .icon a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  justify-content: center;
+  line-height: 1;
+  color: white;
+}
+
+.menu-icons .icon a:link,
+.menu-icons .icon a:visited,
+.menu-icons .icon a:active {
+  color: white;
+  outline: none;
+}
+
+.menu-icons .icon a:focus {
+  outline: none;
+}
+
+.menu-icons .icon-img {
+  flex-shrink: 0;
+}
+
+.menu-icons .icon_description {
+  text-align: center;
+  font-size: 11pt;
+  line-height: 0.9;
+  margin-top: -8px;
+  transition: color 0.2s ease-in-out;
+  position: relative;
+  z-index: 1;
+}
+
+.menu-icons .icon a:hover .icon_description {
+  color: violet;
 }
 
 a {
@@ -27,13 +141,21 @@ a {
   list-style: none;
 }
 
-.icons a, a.source {
-  transition: all .2s ease-in-out;
+.icons a,
+a.subtitle,
+a.resume-link {
+  transition: all 0.2s ease-in-out;
 }
 
-.icons a:hover, a.source:hover {
+.icons a:hover,
+a.subtitle:hover,
+a.resume-link:hover {
   color: violet;
   text-decoration: none;
+}
+
+.subtitle {
+  color: white;
 }
 
 .icon {
@@ -57,18 +179,44 @@ a {
 
 .colorful {
   /* http://www.colorzilla.com/gradient-editor/ */
-  background: rgb(0,0,0); /* Old browsers */
-  background: -moz-linear-gradient(top,  rgba(0,0,0,1) 0%, rgba(168,104,252,1) 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,1)), color-stop(100%,rgba(168,104,252,1))); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top,  rgba(0,0,0,1) 0%,rgba(168,104,252,1) 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top,  rgba(0,0,0,1) 0%,rgba(168,104,252,1) 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top,  rgba(0,0,0,1) 0%,rgba(168,104,252,1) 100%); /* IE10+ */
-  background: linear-gradient(to bottom,  rgba(0,0,0,1) 0%,rgba(168,104,252,1) 100%); /* W3C */
+  background: rgb(0, 0, 0); /* Old browsers */
+  background: -moz-linear-gradient(
+    top,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(168, 104, 252, 1) 100%
+  ); /* FF3.6+ */
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0%, rgba(0, 0, 0, 1)),
+    color-stop(100%, rgba(168, 104, 252, 1))
+  ); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(
+    top,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(168, 104, 252, 1) 100%
+  ); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(
+    top,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(168, 104, 252, 1) 100%
+  ); /* Opera 11.10+ */
+  background: -ms-linear-gradient(
+    top,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(168, 104, 252, 1) 100%
+  ); /* IE10+ */
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(168, 104, 252, 1) 100%
+  ); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#a868fc',GradientType=0 ); /* IE6-9 */
 }
 
 .invis {
-  display: none;
+  display: none !important;
 }
 
 .title {
@@ -77,23 +225,26 @@ a {
   text-align: center;
 }
 
+.title a {
+  display: inline;
+  transition: color 0.2s ease-in-out;
+}
+
 .title .violet-filter {
   font-size: 15pt;
   text-align: center;
   vertical-align: middle;
 }
 
-.source, .pic {
+.subtitle,
+.resume-link,
+.pic {
   display: block;
   margin-left: auto;
   margin-right: auto;
   margin-top: 1em;
   padding: 1em;
   text-align: center;
-}
-
-.source::before {
-  content: "Source: ";
 }
 
 .dryguy_wrapper {
@@ -117,13 +268,29 @@ a {
   margin-right: auto;
   position: relative;
 }
+
 .icon-img img {
+  display: block;
   position: absolute;
-  transition: opacity .2s ease-in-out;
+  top: 0;
+  left: 0;
+  transition: opacity 0.2s ease-in-out;
 }
 
-.icon-img img.violet { opacity: 0; }
-a.hovered .icon-img img.violet { opacity: 1; }
+.icon-img img:first-child {
+  opacity: 1;
+}
 
-.icon-img img.white { opacity: 1; }
-a.hovered .icon-img img.white { opacity: 0; }
+.icon-img img:last-child {
+  opacity: 0;
+  filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(286deg)
+    brightness(118%) contrast(119%);
+}
+
+a:hover .icon-img img:first-child {
+  opacity: 0;
+}
+
+a:hover .icon-img img:last-child {
+  opacity: 1;
+}
