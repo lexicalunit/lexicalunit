@@ -43,6 +43,20 @@
       brightness(118%) contrast(119%);
   }
 
+  /* Tone down for Safari */
+  @supports (-webkit-hyphens: none) {
+    .icon-img img {
+      transition: opacity 0.2s ease-in-out;
+      will-change: opacity;
+    }
+
+    .icon-img img:last-child {
+      filter: invert(48%) sepia(65%) saturate(1200%) hue-rotate(286deg)
+        brightness(90%) contrast(90%);
+      transform: translateZ(0);
+    }
+  }
+
   a:hover .icon-img img:first-child {
     opacity: 0;
   }
