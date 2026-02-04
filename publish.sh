@@ -10,7 +10,6 @@ cd "$wd"
 
 rsync -av --chmod=a+r --rsh=ssh .htaccess "$PUSER@$PHOST:$PDEST"
 rsync -av --chmod=a+r --rsh=ssh favicon.ico "$PUSER@$PHOST:$PDEST"
-rsync -av --chmod=a+r --rsh=ssh best-of.html "$PUSER@$PHOST:$PDEST"
 
 rsync -av --chmod=a+r --rsh=ssh darwi "$PUSER@$PHOST:$PDEST"
 rsync -av --chmod=a+r --rsh=ssh github "$PUSER@$PHOST:$PDEST"
@@ -18,8 +17,7 @@ rsync -av --chmod=a+r --rsh=ssh nanodbc "$PUSER@$PHOST:$PDEST"
 rsync -av --chmod=a+r --rsh=ssh pancake "$PUSER@$PHOST:$PDEST"
 rsync -av --chmod=a+r --rsh=ssh resume "$PUSER@$PHOST:$PDEST"
 rsync -av --chmod=a+r --rsh=ssh town "$PUSER@$PHOST:$PDEST"
-rsync -av --chmod=a+r --rsh=ssh games "$PUSER@$PHOST:$PDEST"
-rsync -av --chmod=a+r --rsh=ssh anime "$PUSER@$PHOST:$PDEST"
+rsync -av --chmod=a+r --rsh=ssh lists "$PUSER@$PHOST:$PDEST"
 rsync -av --chmod=a+r --rsh=ssh www "$PUSER@$PHOST:$PDEST"
 
 rsync -av --chmod=a+r --rsh=ssh index.html "$PUSER@$PHOST:$PDEST"
