@@ -274,7 +274,6 @@ a.resume-link:hover {
   position: absolute;
   top: 0;
   left: 0;
-  transition: opacity 0.2s ease-in-out;
 }
 
 .icon-img img:first-child {
@@ -283,14 +282,4 @@ a.resume-link:hover {
 
 .icon-img img:last-child {
   opacity: 0;
-  filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(286deg)
-    brightness(118%) contrast(119%);
-}
-
-a:hover .icon-img img:first-child {
-  opacity: 0;
-}
-
-a:hover .icon-img img:last-child {
-  opacity: 1;
 }
