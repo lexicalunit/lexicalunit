@@ -114,8 +114,7 @@ body {
 .menu-icons .icon_description {
   text-align: center;
   font-size: 11pt;
-  line-height: 0.9;
-  margin-top: -8px;
+  margin-top: 2px;
   transition: color 0.2s ease-in-out;
   position: relative;
   z-index: 1;
@@ -267,13 +266,14 @@ a.resume-link:hover {
   margin-left: auto;
   margin-right: auto;
   position: relative;
+  display: grid;
+  place-items: center;
 }
 
 .icon-img img {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
+  max-height: 100%;
+  max-width: 100%;
+  grid-area: 1 / 1;
 }
 
 .icon-img img:first-child {
