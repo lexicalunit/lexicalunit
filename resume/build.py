@@ -5,6 +5,7 @@ from __future__ import print_function
 import logging
 import os
 import sys
+from itertools import product
 from subprocess import PIPE, STDOUT, Popen
 
 import yaml
@@ -15,14 +16,13 @@ except ImportError:
     from yaml import Loader
 
 if any(opt in sys.argv for opt in ("-h", "--help")):
-    print("usage: ./build.py [--real]")
+    print("usage: ./build.py")
+    print("Builds all 4 versions: real/anon x digital/paper")
     sys.exit(0)
 
 logging.basicConfig(level=logging.DEBUG)
 log = logging.getLogger()
 
-BUILD_REAL = "--real" in sys.argv
-BUILD_DIGITAL = "--digital" in sys.argv
 CONF_FILE = "resume.yaml"
 
 try:
@@ -31,9 +31,7 @@ except:
     log.exception("error: unable to read {} config file:".format(CONF_FILE))
     raise
 
-# real header has my real name and address, etc...
-if BUILD_REAL:
-    REAL_HEADER = conf["real_header"]
+REAL_HEADER = conf["real_header"]
 
 # anonymized header
 ANON_HEADER = r"""
@@ -54,18 +52,28 @@ DIGITAL_PREAMBLE = r"""
 \renewcommand{\familydefault}{\sfdefault}
 """
 
-# generate LaTeX source
-with open("resume.tex", "r") as f:
-    data = f.read()
-    if BUILD_REAL:
+
+def build_resume(build_real, build_digital):
+    """Build a single version of the resume."""
+    variant = "{}-{}".format(
+        "real" if build_real else "anon",
+        "digital" if build_digital else "paper",
+    )
+    log.info("Building {} version...".format(variant))
+
+    # generate LaTeX source
+    with open("resume.tex", "r") as f:
+        data = f.read()
+
+    if build_real:
         data = data.replace("% <Header>", REAL_HEADER)
     else:
         data = data.replace("% <Header>", ANON_HEADER)
 
-    if BUILD_DIGITAL:
+    if build_digital:
         data = data.replace("% <Digital>", DIGITAL_PREAMBLE)
 
-    if not BUILD_REAL:
+    if not build_real:
         lines = data.split("\n")
         for lineno, line in enumerate(lines):
             if line.startswith(r"\date"):
@@ -77,34 +85,58 @@ with open("resume.tex", "r") as f:
             elif line.startswith(r"\employer"):
                 lines[lineno] = r"\employer{\textbf{Workplace}}"
         data = "\n".join(lines)
-print(data, file=open("built.tex", "w"))
 
-# run LaTeX processing
-p = Popen(
-    ["/Library/TeX/texbin/pdflatex", "--file-line-error", "--synctex=1"],
-    stdout=PIPE,
-    stdin=PIPE,
-    stderr=STDOUT,
-)
-out, err = p.communicate(input=data.encode("utf-8"))
+    print(data, file=open("built.tex", "w"))
 
-# show LaTeX processing output
-print(out)
-if err:
-    print(err, file=sys.stderr)
+    # run LaTeX processing
+    p = Popen(
+        ["/Library/TeX/texbin/pdflatex", "--file-line-error", "--synctex=1"],
+        stdout=PIPE,
+        stdin=PIPE,
+        stderr=STDOUT,
+    )
+    out, err = p.communicate(input=data.encode("utf-8"))
 
-# sanity check
-assert os.path.isfile("texput.pdf")
+    # show LaTeX processing output
+    print(out)
+    if err:
+        print(err, file=sys.stderr)
 
-# cleanup
-os.remove("texput.log")
-os.remove("texput.synctex.gz")
+    # sanity check
+    assert os.path.isfile("texput.pdf"), "Failed to build {} version".format(variant)
 
-# output
-OUTPUT = os.path.expanduser(
-    conf["real_resume_install_path"] if BUILD_REAL else "aresume.pdf"
-)
-if BUILD_DIGITAL:
-    OUTPUT = OUTPUT[:-4] + "-digital" + OUTPUT[-4:]
-os.rename("texput.pdf", OUTPUT)
-print("built {}".format(OUTPUT))
+    # cleanup
+    os.remove("texput.log")
+    os.remove("texput.synctex.gz")
+
+    # determine output filename
+    if build_real:
+        base_path = os.path.expanduser(conf["real_resume_install_path"])
+        base_name = base_path[:-4]  # strip .pdf
+    else:
+        base_name = "aresume"
+
+    suffix = "-digital" if build_digital else "-paper"
+    output = "{}{}.pdf".format(base_name, suffix)
+
+    os.rename("texput.pdf", output)
+    print("built {}".format(output))
+    return output
+
+
+def main():
+    """Build all 4 versions of the resume."""
+    built_files = []
+
+    for build_real, build_digital in product([True, False], [True, False]):
+        output = build_resume(build_real, build_digital)
+        built_files.append(output)
+
+    print("\n" + "=" * 40)
+    print("Successfully built {} versions:".format(len(built_files)))
+    for f in built_files:
+        print("  - {}".format(f))
+
+
+if __name__ == "__main__":
+    main()
