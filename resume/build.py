@@ -68,20 +68,20 @@ with open("resume.tex", "r") as f:
     if not BUILD_REAL:
         lines = data.split("\n")
         for lineno, line in enumerate(lines):
-            if line.startswith("\date"):
+            if line.startswith(r"\date"):
                 lines[lineno] = r"\dates{}"
-            elif line.startswith("\location"):
+            elif line.startswith(r"\location"):
                 lines[lineno] = r"\location{}"
             elif "University" in line:
                 lines[lineno] = r"\employer{\textbf{School}}"
-            elif line.startswith("\employer"):
+            elif line.startswith(r"\employer"):
                 lines[lineno] = r"\employer{\textbf{Workplace}}"
         data = "\n".join(lines)
 print(data, file=open("built.tex", "w"))
 
 # run LaTeX processing
 p = Popen(
-    ["/Library/TeX/texbin/pdflatex", "--file-line-error" "--synctex=1"],
+    ["/Library/TeX/texbin/pdflatex", "--file-line-error", "--synctex=1"],
     stdout=PIPE,
     stdin=PIPE,
     stderr=STDOUT,
@@ -98,6 +98,7 @@ assert os.path.isfile("texput.pdf")
 
 # cleanup
 os.remove("texput.log")
+os.remove("texput.synctex.gz")
 
 # output
 OUTPUT = os.path.expanduser(
