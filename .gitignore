@@ -1,8 +1,10 @@
+*.aux
+*.fdb_latexmk
+*.fls
 *.log
-/resume/built.tex
+*.synctex.gz
+/resume/*.aux
+/resume/built.*
 /resume/resume.pdf
-/resume/resume.synctex.gz
 /resume/resume.yaml
-/resume/resume.aux
-/resume/resume.fdb_latexmk
-/resume/resume.fls
+/resume/texput.pdf
