@@ -2,39 +2,38 @@
 
 % <Digital>
 
-% TODO:
-%  * From the wording of the resume, you come across as a "doer," not an
-%    "achiever." Too many of your job descriptions are task-based and not
-%    results-based. This means that they tell what you did, instead of what you
-%    achieved. This is a common mistake for non- professional resume writers.
-%    To be effective and create excitement, a great resume helps the hiring
-%    executive picture you delivering similar achievements at his or her
-%    company. Here are some examples of task-based sentences in your resume:
-%      - "Worked with services using Ruby, Python, Scala, Kafka, ..."
-%      - "Architected aggregation service built on Druid.io, ..."
-%  * Employers want to know about your previous contributions and specifically
-%    how you’ve made a difference. More importantly, they want to know how you
-%    are going to make a significant difference at their company.
-% TOP KEYWORDS & SKILLS: real-time testing python engineer software engineer
+% Better PDF text extraction and font encoding
+\usepackage{cmap}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
 
+% Hyperlinks
 \usepackage{hyperref}
 \hypersetup{
   colorlinks=true,
   urlcolor=blue
 }
 
-% Change global itemize settings
+% Tighten up itemize spacing
 \let\tempone\itemize
 \let\temptwo\enditemize
-\renewenvironment{itemize}{\tempone\vspace{-.15in}\setlength{\topsep}{0pt}\setlength{\itemsep}{3pt}\vspace{-.15in}}{\temptwo}
+\renewenvironment{itemize}{%
+  \setlength{\topsep}{0pt}%
+  \setlength{\partopsep}{0pt}%
+  \tempone
+  \vspace{-0.25in}% Pull first item closer to job title
+  \setlength{\itemsep}{3pt}%
+  \setlength{\parsep}{0pt}%
+}{%
+  \temptwo
+}
 
 % Macros
-% \def\Cplusplus{{\rm C\raise.5ex\hbox{\small ++}}}
 \def\Cplusplus{C++}
-\def\first{{\raise.5ex\hbox{\small st}}}
-\def\second{{\raise.5ex\hbox{\small nd}}}
-\def\third{{\raise.5ex\hbox{\small rd}}}
-\def\fourth{{\raise.5ex\hbox{\small th}}}
+\def\first{\textsuperscript{st}}
+\def\second{\textsuperscript{nd}}
+\def\third{\textsuperscript{rd}}
+\def\fourth{\textsuperscript{th}}
 
 % Use more of the page than the default
 \addtolength{\oddsidemargin}{-0.50in}
@@ -57,9 +56,7 @@
 
   % Skills
   \section{Skills}
-
-  ~\\ % todo: why is this necessary?
-
+  \vspace{0.50in} % offset to counteract itemize negative space + add ~2 lines
   \begin{itemize}
     \item \textbf{Languages:} Python, TypeScript/JavaScript, \Cplusplus, rust, ruby, Scala, Zsh/Bash
     \item \textbf{Tools:} git, NodeJS, Docker, Kubernetes, JIRA/Confluence, GitLab, CMake
@@ -233,10 +230,9 @@
   \end{position}
 
   % Open Source
-  \vspace{-.08in}
   \section{Open Source}
+  \vspace{0.35in} % offset for section spacing (no preceding \end{position})
   \begin{itemize}
-      \vspace{.55in} % why do I need to manually put vertical space here?
       % \item OSS contributions in the form of PRs and such to Atom packages and bokeh and JSONSchemaValidation...
       % \item \href{https://spellbot.io}{SpellBot}: A matchmaking Discord bot for Magic: The Gathering
       % \item \href{https://convoke.games/}{Convoke}: A browser-based application for playing Magic: The Gathering online
