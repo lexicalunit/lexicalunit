@@ -8,6 +8,9 @@ git archive master | tar -x -C "$wd"
 
 cd "$wd"
 
+test -f ~/Desktop/*-resume-digital.pdf && cp "$_" resume/.
+test -f ~/Desktop/*-resume-paper.pdf && cp "$_" resume/.
+
 rsync -av --chmod=a+r --rsh=ssh \
     .htaccess \
     favicon.ico \
