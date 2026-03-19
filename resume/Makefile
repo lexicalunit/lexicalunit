@@ -1,9 +1,9 @@
-all:
-	./build.py
-	./build.py --real
-	./build.py --digital
-	./build.py --real --digital
+.PHONY: all build clean
 
-.PHONY: clean
+all: build clean
+
+build:
+	./build.py
+
 clean:
-	rm -f built.tex resume.synctex.gz resume.aux resume.fdb_latexmk resume.fls
+	rm -f built.tex *.synctex.gz *.aux *.fdb_latexmk *.fls *.log
