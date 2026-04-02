@@ -456,6 +456,24 @@
       "hero": "hero-ico.jpg",
       "title": "Ico",
       "year": 2001
+    },
+    {
+      "desc": "The very best puzzle game I've ever played. I was hooked on this game for weeks with an entire notepad full of notes and clues. A surprisingly emotional storyline too.",
+      "hero": "hero-blue-prince.jpg",
+      "title": "Blue Prince",
+      "year": 2025
+    },
+    {
+      "desc": "The best top down Zelda-like that I've played since A Link Between Worlds. The movement system in this game is an absolute joy to experience.",
+      "hero": "hero-pipistrello.jpg",
+      "title": "Pipistrello and the Cursed Yoyo",
+      "year": 2025
+    },
+    {
+      "desc": "Incredible characters and music with an engaging storyline. Known as one of the best SRPGs ever for a good reason.",
+      "hero": "hero-ff-tactics.jpg",
+      "title": "Final Fantasy Tactics: The Ivalice Chronicles",
+      "year": 2025
     }
   ],
   "query": "game trailer site:youtube.com",

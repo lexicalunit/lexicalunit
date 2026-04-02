@@ -241,6 +241,12 @@
       "hero": "hero-look-back.jpg",
       "title": "Look Back",
       "year": 2024
+    },
+    {
+      "desc": "I really did not expect where this story went and it was surprisingly refreshing and moving.",
+      "hero": "hero-vinland-saga.jpg",
+      "title": "Vinland Saga",
+      "year": 2019
     }
   ],
   "query": "anime trailer site:youtube.com",
