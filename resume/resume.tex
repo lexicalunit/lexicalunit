@@ -63,12 +63,12 @@
     \item \textbf{Frameworks:} Django, Node.js, Flask, FastAPI, React, Rails, Boost, SQLAlchemy, Akka
     \item \textbf{AI/ML:} Machine Learning, Scikit-learn, PyTorch, LangChain, MCP, LLMs, Classification
     \item \textbf{Infrastructure:} Lambda, ECS/Fargate, Docker, Kafka, API Gateway, Terraform, Kubernetes
-    \item \textbf{Tooling:} pytest, Webpack, Git, GitHub, GitLab, GraphQL, Linear, JIRA, CMake, ODBC
-    \item \textbf{Cloud \& Platforms:} AWS, Databricks, CircleCI, Grafana, Sentry, PagerDuty
-    \item \textbf{Databases:} PostgreSQL, Snowflake, Redis, MySQL, MongoDB, Vertica/Greenplum
+    \item \textbf{Tooling:} pytest, Webpack, Git, GitHub, GitLab, GraphQL, Linear, JIRA, CMake, ODBC, \LaTeX
+    \item \textbf{Cloud \& Platforms:} AWS, Databricks, CircleCI, Grafana, Sentry, PagerDuty, LaunchDarkly
+    \item \textbf{Databases:} PostgreSQL, Snowflake, Redis, MongoDB, Vertica/Greenplum, Elasticsearch
     \item \textbf{Practices:} Agile, Scrum, Distributed System Design, Test/Behavior Driven Development
-    \item \textbf{Markup:} YAML, JSON, HTML/CSS/LESS/Sass, Markdown, \LaTeX, Jinja, Handlebars
-    \item \textbf{Operating Systems:} macOS, Linux (RedHat and Debian based), Windows
+      % \item \textbf{Markup:} YAML, JSON, HTML/CSS/LESS/Sass, Markdown, Jinja, Handlebars
+      % \item \textbf{Operating Systems:} macOS, Linux (RedHat and Debian based), Windows
   \end{itemize}
 
   % Experience
@@ -99,6 +99,7 @@
       \item Designed event processing pipeline handling millions of events/day
       \item Enabled distributed rule evaluation, alert notification, and data export at scale
       \item Led development of internal monitoring and QA systems, reducing incident detection time
+      \item Built agentic interfaces to our GraphQL API using LangChain
     \end{itemize}
   \end{position}
 
@@ -107,7 +108,7 @@
   %\title{Lead Engineer - \href{https://www.checkhq.com/solutions/who-we-serve}{Activations}}
   \title{Lead Engineer - Activations Team}
   \location{Remote}
-  \dates{02/2021 -- 12/22}
+  \dates{02/2021 -- 12/2022}
   \begin{position}
     \begin{itemize}
       \item Mentored multiple teams on testing strategies, improving test coverage by 60\%
@@ -155,11 +156,11 @@
   \dates{10/2015 -- 01/2018}
   \begin{position}
     \begin{itemize}
-        % \item Lead developer of Scala-based microservice for a \$1\,M Samsung partnership
-        % \item Architected an iOS and Python \textit{Find Fitness Classes} feature in partnership with Mindbody
+      \item Lead developer of Scala-based microservice for a \$1\,M Samsung partnership
+      \item Architected an iOS and Python \textit{Find Fitness Classes} feature in partnership with Mindbody
       \item Built \href{https://patents.google.com/patent/US20180225367A1/en?oq=20180225367}{patented ML classifier} for fitness class identification
-        % \item Refactored existing ruby microservices to use a new real-time stream based notification system, driving 20\,k push notifications and emails per minute
       \item Planned and implemented the migration of the MyFitnessPal steps tracking feature used by 225 million users from a Rails monolith to a Go microservice, reducing response times by 300\%
+        % \item Refactored existing ruby microservices to use a new real-time stream based notification system, driving 20\,k push notifications and emails per minute
     \end{itemize}
   \end{position}
 
@@ -171,12 +172,12 @@
   \begin{position}
     \begin{itemize}
       \item Instrumented iOS applications with event tracking using Objective-C++ and Swift
+      \item Optimized Python data-engineering tools using SQL for reporting on A/B-test experiments % Veg-o-Matic
         % \item Prototyped a ``Buy Now'' button with a Python backend leveraging \href{https://stripe.com/}{Stripe.js} %, a cross-device embeddable payment form
         % \item cerebro-deploy fabric based AWS deployment
         % \item storm topology
         % \item kinesis autoscaling
         % \item Implemented a realtime high availability data pipeline using Kinesis and Storm
-      \item Optimized Python data-engineering tools using SQL for reporting on A/B-test experiments % Veg-o-Matic
         % \item Architected aggregation service built on Druid.io, an OLAP realtime datastore
         % \item Wrote Python ETL code leveraging our MasterMind framework
         % \item Built and maintained other internal data oriented products for Business Intelligence division
@@ -190,9 +191,10 @@
   \dates{03/2012 -- 02/2014}
   \begin{position}
     \begin{itemize}
-      \item Leveraged sophisticated data mining techniques to solve big data analytics problems
+      \item Designed the \href{http://nanodbc.io}{nanodbc} library, now used by used by the \href{https://github.com/r-dbi/odbc}{R programming language}
+      \item Built robust Web API resources using Flask, gunicorn, and Nginx
+        % \item Leveraged sophisticated data mining techniques to solve big data analytics problems
         % \item Sharpened \Cplusplus~and Python skills by attending PyCon, PyData, and \Cplusplus~conferences
-        % \item Designed and implemented robust Web API resources using Flask, gunicorn, and Nginx
         % \item Collaborated with research and sales teams to produce client-driven SaaS products
     \end{itemize}
   \end{position}
@@ -206,6 +208,7 @@
     \begin{itemize}
       \item Designed high frequency active sonar installed on 75\% of US nuclear attack submarines
       \item Implemented a target tracking and feature classification system for mine avoidance
+      \item Held Secret security clearance
         % \item Wrote real-time simulation software for stress testing, debugging, and Navy certification
         % \item Devised a VCS to manage security classifications across more than a dozen projects
         % \item Developed a high level of expertise with modern \Cplusplus~techniques and design
@@ -237,19 +240,17 @@
   \section{Open Source}
   \vspace{0.45in} % offset for section spacing (no preceding \end{position})
   \begin{itemize}
-      % \item OSS contributions in the form of PRs and such to Atom packages and bokeh and JSONSchemaValidation...
-      % \item \href{https://spellbot.io}{SpellBot}: A matchmaking Discord bot for Magic: The Gathering
-      % \item \href{https://convoke.games/}{Convoke}: A browser-based application for playing Magic: The Gathering online
-    \item \href{http://nanodbc.io}{nanodbc}: A small \Cplusplus~wrapper for ODBC, used by the \href{https://github.com/r-dbi/odbc}{R programing language}
+    \item \href{http://nanodbc.io}{nanodbc}: A small \Cplusplus~wrapper for ODBC, used by the \href{https://github.com/r-dbi/odbc}{R programming language}
     \item \href{http://pancake.lexicalunit.com}{pancake-master}: A dynamic webpage for \href{https://drafthouse.com/series/master-pancake}{Master Pancake} showtimes
-      %\item \href{https://github.com/theastropath/turbot/}{turbot}: A Discord bot for Animal Crossing: New Horizons
-      %\item \href{https://www.npmjs.com/package/@invisionapp/studio-api}{studio-api}: The Studio Platform API for building plugins
-    \item \href{https://github.com/lexicalunit/atom-notes}{atom-notes}: Embedded \href{https://en.wikipedia.org/wiki/Notational_Velocity}{notational velocity-like} for the Atom code editor
-    \item \href{https://atom.io/packages/multi-wrap-guide}{multi-wrap-guide}: Multi-wrap guides for the Atom, \href{http://blog.atom.io/2015/08/06/new-package-roundup.html}{featured in an Atom blog post}
-      %\item \href{https://atom.io/packages/event-watch}{event-watch}: Recurring event watch plugin for the Atom editor
+    \item \href{https://github.com/lexicalunit/dotfiles}{dotfiles}: My personalized machine configuration management system
+      % \item OSS contributions in the form of PRs and such to Atom packages and bokeh and JSONSchemaValidation...
+      % \item \href{https://github.com/theastropath/turbot/}{turbot}: A Discord bot for Animal Crossing: New Horizons
+      % \item \href{https://www.npmjs.com/package/@invisionapp/studio-api}{studio-api}: The Studio Platform API for building plugins
+      % \item \href{https://github.com/lexicalunit/atom-notes}{atom-notes}: Embedded \href{https://en.wikipedia.org/wiki/Notational_Velocity}{notational velocity-like} for the Atom code editor
+      % \item \href{https://github.com/lexicalunit/multi-wrap-guide}{multi-wrap-guide}: Multi-wrap guides for the Atom, featured in an Atom blog post % http://blog.atom.io/2015/08/06/new-package-roundup.html
+      % \item \href{https://atom.io/packages/event-watch}{event-watch}: Recurring event watch plugin for the Atom editor
       % \item \href{https://www.npmjs.com/package/generator-studio-app}{generator-studio-app}: Scaffold generator for \href{https://www.invisionapp.com/studio}{InVision Studio} plugins
       % \item \href{https://github.com/lexicalunit/dict}{\Cplusplus~dict}: Proof-of-concept \Cplusplus~dict class with Python-like features
-    \item \href{https://github.com/lexicalunit/dotfiles}{dotfiles}: My personalized machine configuration management system
   \end{itemize}
 
   % Education
