@@ -17,7 +17,7 @@ except ImportError:
 
 if any(opt in sys.argv for opt in ("-h", "--help")):
     print("usage: ./build.py")
-    print("Builds all 4 versions: real/anon x digital/paper")
+    print("Builds all versions: real/anon x digital")
     sys.exit(0)
 
 logging.basicConfig(level=logging.DEBUG)
@@ -128,7 +128,8 @@ def main():
     """Build all 4 versions of the resume."""
     built_files = []
 
-    for build_real, build_digital in product([True, False], [True, False]):
+    for build_real, build_digital in product([True, False], [True]):
+        assert build_digital
         output = build_resume(build_real, build_digital)
         built_files.append(output)
 
