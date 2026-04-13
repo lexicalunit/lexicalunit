@@ -6,6 +6,7 @@
 \usepackage{cmap}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
+%\usepackage{texlogos}
 
 % Hyperlinks
 \usepackage{hyperref}
@@ -30,11 +31,7 @@
 }
 
 % Macros
-\def\Cplusplus{C++}
-\def\first{\textsuperscript{st}}
-\def\second{\textsuperscript{nd}}
-\def\third{\textsuperscript{rd}}
-\def\fourth{\textsuperscript{th}}
+\newcommand{\Cpp}{C\kern-0.05em \raisebox{0.4ex}{\tiny\textbf{++}}}
 
 % Use more of the page than the default
 \addtolength{\oddsidemargin}{-0.50in}
@@ -59,7 +56,7 @@
   \section{Skills}
   \vspace{0.50in} % offset to counteract itemize negative space + add ~2 lines
   \begin{itemize}
-    \item \textbf{Languages:} Python, TypeScript/JavaScript, \Cplusplus, SQL, Shell, Go, Rust, Ruby, Scala, Swift
+    \item \textbf{Languages:} Python, TypeScript/JavaScript, \Cpp, SQL, Shell, Go, Rust, Ruby, Scala, Swift
     \item \textbf{Frameworks:} Django, Node.js, Flask, FastAPI, React, Rails, Boost, SQLAlchemy, Akka
     \item \textbf{AI/ML:} Machine Learning, Scikit-learn, PyTorch, LangChain, MCP, LLMs, Classification
     \item \textbf{Infrastructure:} Lambda, ECS/Fargate, Docker, Kafka, API Gateway, Terraform, Kubernetes
@@ -171,7 +168,7 @@
   \dates{04/2014 -- 09/2015}
   \begin{position}
     \begin{itemize}
-      \item Instrumented iOS applications with event tracking using Objective-C++ and Swift
+      \item Instrumented iOS applications with event tracking using Objective-\Cpp~and Swift
       \item Optimized Python data engineering tools using SQL for reporting on A/B-test experiments % Veg-o-Matic
         % \item Prototyped a ``Buy Now'' button with a Python backend leveraging \href{https://stripe.com/}{Stripe.js} %, a cross-device embeddable payment form
         % \item cerebro-deploy fabric based AWS deployment
@@ -194,7 +191,7 @@
       \item Designed the \href{http://nanodbc.io}{nanodbc} library, now used by the \href{https://github.com/r-dbi/odbc}{R programming language}
       \item Architected Web API resources using Flask, gunicorn, and Nginx
         % \item Leveraged sophisticated data mining techniques to solve big data analytics problems
-        % \item Sharpened \Cplusplus~and Python skills by attending PyCon, PyData, and \Cplusplus~conferences
+        % \item Sharpened \Cpp~and Python skills by attending PyCon, PyData, and \Cpp~conferences
         % \item Collaborated with research and sales teams to produce client-driven SaaS products
     \end{itemize}
   \end{position}
@@ -211,7 +208,7 @@
       \item Held Secret security clearance
         % \item Wrote real-time simulation software for stress testing, debugging, and Navy certification
         % \item Devised a VCS to manage security classifications across more than a dozen projects
-        % \item Developed a high level of expertise with modern \Cplusplus~techniques and design
+        % \item Developed a high level of expertise with modern \Cpp~techniques and design
         % \item Traveled to remote contractor sites to integrate ARL software with other US Navy systems
         % \item Used Doxygen to generate project and source level documentation for a 3000 KLOC project
         % \item Spent significant time working on Gnome, KDE, Motif, and Windows environments
@@ -240,7 +237,7 @@
   \section{Open Source}
   \vspace{0.45in} % offset for section spacing (no preceding \end{position})
   \begin{itemize}
-    \item \href{http://nanodbc.io}{nanodbc}: A small \Cplusplus~wrapper for ODBC, used by the \href{https://github.com/r-dbi/odbc}{R programming language}
+    \item \href{http://nanodbc.io}{nanodbc}: A small \Cpp~wrapper for ODBC, used by the \href{https://github.com/r-dbi/odbc}{R programming language}
     \item \href{http://pancake.lexicalunit.com}{pancake-master}: A dynamic webpage for \href{https://drafthouse.com/series/master-pancake}{Master Pancake} showtimes
     \item \href{https://github.com/lexicalunit/dotfiles}{dotfiles}: My personalized machine configuration management system
       % \item OSS contributions in the form of PRs and such to Atom packages and bokeh and JSONSchemaValidation...
@@ -250,7 +247,7 @@
       % \item \href{https://github.com/lexicalunit/multi-wrap-guide}{multi-wrap-guide}: Multi-wrap guides for the Atom, featured in an Atom blog post % http://blog.atom.io/2015/08/06/new-package-roundup.html
       % \item \href{https://atom.io/packages/event-watch}{event-watch}: Recurring event watch plugin for the Atom editor
       % \item \href{https://www.npmjs.com/package/generator-studio-app}{generator-studio-app}: Scaffold generator for \href{https://www.invisionapp.com/studio}{InVision Studio} plugins
-      % \item \href{https://github.com/lexicalunit/dict}{\Cplusplus~dict}: Proof-of-concept \Cplusplus~dict class with Python-like features
+      % \item \href{https://github.com/lexicalunit/dict}{\Cpp~dict}: Proof-of-concept \Cpp~dict class with Python-like features
   \end{itemize}
 
   % Education
