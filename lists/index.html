@@ -148,13 +148,56 @@
         color: #fff;
         text-decoration: none;
       }
+      /* Hamburger menu styles */
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 5px;
+        padding: 10px;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        width: auto;
+      }
+      .hamburger:not([disabled]):active {
+        box-shadow: none;
+        transform: none;
+      }
+      .hamburger span {
+        width: 25px;
+        height: 3px;
+        background-color: #fff;
+        border-radius: 2px;
+        transition: 0.3s;
+      }
       @media (max-width: 768px) {
         .sticky-header h1 {
           font-size: 1.2rem;
         }
+        .hamburger {
+          display: flex;
+        }
+        .sticky-header nav {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background-color: rgba(0, 0, 0, 0.95);
+          padding: 15px;
+        }
+        .sticky-header nav.open {
+          display: block;
+        }
         .sticky-header nav ul {
           flex-direction: column;
-          gap: 10px;
+          gap: 15px;
+          padding: 0;
+          margin: 0;
+        }
+        .sticky-header nav ul li {
+          text-align: center;
         }
       }
     </style>
@@ -242,6 +285,11 @@
         displayList();
       }
 
+      function toggleMenu() {
+        const nav = document.querySelector(".sticky-header nav");
+        nav.classList.toggle("open");
+      }
+
       window.addEventListener("DOMContentLoaded", renderPage);
     </script>
   </head>
@@ -249,6 +297,15 @@
     <header class="sticky-header">
       <div class="container">
         <h1>Lexical Unit</h1>
+        <button
+          class="hamburger"
+          onclick="toggleMenu()"
+          aria-label="Toggle menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
         <nav>
           <ul>
             <li><a href="/">Home</a></li>
