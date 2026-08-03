@@ -22,9 +22,11 @@ import json
 import os
 import re
 import shutil
+import socket
 import subprocess
 import sys
 import tempfile
+import threading
 import unicodedata
 import urllib.error
 import urllib.parse
@@ -822,6 +824,46 @@ class StudioHandler(SimpleHTTPRequestHandler):
         super().end_headers()
 
 
+class StudioServer(ThreadingHTTPServer):
+    """IPv4 loopback. Subclassed only so the IPv6 twin below can share config."""
+
+
+class StudioServer6(StudioServer):
+    address_family = socket.AF_INET6
+
+
+def loopback_binds():
+    """(server class, address) pairs to listen on, IPv6 first.
+
+    Both families, because `localhost` resolves to ::1 first on macOS. Serving
+    only 127.0.0.1 leaves the other half of `localhost` free for a stray
+    `python3 -m http.server` to answer instead, and then admin.js probes
+    /api/config, gets that server's 404, and silently decides it is running on
+    the deployed site — edit mode just never appears.
+    """
+    binds = [(StudioServer, "127.0.0.1")]
+    if socket.has_ipv6:
+        binds.insert(0, (StudioServer6, "::1"))
+    return binds
+
+
+def listener_on(family, address, port):
+    """True if something already accepts connections at this address.
+
+    A connect probe, not a trial bind: HTTPServer keeps SO_REUSEADDR on so that
+    restarting studio right after Ctrl-C works, and that same flag lets a bind
+    quietly succeed alongside an existing listener rather than failing. Probing
+    also refuses to be fooled by the TIME_WAIT sockets a just-killed server
+    leaves behind, which a bind without SO_REUSEADDR would trip over.
+    """
+    with socket.socket(family, socket.SOCK_STREAM) as probe:
+        probe.settimeout(0.25)
+        try:
+            return probe.connect_ex((address, port)) == 0
+        except OSError:
+            return False
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--port", type=int, default=8000)
@@ -831,7 +873,24 @@ def main():
         sys.exit("ImageMagick's `convert` is not on PATH (brew install imagemagick)")
 
     handler = functools.partial(StudioHandler, directory=str(REPO))
-    server = ThreadingHTTPServer(("127.0.0.1", args.port), handler)
+
+    binds = loopback_binds()
+    for cls, address in binds:
+        if listener_on(cls.address_family, address, args.port):
+            sys.exit(
+                f"something is already listening on {address} port {args.port} "
+                f"(a stray ./local.sh?). Find it with:\n"
+                f"    lsof -nP -iTCP:{args.port} -sTCP:LISTEN"
+            )
+
+    servers = []
+    for cls, address in binds:
+        try:
+            servers.append(cls((address, args.port), handler))
+        except OSError as error:
+            for server in servers:
+                server.server_close()
+            sys.exit(f"cannot listen on {address} port {args.port}: {error}")
 
     config = load_config()
     # dict, not set: TMDB serves two lists and should still be named once.
@@ -846,10 +905,15 @@ def main():
     print("artwork: Wikipedia (no key needed) for every list")
     if unconfigured:
         print(f"optional, not configured: {', '.join(unconfigured)} — see {CONFIG_PATH}")
+    for server in servers[1:]:
+        threading.Thread(target=server.serve_forever, daemon=True).start()
     try:
-        server.serve_forever()
+        servers[0].serve_forever()
     except KeyboardInterrupt:
         print("\nbye")
+    finally:
+        for server in servers:
+            server.server_close()
 
 
 if __name__ == "__main__":
