@@ -31,6 +31,17 @@
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-+|-+$/g, "");
 
+  // Mirrors item_slug() in tools/studio.py: an item is addressed by the slug in
+  // its hero image name, or by its slugified title until it has one.
+  const itemSlug = (item) => {
+    const match = /^hero-(.+)\.jpg$/.exec(item.hero || "");
+    return match ? match[1] : slugify(item.title);
+  };
+
+  // Matches the data-item attribute index.html puts on each <li>.
+  const itemFor = (li) =>
+    data.items.find((entry) => (entry.hero || entry.title) === li.dataset.item);
+
   const STYLE = `
     .admin-bar {
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 1001;
@@ -55,6 +66,7 @@
     .admin-edit:not([disabled]):active { transform: none; box-shadow: none; }
     main li.admin-hidden { opacity: 0.45; }
     main li.admin-nodesc:before { border-color: #ff8772 !important; border-style: dashed; }
+    main li.admin-nohero:before { background: #ff8772; }
 
     dialog.admin-dialog {
       width: min(1040px, 95vw); max-height: 92vh; border: 1px solid #000;
@@ -139,6 +151,7 @@
   const results = el("div", { className: "admin-results" });
   const chosen = el("div", { className: "admin-chosen" });
   const titleInput = el("input", { type: "text" });
+  const authorInput = el("input", { type: "text", placeholder: "optional" });
   const yearInput = el("input", { type: "number" });
   const slugInput = el("input", { type: "text" });
   const descInput = el("textarea", { placeholder: "description (can be filled in later)" });
@@ -168,6 +181,9 @@
     labelled("year", yearInput),
   );
 
+  const authorRow = el("div", { className: "admin-row" });
+  authorRow.append(labelled("author", authorInput, "grow-2"));
+
   const slugRow = el("div", { className: "admin-row" });
   slugRow.append(labelled("image slug (hero-<slug>.jpg)", slugInput));
 
@@ -186,7 +202,10 @@
     cancelButton,
   );
 
-  dialog.append(heading, searchRow, results, chosen, identityRow, slugRow, descRow, actions, message);
+  dialog.append(
+    heading, searchRow, results, chosen,
+    identityRow, authorRow, slugRow, descRow, actions, message,
+  );
 
   const say = (text, tone = "error") => {
     message.textContent = text;
@@ -238,6 +257,9 @@
         if (!yearInput.value && result.year) yearInput.value = result.year;
         if (!slugTouched) slugInput.value = slugify(titleInput.value);
       }
+      if (!authorInput.value.trim() && result.author) {
+        authorInput.value = result.author;
+      }
     });
     return tile;
   };
@@ -284,7 +306,7 @@
 
   const openDialog = (item) => {
     mode = item ? "edit" : "add";
-    editingSlug = item ? item.hero.replace(/^hero-|\.jpg$/g, "") : null;
+    editingSlug = item ? itemSlug(item) : null;
     selectedImage = null;
     slugTouched = Boolean(item);
     heading.textContent = item ? `Edit — ${item.title}` : `Add to ${type}`;
@@ -293,14 +315,27 @@
     chosen.replaceChildren();
     titleInput.value = item ? item.title : "";
     yearInput.value = item ? item.year : "";
+    // Only lists that use authors show the field, so it stays out of the way
+    // for the ones that do not.
+    authorRow.style.display = data.items.some((entry) => "author" in entry) ? "" : "none";
+    authorInput.value = (item && item.author) || "";
     slugInput.value = editingSlug || "";
-    slugInput.disabled = Boolean(item);
+    // The slug is fixed once an image names it, but an item still waiting for
+    // one may be renamed here before the artwork is fetched.
+    slugInput.disabled = Boolean(item && item.hero);
     descInput.value = item ? item.desc : "";
     includeInput.checked = item ? item.include === false : false;
     deleteButton.style.display = item ? "" : "none";
-    say(item ? "search to replace the artwork, or just edit the text" : "", "note");
+    say(
+      item
+        ? item.hero
+          ? "search to replace the artwork, or just edit the text"
+          : "no image yet — search and pick one, or just edit the text"
+        : "",
+      "note",
+    );
     dialog.showModal();
-    (item ? descInput : searchInput).focus();
+    (item && item.hero ? descInput : searchInput).focus();
   };
 
   const save = async () => {
@@ -311,6 +346,7 @@
         await api("POST", "/api/items", {
           type,
           title: titleInput.value,
+          author: authorInput.value,
           year: yearInput.value,
           slug: slugInput.value.trim() || slugify(titleInput.value),
           desc: descInput.value,
@@ -318,15 +354,23 @@
           include: includeInput.checked ? false : true,
         });
       } else {
-        await api("PUT", `/api/items/${type}/${editingSlug}`, {
+        // The image goes first: installing one on an item that had none gives
+        // it a hero, and that is the identity the edit then has to use.
+        let slug = editingSlug;
+        if (selectedImage) {
+          const installed = await api("POST", `/api/image/${type}/${editingSlug}`, {
+            imageUrl: selectedImage,
+            slug: slugInput.value.trim() || editingSlug,
+          });
+          slug = installed.hero.replace(/^hero-|\.jpg$/g, "");
+        }
+        await api("PUT", `/api/items/${type}/${slug}`, {
           title: titleInput.value,
+          author: authorInput.value,
           year: yearInput.value,
           desc: descInput.value,
           include: includeInput.checked ? false : true,
         });
-        if (selectedImage) {
-          await api("POST", `/api/image/${type}/${editingSlug}`, { imageUrl: selectedImage });
-        }
       }
       dialog.close();
       await refreshList();
@@ -357,6 +401,7 @@
 
   const addButton = el("button", { type: "button", textContent: "+ Add" });
   const needsDesc = el("input", { type: "checkbox" });
+  const needsHero = el("input", { type: "checkbox" });
   const commitInput = el("input", { type: "text", placeholder: "commit message" });
   const commitButton = el("button", { type: "button", textContent: "Commit & push" });
   const statusText = el("span", { className: "admin-note" });
@@ -365,10 +410,16 @@
   const descFilterLabel = el("label");
   descFilterLabel.append(needsDesc, "needs description");
 
-  bar.append(addButton, descFilterLabel, statusText, commitInput, commitButton);
+  const heroFilterLabel = el("label");
+  heroFilterLabel.append(needsHero, "needs image");
+
+  bar.append(
+    addButton, descFilterLabel, heroFilterLabel, statusText, commitInput, commitButton,
+  );
 
   addButton.addEventListener("click", () => openDialog(null));
   needsDesc.addEventListener("change", () => applyFilter());
+  needsHero.addEventListener("change", () => applyFilter());
 
   const refreshStatus = async () => {
     try {
@@ -421,19 +472,22 @@
   // ------------------------------------------------------------- decoration
 
   const applyFilter = () => {
-    const only = needsDesc.checked;
-    document.querySelectorAll("main li[data-hero]").forEach((li) => {
-      const empty = li.dataset.desc === "";
-      li.style.display = only && !empty ? "none" : "";
+    document.querySelectorAll("main li[data-item]").forEach((li) => {
+      const item = itemFor(li);
+      const wanted =
+        (!needsDesc.checked || !item || !item.desc) &&
+        (!needsHero.checked || !item || !item.hero);
+      li.style.display = wanted ? "" : "none";
     });
   };
 
   const decorate = () => {
-    document.querySelectorAll("main li[data-hero]").forEach((li) => {
-      const item = data.items.find((entry) => entry.hero === li.dataset.hero);
+    document.querySelectorAll("main li[data-item]").forEach((li) => {
+      const item = itemFor(li);
       if (!item || li.querySelector(".admin-edit")) return;
       li.classList.toggle("admin-hidden", item.include === false);
       li.classList.toggle("admin-nodesc", !item.desc);
+      li.classList.toggle("admin-nohero", !item.hero);
       const pencil = el("button", {
         type: "button",
         className: "admin-edit",

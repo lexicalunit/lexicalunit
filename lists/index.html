@@ -115,6 +115,25 @@
         display: block;
         border: 1px solid black;
       }
+      /* Stand-in for items that have no hero image yet. */
+      .no-hero {
+        margin: 5px auto;
+        width: 200px;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px dashed #ccc;
+        border-radius: 4px;
+        color: #a0a0a0;
+        font-size: 13px;
+      }
+      main li em {
+        display: block;
+        color: #6f6f6f;
+        font-style: normal;
+        font-size: 14px;
+      }
 
       /* Sticky header styles */
       .sticky-header a:hover {
@@ -220,7 +239,7 @@
           type = urlParams.get("type") || "games";
 
           // Validate type
-          if (!["games", "anime", "movies"].includes(type)) {
+          if (!["games", "anime", "movies", "books"].includes(type)) {
             type = "games";
           }
 
@@ -273,17 +292,22 @@
         sortedItems.forEach((item) => {
           if (item.include === false && !window.adminMode) return;
           const li = document.createElement("li");
-          li.dataset.hero = item.hero;
-          li.dataset.desc = item.desc;
-          const query = `"${item.title}" ${data.query}`;
+          // Identity for admin.js: the hero image name, or the title until the
+          // item has one.
+          li.dataset.item = item.hero || item.title;
+          const query = `"${item.title}" ${item.author || ""} ${data.query}`;
           const link =
             `https://www.google.com/search?` +
             `&btnI=I%27m+Feeling+Lucky&gbv=1&` +
             `q=${encodeURIComponent(query)}`;
+          const art = item.hero
+            ? `<img alt="${esc(item.title)}" src="${data.images}/${item.hero}" />`
+            : `<div class="no-hero">no image yet</div>`;
           li.innerHTML = `
             <a href="${link}" target="_blank" rel="noopener noreferrer">
               <strong>${esc(item.title)} — ${item.year}</strong>
-              <img alt="${esc(item.title)}" src="${data.images}/${item.hero}" />
+              ${item.author ? `<em>${esc(item.author)}</em>` : ""}
+              ${art}
               <p>${esc(item.desc)}</p>
             </a>
           `;
@@ -339,6 +363,7 @@
             <li><a href="/lists?type=games">Best Games</a></li>
             <li><a href="/lists?type=anime">Best Anime</a></li>
             <li><a href="/lists?type=movies">Best Movies</a></li>
+            <li><a href="/lists?type=books">Best Books</a></li>
           </ul>
         </nav>
       </div>

@@ -1,0 +1,224 @@
+{
+  "images": "/www/img/books",
+  "items": [
+    {
+      "author": "J. D. Salinger",
+      "desc": "",
+      "hero": "hero-a-perfect-day-for-bananafish.jpg",
+      "title": "A Perfect Day for Bananafish",
+      "year": 1948
+    },
+    {
+      "author": "J. D. Salinger",
+      "desc": "",
+      "hero": "hero-the-catcher-in-the-rye.jpg",
+      "title": "The Catcher in the Rye",
+      "year": 1951
+    },
+    {
+      "author": "Frank Herbert",
+      "desc": "",
+      "hero": "hero-dune-dune-messiah-children-of-dune.jpg",
+      "title": "Dune, Dune Messiah, Children of Dune",
+      "year": 1965
+    },
+    {
+      "author": "Frank Herbert",
+      "desc": "",
+      "hero": "hero-the-dosadi-experiment.jpg",
+      "title": "The Dosadi Experiment",
+      "year": 1977
+    },
+    {
+      "author": "Neil Gaiman",
+      "desc": "",
+      "hero": "hero-the-sandman.jpg",
+      "title": "The Sandman",
+      "year": 1989
+    },
+    {
+      "author": "Clive Barker",
+      "desc": "",
+      "hero": "hero-imajica.jpg",
+      "title": "Imajica",
+      "year": 1991
+    },
+    {
+      "author": "Octavia E. Butler",
+      "desc": "",
+      "hero": "hero-parable-of-the-sower.jpg",
+      "title": "Parable of the Sower",
+      "year": 1993
+    },
+    {
+      "author": "Jacqueline Carey",
+      "desc": "",
+      "hero": "hero-kushiel.jpg",
+      "title": "Kushiel's Dart, Kushiel's Chosen, Kushiel's Avatar",
+      "year": 2001
+    },
+    {
+      "author": "John Scalzi",
+      "desc": "",
+      "hero": "hero-old-mans-war.jpg",
+      "title": "Old Man's War",
+      "year": 2005
+    },
+    {
+      "author": "Scott Lynch",
+      "desc": "",
+      "hero": "hero-the-lies-of-locke-lamora.jpg",
+      "title": "The Lies of Locke Lamora",
+      "year": 2006
+    },
+    {
+      "author": "Joe Abercrombie",
+      "desc": "",
+      "hero": "hero-best-served-cold.jpg",
+      "title": "Best Served Cold",
+      "year": 2009
+    },
+    {
+      "author": "Iain M. Banks",
+      "desc": "",
+      "hero": "hero-surface-detail.jpg",
+      "title": "Surface Detail",
+      "year": 2010
+    },
+    {
+      "author": "Ann Leckie",
+      "desc": "",
+      "hero": "hero-ancillary-justice-ancillary-sword-ancillary-mercy.jpg",
+      "title": "Ancillary Justice, Ancillary Sword, Ancillary Mercy",
+      "year": 2013
+    },
+    {
+      "author": "John Scalzi",
+      "desc": "",
+      "hero": "hero-lock-in.jpg",
+      "title": "Lock In",
+      "year": 2014
+    },
+    {
+      "author": "Ryan North",
+      "desc": "",
+      "hero": "hero-the-midas-flesh.jpg",
+      "title": "The Midas Flesh",
+      "year": 2014
+    },
+    {
+      "author": "Nick Cutter",
+      "desc": "",
+      "hero": "hero-the-troop.jpg",
+      "title": "The Troop",
+      "year": 2014
+    },
+    {
+      "author": "Scott Snyder",
+      "desc": "",
+      "hero": "hero-wytches.jpg",
+      "title": "Wytches",
+      "year": 2014
+    },
+    {
+      "author": "V. E. Schwab",
+      "desc": "",
+      "hero": "hero-a-darker-shade-of-magic.jpg",
+      "title": "A Darker Shade of Magic",
+      "year": 2015
+    },
+    {
+      "author": "Gemma Files",
+      "desc": "",
+      "hero": "hero-experimental-film.jpg",
+      "title": "Experimental Film",
+      "year": 2015
+    },
+    {
+      "author": "Brian K. Vaughan",
+      "desc": "",
+      "hero": "hero-paper-girls.jpg",
+      "title": "Paper Girls",
+      "year": 2015
+    },
+    {
+      "author": "N. K. Jemisin",
+      "desc": "",
+      "hero": "hero-the-fifth-season-the-obelisk-gate-the-stone-sky.jpg",
+      "title": "The Fifth Season, The Obelisk Gate, The Stone Sky",
+      "year": 2015
+    },
+    {
+      "author": "Naomi Novik",
+      "desc": "",
+      "hero": "hero-uprooted.jpg",
+      "title": "Uprooted",
+      "year": 2015
+    },
+    {
+      "author": "Nick Cutter",
+      "desc": "",
+      "hero": "hero-little-heaven.jpg",
+      "title": "Little Heaven",
+      "year": 2017
+    },
+    {
+      "author": "Martha Wells",
+      "desc": "",
+      "hero": "hero-murderbot-diaries.jpg",
+      "title": "Murderbot Diaries",
+      "year": 2017
+    },
+    {
+      "author": "Ann Leckie",
+      "desc": "",
+      "hero": "hero-provenance.jpg",
+      "title": "Provenance",
+      "year": 2017
+    },
+    {
+      "author": "Kameron Hurley",
+      "desc": "",
+      "hero": "hero-the-stars-are-legion.jpg",
+      "title": "The Stars Are Legion",
+      "year": 2017
+    },
+    {
+      "author": "Seanan McGuire",
+      "desc": "",
+      "hero": "hero-middlegame.jpg",
+      "title": "Middlegame",
+      "year": 2019
+    },
+    {
+      "author": "Ann Leckie",
+      "desc": "",
+      "hero": "hero-the-raven-tower.jpg",
+      "title": "The Raven Tower",
+      "year": 2019
+    },
+    {
+      "author": "Susanna Clarke",
+      "desc": "",
+      "hero": "hero-piranesi.jpg",
+      "title": "Piranesi",
+      "year": 2020
+    },
+    {
+      "author": "V. E. Schwab",
+      "desc": "",
+      "hero": "hero-the-invisible-life-of-addie-larue.jpg",
+      "title": "The Invisible Life of Addie LaRue",
+      "year": 2020
+    },
+    {
+      "author": "Derecka Purnell",
+      "desc": "",
+      "hero": "hero-becoming-abolitionists.jpg",
+      "title": "Becoming Abolitionists: Police, Protests, and the Pursuit of Freedom",
+      "year": 2021
+    }
+  ],
+  "query": "book site:goodreads.com",
+  "title": "Best Books"
+}

@@ -100,10 +100,20 @@ def hero_name(slug):
     return f"hero-{slug}.jpg"
 
 
+def item_slug(item):
+    """An item's identity in the API.
+
+    Normally that is the slug inside its hero image name, but an item may have
+    no image yet (hero ""), and those are addressed by their slugified title
+    until one is installed.
+    """
+    match = re.fullmatch(r"hero-(.+)\.jpg", item.get("hero") or "")
+    return match.group(1) if match else slugify(item.get("title") or "")
+
+
 def find_item(data, slug):
-    hero = hero_name(slug)
     for item in data["items"]:
-        if item.get("hero") == hero:
+        if item_slug(item) == slug:
             return item
     return None
 
@@ -236,11 +246,14 @@ def get_json(url, data=None, headers=None):
         raise ApiError(HTTPStatus.BAD_GATEWAY, f"provider unreachable: {error}")
 
 
-def candidate(title, year, images, source):
+def candidate(title, year, images, source, author=None):
     images = [url for url in images if url]
     if not title or not images:
         return None
-    return {"title": title, "year": year, "images": images, "source": source}
+    result = {"title": title, "year": year, "images": images, "source": source}
+    if author:
+        result["author"] = author
+    return result
 
 
 def search_anime(query, config):
@@ -327,7 +340,7 @@ def search_games(query, config):
 def search_books(query, config):
     """Open Library. No API key required."""
     url = "https://openlibrary.org/search.json?" + urllib.parse.urlencode(
-        {"q": query, "limit": 12, "fields": "title,first_publish_year,cover_i"}
+        {"q": query, "limit": 12, "fields": "title,first_publish_year,cover_i,author_name"}
     )
     results = []
     for book in get_json(url).get("docs", []):
@@ -335,8 +348,15 @@ def search_books(query, config):
         images = []
         if cover:
             images = [f"https://covers.openlibrary.org/b/id/{cover}-L.jpg"]
+        authors = book.get("author_name") or []
         results.append(
-            candidate(book.get("title"), book.get("first_publish_year"), images, "Open Library")
+            candidate(
+                book.get("title"),
+                book.get("first_publish_year"),
+                images,
+                "Open Library",
+                author=authors[0] if authors else None,
+            )
         )
     return results
 
@@ -509,20 +529,24 @@ def api_create_item(handler, body):
 
     slug = check_slug((body.get("slug") or slugify(title)).strip())
     image_url = (body.get("imageUrl") or "").strip()
-    if not image_url:
-        raise ApiError(HTTPStatus.BAD_REQUEST, "pick an image first")
 
     if find_item(data, slug) or (image_dir(type_) / hero_name(slug)).exists():
         raise ApiError(HTTPStatus.CONFLICT, f"{hero_name(slug)} already exists")
 
-    install_image(image_url, type_, slug)
+    # An item may be added without artwork; the list renders a placeholder for
+    # it and the image can be picked later by editing the item.
+    if image_url:
+        install_image(image_url, type_, slug)
 
     item = {
         "desc": (body.get("desc") or "").strip(),
-        "hero": hero_name(slug),
+        "hero": hero_name(slug) if image_url else "",
         "title": title,
         "year": year,
     }
+    author = (body.get("author") or "").strip()
+    if author:
+        item["author"] = author
     if body.get("include") is False:
         item["include"] = False
     data["items"].append(item)
@@ -534,7 +558,7 @@ def api_update_item(handler, body, type_, slug):
     data = read_data(type_)
     item = find_item(data, slug)
     if item is None:
-        raise ApiError(HTTPStatus.NOT_FOUND, f"no item with hero {hero_name(slug)}")
+        raise ApiError(HTTPStatus.NOT_FOUND, f"no {type_} item known as {slug}")
 
     if "title" in body:
         title = (body.get("title") or "").strip()
@@ -543,6 +567,14 @@ def api_update_item(handler, body, type_, slug):
         item["title"] = title
     if "desc" in body:
         item["desc"] = (body.get("desc") or "").strip()
+    if "author" in body:
+        # Only books carry an author, so an empty one drops the key entirely
+        # rather than writing it into every other list.
+        author = (body.get("author") or "").strip()
+        if author:
+            item["author"] = author
+        else:
+            item.pop("author", None)
     if "year" in body:
         try:
             item["year"] = int(body["year"])
@@ -560,23 +592,41 @@ def api_update_item(handler, body, type_, slug):
 
 def api_replace_image(handler, body, type_, slug):
     data = read_data(type_)
-    if find_item(data, slug) is None:
-        raise ApiError(HTTPStatus.NOT_FOUND, f"no item with hero {hero_name(slug)}")
+    item = find_item(data, slug)
+    if item is None:
+        raise ApiError(HTTPStatus.NOT_FOUND, f"no {type_} item known as {slug}")
     image_url = (body.get("imageUrl") or "").strip()
     if not image_url:
         raise ApiError(HTTPStatus.BAD_REQUEST, "pick an image first")
-    install_image(image_url, type_, slug)
-    return {"hero": hero_name(slug)}
+
+    # An item with no artwork yet may name the image it is about to get; once
+    # installed that name is its identity, so replacements keep it.
+    target = slug
+    if not item.get("hero"):
+        target = check_slug((body.get("slug") or slug).strip())
+        if target != slug and (
+            find_item(data, target) or (image_dir(type_) / hero_name(target)).exists()
+        ):
+            raise ApiError(HTTPStatus.CONFLICT, f"{hero_name(target)} already exists")
+
+    install_image(image_url, type_, target)
+    # An item that had no artwork is adopting this one, so it stops being
+    # addressed by its title and gets a hero of its own.
+    if item.get("hero") != hero_name(target):
+        item["hero"] = hero_name(target)
+        write_data(type_, data)
+    return {"hero": hero_name(target)}
 
 
 def api_delete_item(handler, body, type_, slug):
     data = read_data(type_)
     item = find_item(data, slug)
     if item is None:
-        raise ApiError(HTTPStatus.NOT_FOUND, f"no item with hero {hero_name(slug)}")
+        raise ApiError(HTTPStatus.NOT_FOUND, f"no {type_} item known as {slug}")
     data["items"] = [entry for entry in data["items"] if entry is not item]
     write_data(type_, data)
-    trash(image_dir(type_) / hero_name(slug))
+    if item.get("hero"):
+        trash(image_dir(type_) / item["hero"])
     return {"deleted": item["title"]}
 
 

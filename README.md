@@ -31,6 +31,8 @@ Optionally, movies and games can also search TMDB and RAWG for a wider choice of
 
 Results from every configured provider are merged, so a missing key or an API having a bad day just means fewer images to choose from, never a broken search.
 
+Artwork is optional: an entry with `"hero": ""` renders a placeholder on the page, is flagged by the "needs image" filter in the admin bar, and picks up a real image the moment you choose one in its edit dialog. Books also carry an `author`, which the dialog offers for any list that already uses one and Open Library fills in for you.
+
 To add a new list, create `lists/<type>/data.json` (copying the shape of an existing one) and `www/img/<type>/`, then add the type to the nav and the validation list in `lists/index.html`. The studio picks it up automatically.
 
 ## Publishing
