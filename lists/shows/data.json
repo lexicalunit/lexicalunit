@@ -1,0 +1,337 @@
+{
+  "images": "/www/img/shows",
+  "items": [
+    {
+      "desc": "",
+      "hero": "hero-doctor-who.jpg",
+      "title": "Doctor Who",
+      "year": 1963
+    },
+    {
+      "desc": "",
+      "hero": "hero-star-trek-the-next-generation.jpg",
+      "title": "Star Trek: The Next Generation",
+      "year": 1987
+    },
+    {
+      "desc": "",
+      "hero": "hero-babylon-5.jpg",
+      "title": "Babylon 5",
+      "year": 1993
+    },
+    {
+      "desc": "",
+      "hero": "hero-star-trek-deep-space-nine.jpg",
+      "title": "Star Trek: Deep Space Nine",
+      "year": 1993
+    },
+    {
+      "desc": "",
+      "hero": "hero-xena-warrior-princess.jpg",
+      "title": "Xena: Warrior Princess",
+      "year": 1995
+    },
+    {
+      "desc": "",
+      "hero": "hero-lexx.jpg",
+      "title": "Lexx",
+      "year": 1996
+    },
+    {
+      "desc": "",
+      "hero": "hero-daria.jpg",
+      "title": "Daria",
+      "year": 1997
+    },
+    {
+      "desc": "",
+      "hero": "hero-farscape.jpg",
+      "title": "Farscape",
+      "year": 1999
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Invader Zim",
+      "year": 2001
+    },
+    {
+      "desc": "",
+      "hero": "hero-justice-league.jpg",
+      "title": "Justice League",
+      "year": 2001
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Firefly",
+      "year": 2002
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "The Venture Brothers",
+      "year": 2003
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Battlestar Galactica",
+      "year": 2004
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Avatar: The Last Airbender",
+      "year": 2005
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Adventure Time",
+      "year": 2010
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "My Little Pony: Friendship is Magic",
+      "year": 2010
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Young Justice",
+      "year": 2010
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Avatar: The Legend of Korra",
+      "year": 2012
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Gravity Falls",
+      "year": 2012
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Hannibal",
+      "year": 2013
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Rick and Morty",
+      "year": 2013
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Steven Universe",
+      "year": 2013
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Daredevil",
+      "year": 2015
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Sense8",
+      "year": 2015
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Taskmaster",
+      "year": 2015
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "The Expanse",
+      "year": 2015
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Legends of Tomorrow",
+      "year": 2016
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "The Good Place",
+      "year": 2016
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Counterpart",
+      "year": 2017
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "DuckTales",
+      "year": 2017
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Legion",
+      "year": 2017
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Maniac",
+      "year": 2018
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "She-Ra and the Princesses of Power",
+      "year": 2018
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Chernobyl",
+      "year": 2019
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "The Boys",
+      "year": 2019
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Watchmen",
+      "year": 2019
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Star Trek: Lower Decks",
+      "year": 2020
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "The Owl House",
+      "year": 2020
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Invincible",
+      "year": 2021
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Midnight Mass",
+      "year": 2021
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "WandaVision",
+      "year": 2021
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Andor",
+      "year": 2022
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Interview with the Vampire",
+      "year": 2022
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Peacemaker",
+      "year": 2022
+    },
+    {
+      "desc": "",
+      "hero": "hero-severance.jpg",
+      "title": "Severance",
+      "year": 2022
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "The Sandman",
+      "year": 2022
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Beef",
+      "year": 2023
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Scavengers Reign",
+      "year": 2023
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Silo",
+      "year": 2023
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "The Last of Us",
+      "year": 2023
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Batman: Caped Crusader",
+      "year": 2024
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "True Detective: Night Country",
+      "year": 2024
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Common Side Effects",
+      "year": 2025
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "Murderbot",
+      "year": 2025
+    },
+    {
+      "desc": "",
+      "hero": "",
+      "title": "The Pitt",
+      "year": 2025
+    }
+  ],
+  "query": "tv show trailer site:youtube.com",
+  "title": "Best Shows"
+}

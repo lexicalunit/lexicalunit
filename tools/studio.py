@@ -315,6 +315,49 @@ def search_movies(query, config):
     return results
 
 
+def search_tvmaze(query, config):
+    """TVmaze. No API key required, so shows work with no credentials at all."""
+    url = "https://api.tvmaze.com/search/shows?" + urllib.parse.urlencode({"q": query})
+    results = []
+    for match in get_json(url)[:12]:
+        show = match.get("show") or {}
+        image = show.get("image") or {}
+        year = (show.get("premiered") or "")[:4]
+        results.append(
+            candidate(
+                show.get("name"),
+                int(year) if year.isdigit() else None,
+                [image.get("original"), image.get("medium")],
+                "TVmaze",
+            )
+        )
+    return results
+
+
+def search_shows(query, config):
+    """TMDB again, on the television half of it. Same free key as movies."""
+    key = require_key(config, "tmdb_api_key", "TMDB")
+    url = "https://api.themoviedb.org/3/search/tv?" + urllib.parse.urlencode(
+        {"api_key": key, "query": query, "include_adult": "false"}
+    )
+    results = []
+    for show in get_json(url).get("results", [])[:12]:
+        images = []
+        for path, size in ((show.get("poster_path"), "w500"), (show.get("backdrop_path"), "w780")):
+            if path:
+                images.append(f"https://image.tmdb.org/t/p/{size}{path}")
+        year = (show.get("first_air_date") or "")[:4]
+        results.append(
+            candidate(
+                show.get("name"),
+                int(year) if year.isdigit() else None,
+                images,
+                "TMDB",
+            )
+        )
+    return results
+
+
 def search_games(query, config):
     """RAWG. Free key from rawg.io/apidocs."""
     key = require_key(config, "rawg_api_key", "RAWG")
@@ -392,7 +435,11 @@ def search_wikipedia(query, config, hint=""):
         }
     )
     results = []
-    for page in get_json(url).get("query", {}).get("pages", []):
+    # Pages come back in arbitrary order; index is the search ranking, and the
+    # best match being first matters a lot when a cast member's photo is one of
+    # the other hits.
+    pages = get_json(url).get("query", {}).get("pages", [])
+    for page in sorted(pages, key=lambda page: page.get("index", 99)):
         title = page.get("title", "")
         description = (page.get("pageprops") or {}).get("wikibase-shortdesc", "")
         if title.endswith("(disambiguation)") or description.startswith("Topics referred"):
@@ -419,14 +466,17 @@ def wikipedia_for(hint):
 PROVIDERS = {
     "anime": [search_anime, wikipedia_for("anime")],
     "movies": [search_movies, wikipedia_for("film")],
+    "shows": [search_tvmaze, search_shows, wikipedia_for("TV series")],
     "games": [search_games, wikipedia_for("video game")],
     "books": [search_books, wikipedia_for("novel")],
 }
 
 # Optional providers, and the config key each one needs. Everything else works
 # with no credentials at all.
+TMDB = ("TMDB", "tmdb_api_key", "https://www.themoviedb.org/settings/api")
 PROVIDER_KEYS = {
-    "movies": ("TMDB", "tmdb_api_key", "https://www.themoviedb.org/settings/api"),
+    "movies": TMDB,
+    "shows": TMDB,
     "games": ("RAWG", "rawg_api_key", "https://rawg.io/apidocs"),
 }
 
@@ -554,12 +604,31 @@ def api_create_item(handler, body):
     return {"item": item, "slug": slug}
 
 
+def rename_slug(data, item, type_, target):
+    """Move an item's artwork to hero-<target>.jpg and follow it in data.json.
+
+    An item with no artwork has nothing to rename: its slug is derived from its
+    title, and the one typed in the dialog applies when an image is installed.
+    """
+    if target == item_slug(item) or not item.get("hero"):
+        return
+    if find_item(data, target) or (image_dir(type_) / hero_name(target)).exists():
+        raise ApiError(HTTPStatus.CONFLICT, f"{hero_name(target)} already exists")
+    source = image_dir(type_) / item["hero"]
+    if not source.exists():
+        raise ApiError(HTTPStatus.NOT_FOUND, f"{item['hero']} is not on disk")
+    os.replace(source, image_dir(type_) / hero_name(target))
+    item["hero"] = hero_name(target)
+
+
 def api_update_item(handler, body, type_, slug):
     data = read_data(type_)
     item = find_item(data, slug)
     if item is None:
         raise ApiError(HTTPStatus.NOT_FOUND, f"no {type_} item known as {slug}")
 
+    if "slug" in body:
+        rename_slug(data, item, type_, check_slug((body.get("slug") or "").strip()))
     if "title" in body:
         title = (body.get("title") or "").strip()
         if not title:
@@ -765,9 +834,12 @@ def main():
     server = ThreadingHTTPServer(("127.0.0.1", args.port), handler)
 
     config = load_config()
-    unconfigured = [
-        name for name, key, _ in PROVIDER_KEYS.values() if not has_key(config, key)
-    ]
+    # dict, not set: TMDB serves two lists and should still be named once.
+    unconfigured = list(
+        dict.fromkeys(
+            name for name, key, _ in PROVIDER_KEYS.values() if not has_key(config, key)
+        )
+    )
 
     print(f"studio serving {REPO} at http://localhost:{args.port}/lists/?type=games")
     print(f"lists: {', '.join(list_types())}")

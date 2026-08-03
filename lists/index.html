@@ -239,7 +239,7 @@
           type = urlParams.get("type") || "games";
 
           // Validate type
-          if (!["games", "anime", "movies", "books"].includes(type)) {
+          if (!["games", "anime", "movies", "books", "shows"].includes(type)) {
             type = "games";
           }
 
@@ -364,6 +364,7 @@
             <li><a href="/lists?type=anime">Best Anime</a></li>
             <li><a href="/lists?type=movies">Best Movies</a></li>
             <li><a href="/lists?type=books">Best Books</a></li>
+            <li><a href="/lists?type=shows">Best Shows</a></li>
           </ul>
         </nav>
       </div>

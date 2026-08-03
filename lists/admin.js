@@ -315,22 +315,16 @@
     chosen.replaceChildren();
     titleInput.value = item ? item.title : "";
     yearInput.value = item ? item.year : "";
-    // Only lists that use authors show the field, so it stays out of the way
-    // for the ones that do not.
-    authorRow.style.display = data.items.some((entry) => "author" in entry) ? "" : "none";
     authorInput.value = (item && item.author) || "";
     slugInput.value = editingSlug || "";
-    // The slug is fixed once an image names it, but an item still waiting for
-    // one may be renamed here before the artwork is fetched.
-    slugInput.disabled = Boolean(item && item.hero);
     descInput.value = item ? item.desc : "";
     includeInput.checked = item ? item.include === false : false;
     deleteButton.style.display = item ? "" : "none";
     say(
       item
         ? item.hero
-          ? "search to replace the artwork, or just edit the text"
-          : "no image yet — search and pick one, or just edit the text"
+          ? "every field is editable; a new slug renames the image on disk"
+          : "no image yet — search and pick one, or just edit the fields"
         : "",
       "note",
     );
@@ -369,6 +363,7 @@
           author: authorInput.value,
           year: yearInput.value,
           desc: descInput.value,
+          slug: slugInput.value.trim() || slug,
           include: includeInput.checked ? false : true,
         });
       }
