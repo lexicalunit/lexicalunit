@@ -274,8 +274,12 @@
           output.innerHTML = `<ul class="alternating-colors"></ul>`;
         }
 
-        const button = document.querySelector("button");
+        const button = document.querySelector(".sort-toggle");
         button.innerHTML = asc ? "▲" : "▼";
+        button.setAttribute(
+          "aria-label",
+          asc ? "Sort oldest first" : "Sort newest first",
+        );
 
         const ul = document.querySelector(".output ul");
         ul.style.display = "flex";
@@ -372,7 +376,11 @@
     <main>
       <div class="container">
         <h2 style="display: inline-block">Best of the Best</h2>
-        <button onclick="toggleSort()"></button>
+        <button
+          class="sort-toggle"
+          type="button"
+          onclick="toggleSort()"
+        ></button>
         <div class="output"></div>
       </div>
     </main>

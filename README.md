@@ -3,7 +3,7 @@
 ## Developing
 
 ```sh
-python3 -m http.server 8000
+./local.sh
 ```
 
 Then open `http://localhost:8000/` in your browser.
