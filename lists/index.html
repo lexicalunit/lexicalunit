@@ -206,6 +206,13 @@
       let data = [];
       let type = "games"; // default
 
+      function esc(text) {
+        return String(text ?? "").replace(
+          /[&<>"]/g,
+          (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c],
+        );
+      }
+
       async function fetchData() {
         if (data.length === 0) {
           // Get type from URL parameter
@@ -223,6 +230,12 @@
         return data;
       }
 
+      // Used by admin.js to re-render after an edit.
+      async function refreshList() {
+        data = [];
+        await renderPage();
+      }
+
       async function renderPage() {
         const data = await fetchData();
 
@@ -231,8 +244,6 @@
 
         const header = document.querySelector("h2");
         header.innerHTML = data.title;
-
-        const items = data.items;
 
         displayList();
         populateList();
@@ -260,8 +271,10 @@
         const ul = document.querySelector(".output ul");
 
         sortedItems.forEach((item) => {
-          if (item.include === false) return;
+          if (item.include === false && !window.adminMode) return;
           const li = document.createElement("li");
+          li.dataset.hero = item.hero;
+          li.dataset.desc = item.desc;
           const query = `"${item.title}" ${data.query}`;
           const link =
             `https://www.google.com/search?` +
@@ -269,15 +282,16 @@
             `q=${encodeURIComponent(query)}`;
           li.innerHTML = `
             <a href="${link}" target="_blank" rel="noopener noreferrer">
-              <strong>${item.title} — ${item.year}</strong>
-              <img alt="${item.title}" src="${data.images}/${item.hero}" />
-              <p>${item.desc}</p>
+              <strong>${esc(item.title)} — ${item.year}</strong>
+              <img alt="${esc(item.title)}" src="${data.images}/${item.hero}" />
+              <p>${esc(item.desc)}</p>
             </a>
           `;
           fragment.appendChild(li);
         });
 
-        ul.appendChild(fragment);
+        ul.replaceChildren(fragment);
+        if (window.onListRendered) window.onListRendered();
       }
 
       function toggleSort() {
@@ -291,6 +305,19 @@
       }
 
       window.addEventListener("DOMContentLoaded", renderPage);
+
+      // Local authoring tools (tools/studio.py). admin.js probes /api/config
+      // and stays invisible unless the studio server is answering, so this is
+      // inert on the deployed site.
+      if (["localhost", "127.0.0.1"].includes(location.hostname)) {
+        window.addEventListener("DOMContentLoaded", () => {
+          document.body.appendChild(
+            Object.assign(document.createElement("script"), {
+              src: "admin.js",
+            }),
+          );
+        });
+      }
     </script>
   </head>
   <body>

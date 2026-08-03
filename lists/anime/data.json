@@ -188,6 +188,18 @@
       "year": 2019
     },
     {
+      "desc": "I really did not expect where this story went and it was surprisingly refreshing and moving.",
+      "hero": "hero-vinland-saga.jpg",
+      "title": "Vinland Saga",
+      "year": 2019
+    },
+    {
+      "desc": "I love how unabashedly weird and gruesome this anime is while still managing to be consistently thoughtful and fun.",
+      "hero": "hero-dorohedoro.jpg",
+      "title": "Dorohedoro",
+      "year": 2020
+    },
+    {
       "desc": "Just watch the first episode, you will immediately fall in love with the characters and want to know what happens next. I love how much they play with the animation and how it doesn't look like anything else.",
       "hero": "hero-ranking-of-kings.jpg",
       "title": "Ranking of Kings",
@@ -241,12 +253,6 @@
       "hero": "hero-look-back.jpg",
       "title": "Look Back",
       "year": 2024
-    },
-    {
-      "desc": "I really did not expect where this story went and it was surprisingly refreshing and moving.",
-      "hero": "hero-vinland-saga.jpg",
-      "title": "Vinland Saga",
-      "year": 2019
     }
   ],
   "query": "anime trailer site:youtube.com",

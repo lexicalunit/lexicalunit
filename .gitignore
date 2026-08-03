@@ -2,7 +2,9 @@
 *.fdb_latexmk
 *.fls
 *.log
+*.pyc
 *.synctex.gz
+__pycache__/
 /resume/*.aux
 /resume/built.*
 /resume/resume.pdf
