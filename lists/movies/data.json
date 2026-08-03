@@ -2,79 +2,79 @@
   "images": "/www/img/movies",
   "items": [
     {
-      "desc": "",
+      "desc": "My personal favorite of Kurosawa's work. A beautiful and moving movie about the importance of filling your life with friends and family.",
       "hero": "hero-ikiru.jpg",
       "title": "Ikiru (To Live)",
       "year": 1952
     },
     {
-      "desc": "",
+      "desc": "Perfectly encapsulates and satirizes the madness of the Cold War.",
       "hero": "hero-dr-strangelove.jpg",
       "title": "Dr. Strangelove",
       "year": 1964
     },
     {
-      "desc": "",
+      "desc": "I honestly can't tell you what happens in this movie but the gestalt it created in my mind will never leave me.",
       "hero": "hero-holy-mountain.jpg",
       "title": "Holy Mountain",
       "year": 1973
     },
     {
-      "desc": "",
+      "desc": "One of the best horror and best sci-fi movies of all time. The set design in particular is something that modern movies have yet to match.",
       "hero": "hero-alien.jpg",
       "title": "Alien",
       "year": 1979
     },
     {
-      "desc": "",
+      "desc": "An incredibly intricate movie that begs to be intellectually dissected while at the same time delivering heart pounding action and true horror. Some of the best practical specific effects I've ever seen.",
       "hero": "hero-the-thing.jpg",
       "title": "The Thing",
       "year": 1982
     },
     {
-      "desc": "",
+      "desc": "Dreamlike in presentation while still having something important to say about society.",
       "hero": "hero-brazil.jpg",
       "title": "Brazil",
       "year": 1985
     },
     {
-      "desc": "",
+      "desc": "Pure camp and endlessly rewatchable. Has my favorite fight scene in any movie.",
       "hero": "hero-they-live.jpg",
       "title": "They Live",
       "year": 1988
     },
     {
-      "desc": "",
+      "desc": "A strong candidate for my favorite horror movie. I love that the movie is both horrible and beautiful at the same time.",
       "hero": "hero-candyman-1992.jpg",
       "title": "Candyman",
       "year": 1992
     },
     {
-      "desc": "",
+      "desc": "A fun and utterly weird sci-fi movie. Gets better with every rewatch.",
       "hero": "hero-12-monkeys.jpg",
       "title": "12 Monkeys",
       "year": 1995
     },
     {
-      "desc": "",
+      "desc": "I love the humor in this movie. The acting is also fantastic. The sudden moments of violence are so memorable, even years later.",
       "hero": "hero-fargo.jpg",
       "title": "Fargo",
       "year": 1996
     },
     {
-      "desc": "",
+      "desc": "The performances from the main cast are pitch perfect for this campy action movie. I also love the grungy future aesthetic and the way the movie is edited: Jumping quickly between disparate points of view.",
       "hero": "hero-fifth-element.jpg",
       "title": "The Fifth Element",
       "year": 1997
     },
     {
-      "desc": "",
+      "desc": "One of my favorite soundtracks and I love the movie's creepy weirdness.",
       "hero": "hero-dark-city.jpg",
       "title": "Dark City",
       "year": 1998
     },
     {
-      "desc": "",
+      "desc": "For the longest time this was my favorite movie of all time. However the story today is loved by people that apparently don't understand the entire point the movie is trying to make. This movie is about many things, but the core is a critique of toxic masculinity.",
       "hero": "hero-fight-club.jpg",
       "title": "Fight Club",
       "year": 1999
@@ -86,7 +86,7 @@
       "year": 2004
     },
     {
-      "desc": "",
+      "desc": "A quirky love story with an interesting sci-fi premise that truly demonstrated to me how good of an actor Jim Carrey actually is.",
       "hero": "hero-eternal-sunshine.jpg",
       "title": "Eternal Sunshine of the Spotless Mind",
       "year": 2004
