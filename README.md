@@ -1,46 +1,34 @@
-# Lexical Unit
+# Hi, I'm Amy 🤘
 
-## Developing
+I'm a Senior Software Engineer at [Builder.io](https://www.builder.io/), and the creator of [SpellBot](https://spellbot.io/) and co-creator of [Convoke](https://convoke.games/). I've spent two decades shipping everything from sonar systems to backend APIs serving tens of millions of users, and these days I mostly build distributed systems, developer tools, and the occasional Discord bot.
 
-```sh
-./local.sh
-```
+You can find my full work history on my [résumé](https://lexicalunit.com/resume/aresume-digital.pdf), and more about me at [lexicalunit.com](https://lexicalunit.com).
 
-Then open `http://localhost:8000/` in your browser.
+## What I'm building
 
-## Editing the lists
+- 🎲 [**SpellBot**](https://spellbot.io/) — a Discord matchmaking bot for the [SpellTable](https://spelltable.wizards.com/) community, serving 18k+ monthly games
+- 📹 [**Convoke**](https://convoke.games/) — a next-generation webcam Magic: The Gathering platform, scaled to 20k+ active users in its first 4 months
+- 🔌 [**nanodbc**](http://nanodbc.io) — a small C++ wrapper for ODBC, used by the [R programming language](https://github.com/r-dbi/odbc)'s `odbc` package
 
-```sh
-./studio.sh
-```
+## Skills
 
-This serves the site the same way, and additionally exposes a localhost-only API that the lists page uses to add and edit entries: search a metadata provider by title, pick artwork from the results, and it gets resized to 300px wide (exactly what `www/img/*/fix.sh` does) and written into `lists/<type>/data.json` for you. The bar at the bottom of the page commits and pushes; deploying is still `./publish.sh`.
+<!-- SKILLS:START -->
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=py,ts,js,cpp,go,rust,ruby,scala,swift,django,nodejs,flask,fastapi,react,rails,pytorch,sklearn,aws,docker,kubernetes,terraform,postgres,redis,mongodb,elasticsearch,git,github,gitlab,graphql,jira,latex,kafka&theme=dark&perline=8" alt="Skills" />
+</p>
+<!-- SKILLS:END -->
 
-The admin controls only appear when `tools/studio.py` is answering, so nothing changes on the deployed site.
+## GitHub stats
 
-No credentials are needed. Every list searches Wikipedia, which carries official posters and box art at roughly the size a hero image wants, along with the release year. Anime additionally searches AniList, books Open Library, and shows TVmaze, all keyless.
+<p align="center">
+  <img src="./github-metrics.svg" alt="Amy's GitHub metrics" />
+</p>
 
-Optionally, movies and shows can also search TMDB, and games RAWG, for a wider choice of artwork. Those need free keys in `~/.config/lexicalunit/studio.json`, outside this repo so they are never committed or published:
+## Connect with me
 
-```json
-{
-  "tmdb_api_key": "...",
-  "rawg_api_key": "..."
-}
-```
-
-Results from every configured provider are merged, so a missing key or an API having a bad day just means fewer images to choose from, never a broken search.
-
-Every field of an entry is editable from its dialog: title, author, year, description, whether it is hidden, the artwork, and the image slug — renaming that one moves `hero-<slug>.jpg` on disk and follows it in `data.json`.
-
-Artwork is optional: an entry with `"hero": ""` renders a placeholder on the page, is flagged by the "needs image" filter in the admin bar, and picks up a real image the moment you choose one in its edit dialog. Books also carry an `author`, which Open Library fills in for you.
-
-To add a new list, create `lists/<type>/data.json` (copying the shape of an existing one) and `www/img/<type>/`, then add the type to the nav and the validation list in `lists/index.html`. The studio picks it up automatically.
-
-## Publishing
-
-```sh
-# source env vars from 1pass
-nopw "$PUSER"@"$PHOST"
-./publish.sh
-```
+<p align="center">
+  <a href="https://www.linkedin.com/in/amy-troschinetz/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
+  <a href="https://bsky.app/profile/lexicalunit.com"><img src="https://img.shields.io/badge/Bluesky-0285FF?style=for-the-badge&logo=bluesky&logoColor=white" alt="Bluesky" /></a>
+  <a href="https://lexicalunit.com"><img src="https://img.shields.io/badge/lexicalunit.com-000000?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Website" /></a>
+  <a href="mailto:amy@lexicalunit.com"><img src="https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" /></a>
+</p>

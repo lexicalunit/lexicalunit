@@ -52,6 +52,49 @@ DIGITAL_PREAMBLE = r"""
 \renewcommand{\familydefault}{\sfdefault}
 """
 
+# Keep in sync with the Skills section of resume.tex. Feeds the skillicons.dev
+# badge in the top-level README via update_readme_skills() below.
+SKILL_ICONS = [
+    "py", "ts", "js", "cpp", "go", "rust", "ruby", "scala", "swift",
+    "django", "nodejs", "flask", "fastapi", "react", "rails",
+    "pytorch", "sklearn",
+    "aws", "docker", "kubernetes", "terraform",
+    "postgres", "redis", "mongodb", "elasticsearch",
+    "git", "github", "gitlab", "graphql", "jira", "latex", "kafka",
+]
+
+README_PATH = os.path.join(os.pardir, "README.md")
+SKILLS_START = "<!-- SKILLS:START -->"
+SKILLS_END = "<!-- SKILLS:END -->"
+
+
+def update_readme_skills():
+    """Regenerate the skillicons badge block in the top-level README.md."""
+    icons = ",".join(SKILL_ICONS)
+    block = "\n".join(
+        [
+            SKILLS_START,
+            '<p align="center">',
+            '  <img src="https://skillicons.dev/icons?i={}&theme=dark&perline=8" alt="Skills" />'.format(
+                icons
+            ),
+            "</p>",
+            SKILLS_END,
+        ]
+    )
+
+    with open(README_PATH, "r") as f:
+        content = f.read()
+
+    start = content.index(SKILLS_START)
+    end = content.index(SKILLS_END) + len(SKILLS_END)
+    content = content[:start] + block + content[end:]
+
+    with open(README_PATH, "w") as f:
+        f.write(content)
+
+    log.info("updated README.md skills section")
+
 
 def build_resume(build_real, build_digital):
     """Build a single version of the resume."""
@@ -132,6 +175,8 @@ def main():
         assert build_digital
         output = build_resume(build_real, build_digital)
         built_files.append(output)
+
+    update_readme_skills()
 
     print("\n" + "=" * 40)
     print("Successfully built {} versions:".format(len(built_files)))
