@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-from __future__ import print_function
 
 import logging
 import os
@@ -28,7 +27,7 @@ CONF_FILE = "resume.yaml"
 try:
     conf = yaml.load(open(os.path.join(os.curdir, CONF_FILE), "rb"), Loader=Loader)
 except:
-    log.exception("error: unable to read {} config file:".format(CONF_FILE))
+    log.exception(f"error: unable to read {CONF_FILE} config file:")
     raise
 
 REAL_HEADER = conf["real_header"]
@@ -55,12 +54,38 @@ DIGITAL_PREAMBLE = r"""
 # Keep in sync with the Skills section of resume.tex. Feeds the skillicons.dev
 # badge in the top-level README via update_readme_skills() below.
 SKILL_ICONS = [
-    "py", "ts", "js", "cpp", "go", "rust", "ruby", "scala", "swift",
-    "django", "nodejs", "flask", "fastapi", "react", "rails",
-    "pytorch", "sklearn",
-    "aws", "docker", "kubernetes", "terraform",
-    "postgres", "redis", "mongodb", "elasticsearch",
-    "git", "github", "gitlab", "graphql", "jira", "latex", "kafka",
+    "py",
+    "ts",
+    "js",
+    "cpp",
+    "go",
+    "rust",
+    "ruby",
+    "scala",
+    "swift",
+    "django",
+    "nodejs",
+    "flask",
+    "fastapi",
+    "react",
+    "rails",
+    "pytorch",
+    "sklearn",
+    "aws",
+    "gcp",
+    "docker",
+    "kubernetes",
+    "terraform",
+    "postgres",
+    "redis",
+    "mongodb",
+    "elasticsearch",
+    "git",
+    "github",
+    "gitlab",
+    "graphql",
+    "latex",
+    "kafka",
 ]
 
 README_PATH = os.path.join(os.pardir, "README.md")
@@ -75,9 +100,7 @@ def update_readme_skills():
         [
             SKILLS_START,
             '<p align="center">',
-            '  <img src="https://skillicons.dev/icons?i={}&theme=dark&perline=8" alt="Skills" />'.format(
-                icons
-            ),
+            f'  <img src="https://skillicons.dev/icons?i={icons}&theme=dark&perline=8" alt="Skills" />',
             "</p>",
             SKILLS_END,
         ]
@@ -102,7 +125,7 @@ def build_resume(build_real, build_digital):
         "real" if build_real else "anon",
         "digital" if build_digital else "paper",
     )
-    log.info("Building {} version...".format(variant))
+    log.info(f"Building {variant} version...")
 
     # generate LaTeX source
     with open("resume.tex", "r") as f:
@@ -146,7 +169,7 @@ def build_resume(build_real, build_digital):
         print(err, file=sys.stderr)
 
     # sanity check
-    assert os.path.isfile("texput.pdf"), "Failed to build {} version".format(variant)
+    assert os.path.isfile("texput.pdf"), f"Failed to build {variant} version"
 
     # cleanup
     os.remove("texput.log")
@@ -160,10 +183,10 @@ def build_resume(build_real, build_digital):
         base_name = "aresume"
 
     suffix = "-digital" if build_digital else "-paper"
-    output = "{}{}.pdf".format(base_name, suffix)
+    output = f"{base_name}{suffix}.pdf"
 
     os.rename("texput.pdf", output)
-    print("built {}".format(output))
+    print(f"built {output}")
     return output
 
 
@@ -179,9 +202,9 @@ def main():
     update_readme_skills()
 
     print("\n" + "=" * 40)
-    print("Successfully built {} versions:".format(len(built_files)))
+    print(f"Successfully built {len(built_files)} versions:")
     for f in built_files:
-        print("  - {}".format(f))
+        print(f"  - {f}")
 
 
 if __name__ == "__main__":
