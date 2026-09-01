@@ -1,6 +1,6 @@
 # Hi, I'm Amy 🤘
 
-I'm a Senior Software Engineer at [Builder.io](https://www.builder.io/), and the creator of [SpellBot](https://spellbot.io/) and a developer working on [Convoke](https://convoke.games/). I've spent two decades shipping everything from sonar systems to backend APIs serving tens of millions of users, and these days I mostly build distributed systems, developer tools, and the occasional Discord bot.
+I'm a Senior Software Engineer at [Builder.io](https://www.builder.io/), the creator of [SpellBot](https://spellbot.io/), and a developer working on [Convoke](https://convoke.games/). I've spent two decades shipping everything from sonar systems to backend APIs serving tens of millions of users, and these days I mostly build distributed systems, developer tools, and the occasional Discord bot.
 
 You can find my full work history on my [résumé](https://lexicalunit.com/resume/aresume-digital.pdf), and more about me at [lexicalunit.com](https://lexicalunit.com).
 
