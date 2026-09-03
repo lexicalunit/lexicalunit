@@ -1,0 +1,349 @@
+:root {
+  --bg: #0b0b0d;
+  --bg-raised: #141418;
+  --line: #26262e;
+  --fg: #f2f2f4;
+  --fg-dim: #8b8b96;
+  --accent: violet;
+  --radius: 10px;
+  --gap: clamp(1rem, 3vw, 2rem);
+  --shell: 1180px;
+
+  /* White icons -> violet */
+  --violet-filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(286deg)
+    brightness(118%) contrast(119%);
+}
+
+/* Safari renders the saturated filter far too hot; ease it off. */
+@supports (-webkit-hyphens: none) {
+  :root {
+    --violet-filter: invert(48%) sepia(65%) saturate(1200%) hue-rotate(286deg)
+      brightness(90%) contrast(90%);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0 var(--gap) 4rem;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: "Inconsolata", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.shell {
+  max-width: var(--shell);
+  margin: 0 auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Visible focus for keyboard users, suppressed for mouse clicks. */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ----------------------------------------------------------- masthead --- */
+
+.masthead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1.75rem 0 1.25rem;
+}
+
+.wordmark {
+  font-size: clamp(1.75rem, 5vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+  transition: color 0.2s ease;
+}
+
+.wordmark:hover {
+  color: var(--accent);
+}
+
+/* ------------------------------------------------------------ showcase --- */
+
+/* Stacked by default; side by side once there is room, which keeps the
+   links above the fold instead of pushing them under a full-width photo. */
+.layout {
+  display: grid;
+  /* minmax(0,...) so a wide grid child can never stretch the whole page. */
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(1.75rem, 4vw, 3rem);
+}
+
+.layout > * {
+  min-width: 0;
+}
+
+@media (min-width: 900px) {
+  .layout {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+.showcase {
+  margin: 0;
+  min-width: 0;
+}
+
+/* Fixed 4:3 box reserves the space so swapping photos never reflows the page,
+   but it paints nothing itself: a portrait photo does not fill it, and any
+   background or border would show up as bars beside it. */
+.frame {
+  aspect-ratio: 4 / 3;
+  display: grid;
+  place-items: center;
+}
+
+/* Stacked in one grid cell and crossfaded. Each image is sized to its own
+   aspect rather than stretched to the box, so the corner radius lands on the
+   photo's real edges whatever its shape. */
+.frame img {
+  grid-area: 1 / 1;
+  /* Grid items default to min-height:auto, which would let the taller (even
+     hidden) photo stretch the row past the 4:3 box. */
+  min-width: 0;
+  min-height: 0;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  border-radius: var(--radius);
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+.frame img.is-active {
+  opacity: 1;
+}
+
+.caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.85rem;
+}
+
+.caption-text {
+  color: var(--fg-dim);
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+}
+
+.caption-text b {
+  color: var(--fg);
+  font-weight: 700;
+}
+
+.dryguy {
+  display: inline-flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  padding: 0.25rem;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+
+.dryguy:hover {
+  opacity: 1;
+}
+
+.dryguy img {
+  height: 56px;
+  width: auto;
+  display: block;
+}
+
+/* --------------------------------------------------------------- links --- */
+
+.group + .group {
+  margin-top: 1.75rem;
+}
+
+.group-label {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 0 1.25rem;
+  color: var(--fg-dim);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+/* Rule that fills whatever space the label leaves. */
+.group-label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+/* Two-up, and laid out side-on: shorter than a project tile, and reads as a
+   different kind of link rather than another project. */
+.tiles-pair {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.tiles-pair .tile a {
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.7rem;
+  padding: 0.7rem 0.75rem;
+}
+
+.tiles-pair .tile img {
+  height: 30px;
+}
+
+.tile a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  height: 100%;
+  padding: 1rem 0.75rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg-raised);
+  text-align: center;
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.tile a:hover {
+  border-color: var(--accent);
+  background: #1a1a20;
+  transform: translateY(-2px);
+}
+
+.tile img {
+  height: 42px;
+  width: auto;
+  max-width: 100%;
+  transition: filter 0.2s ease;
+}
+
+.tile a:hover img {
+  filter: var(--violet-filter);
+}
+
+.tile span {
+  overflow-wrap: anywhere;
+  font-size: 0.9rem;
+  line-height: 1.25;
+  color: var(--fg);
+  transition: color 0.2s ease;
+}
+
+.tile a:hover span {
+  color: var(--accent);
+}
+
+/* -------------------------------------------------------------- footer --- */
+
+.colophon {
+  margin-top: 3.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+  color: var(--fg-dim);
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.colophon a:hover {
+  color: var(--accent);
+}
+
+/* ------------------------------------------------------------- narrow --- */
+
+@media (max-width: 560px) {
+  /* Match the primary photo's own ratio so it fills the frame edge to edge. */
+  .frame {
+    aspect-ratio: 4 / 3;
+  }
+
+  .caption {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .tiles {
+    grid-template-columns: repeat(auto-fit, minmax(104px, 1fr));
+  }
+
+  .tile img {
+    height: 38px;
+  }
+
+  .tile span {
+    font-size: 0.8rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

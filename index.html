@@ -1,18 +1,182 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Lexical Unit</title>
+    <meta name="description" content="Lexical Unit — portfolio and lists" />
 
-    <link type="text/css" href="www/css/mobile.css" rel="stylesheet" />
-    <link type="text/css" href="www/css/screen.css" rel="stylesheet" />
+    <link rel="icon" href="favicon.ico" />
+    <meta property="og:title" content="Lexical Unit" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="www/img/rio-web.jpg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css?family=Inconsolata&display=block"
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="www/css/site.css" />
+  </head>
+
+  <body>
+    <div class="shell">
+      <header class="masthead">
+        <a class="wordmark" href="/">Lexical&nbsp;Unit</a>
+      </header>
+
+      <div class="layout">
+        <section class="showcase">
+          <h2 class="visually-hidden">Photography</h2>
+
+          <div class="frame">
+            <img
+              class="is-active"
+              data-role="main"
+              data-title="Rio de Janeiro"
+              src="www/img/rio-web.jpg"
+              alt="Panoramic view over Rio de Janeiro from a hillside, looking across the bay toward Sugarloaf Mountain."
+            />
+            <img
+              data-role="alt"
+              data-title="Tycho"
+              src="www/img/tycho-web.jpg"
+              loading="lazy"
+              alt="Tycho, a brown and white dog in a teal harness, sitting on grass in front of a bright red Japanese maple."
+            />
+          </div>
+
+          <div class="caption">
+            <p class="caption-text" role="status" aria-live="polite">
+              <b>Rio de Janeiro</b>
+            </p>
+
+            <button
+              class="dryguy"
+              type="button"
+              aria-pressed="false"
+              title="Show the other photo"
+              aria-label="Show the other photo"
+            >
+              <img src="www/img/dryguy.gif" alt="" />
+            </button>
+          </div>
+        </section>
+
+        <nav aria-label="Site links">
+          <section class="group">
+            <h2 class="group-label">Portfolio</h2>
+            <ul class="tiles tiles-pair">
+              <li class="tile">
+                <a href="resume/aresume-digital.pdf" title="Résumé (PDF)">
+                  <img src="www/img/resume.svg" alt="" />
+                  <span>résumé</span>
+                </a>
+              </li>
+              <li class="tile">
+                <a href="http://github.lexicalunit.com" title="GitHub">
+                  <img src="www/img/github.png" alt="" />
+                  <span>github</span>
+                </a>
+              </li>
+            </ul>
+          </section>
+
+          <section class="group">
+            <h2 class="group-label">Projects</h2>
+            <ul class="tiles">
+              <li class="tile">
+                <a
+                  href="https://spellbot.io/"
+                  title="SpellBot"
+                  rel="noopener noreferrer"
+                >
+                  <img src="www/img/spellbot.png" alt="" />
+                  <span>spellbot</span>
+                </a>
+              </li>
+              <li class="tile">
+                <a href="http://nanodbc.lexicalunit.com" title="nanodbc">
+                  <img src="www/img/nano.png" alt="" />
+                  <span>nanodbc</span>
+                </a>
+              </li>
+              <li class="tile">
+                <a href="http://pancake.lexicalunit.com" title="Pancake Master">
+                  <img src="www/img/alamo.png" alt="" />
+                  <span>pancake</span>
+                </a>
+              </li>
+              <li class="tile">
+                <a href="/town" title="English Town Names">
+                  <img src="www/img/uk.png" alt="" />
+                  <span>english&nbsp;towns</span>
+                </a>
+              </li>
+              <li class="tile">
+                <a
+                  href="https://landcalc.onrender.com/"
+                  title="Magic Land Calculator"
+                  rel="noopener noreferrer"
+                >
+                  <img src="www/img/land-calc.png" alt="" />
+                  <span>land&nbsp;calc</span>
+                </a>
+              </li>
+            </ul>
+          </section>
+
+          <section class="group">
+            <h2 class="group-label">Best of the best</h2>
+            <ul class="tiles">
+              <li class="tile">
+                <a href="/lists?type=games" title="Best Games">
+                  <img src="www/img/games.png" alt="" />
+                  <span>games</span>
+                </a>
+              </li>
+              <li class="tile">
+                <a href="/lists?type=anime" title="Best Anime">
+                  <img src="www/img/anime.png" alt="" />
+                  <span>anime</span>
+                </a>
+              </li>
+              <li class="tile">
+                <a href="/lists?type=movies" title="Best Movies">
+                  <img src="www/img/movies.png" alt="" />
+                  <span>movies</span>
+                </a>
+              </li>
+              <li class="tile">
+                <a href="/lists?type=books" title="Best Books">
+                  <img src="www/img/books.png" alt="" />
+                  <span>books</span>
+                </a>
+              </li>
+              <li class="tile">
+                <a href="/lists?type=shows" title="Best Shows">
+                  <img src="www/img/shows.png" alt="" />
+                  <span>shows</span>
+                </a>
+              </li>
+            </ul>
+          </section>
+        </nav>
+      </div>
+
+      <footer class="colophon">
+        <span
+          >Dry Guy from
+          <a href="http://mother3.fobby.net" rel="noopener noreferrer"
+            >mother3.fobby.net</a
+          ></span
+        >
+      </footer>
+    </div>
+
+    <script src="www/js/site.js"></script>
 
     <!-- Google Analytics -->
     <script>
@@ -39,169 +203,5 @@
       ga("send", "pageview");
     </script>
     <!-- End Google Analytics -->
-  </head>
-  <body>
-    <div class="content">
-      <!-- hamburger menu button -->
-      <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
-      <!-- slide-out menu -->
-      <nav class="menu-panel">
-        <ul class="menu-icons">
-          <li class="icon">
-            <a title="Github" href="http://github.lexicalunit.com">
-              <div class="icon-img">
-                <img alt="Github" src="www/img/github.png" />
-                <img alt="Github" src="www/img/github.png" />
-              </div>
-              <span class="icon_description">github</span>
-            </a>
-          </li>
-          <li class="icon">
-            <a title="Spellbot" href="https://spellbot.io/">
-              <div class="icon-img">
-                <img alt="Spellbot" src="www/img/spellbot.png" />
-                <img alt="Spellbot" src="www/img/spellbot.png" />
-              </div>
-              <span class="icon_description">spellbot</span>
-            </a>
-          </li>
-          <li class="icon">
-            <a title="nanodbc" href="http://nanodbc.lexicalunit.com">
-              <div class="icon-img">
-                <img alt="Nanodbc" src="www/img/nano.png" />
-                <img alt="Nanodbc" src="www/img/nano.png" />
-              </div>
-              <span class="icon_description">nanodbc</span>
-            </a>
-          </li>
-          <li class="icon">
-            <a title="Pancake Master" href="http://pancake.lexicalunit.com">
-              <div class="icon-img">
-                <img alt="Pancake Master" src="www/img/alamo.png" />
-                <img alt="Pancake Master" src="www/img/alamo.png" />
-              </div>
-              <span class="icon_description">pancake</span>
-            </a>
-          </li>
-          <li class="icon">
-            <a title="Best Games" href="/lists?type=games">
-              <div class="icon-img">
-                <img alt="Best Games" src="www/img/games.png" />
-                <img alt="Best Games" src="www/img/games.png" />
-              </div>
-              <span class="icon_description">best&nbsp;games</span>
-            </a>
-          </li>
-          <li class="icon">
-            <a title="Best Anime" href="/lists?type=anime">
-              <div class="icon-img">
-                <img alt="Best Anime" src="www/img/anime.png" />
-                <img alt="Best Anime" src="www/img/anime.png" />
-              </div>
-              <span class="icon_description">best&nbsp;anime</span>
-            </a>
-          </li>
-          <li class="icon">
-            <a title="Best Movies" href="/lists?type=movies">
-              <div class="icon-img">
-                <img alt="Best Movies" src="www/img/movies.png" />
-                <img alt="Best Movies" src="www/img/movies.png" />
-              </div>
-              <span class="icon_description">best&nbsp;movies</span>
-            </a>
-          </li>
-          <li class="icon">
-            <a title="Best Books" href="/lists?type=books">
-              <div class="icon-img">
-                <img alt="Best Books" src="www/img/books.png" />
-                <img alt="Best Books" src="www/img/books.png" />
-              </div>
-              <span class="icon_description">best&nbsp;books</span>
-            </a>
-          </li>
-          <li class="icon">
-            <a title="Best Shows" href="/lists?type=shows">
-              <div class="icon-img">
-                <img alt="Best Shows" src="www/img/shows.png" />
-                <img alt="Best Shows" src="www/img/shows.png" />
-              </div>
-              <span class="icon_description">best&nbsp;shows</span>
-            </a>
-          </li>
-          <li class="icon">
-            <a title="English Towns" class="town" href="/town">
-              <div class="icon-img">
-                <img alt="English Town Names" src="www/img/uk.png" />
-                <img alt="English Town Names" src="www/img/uk.png" />
-              </div>
-              <span class="icon_description">english&nbsp;towns</span>
-            </a>
-          </li>
-          <li class="icon">
-            <a
-              title="Magic Land Calculator"
-              class="town"
-              href="https://landcalc.onrender.com/"
-            >
-              <div class="icon-img">
-                <img alt="Magic Land Calculator" src="www/img/land-calc.png" />
-                <img alt="Magic Land Calculator" src="www/img/land-calc.png" />
-              </div>
-              <span class="icon_description">land&nbsp;calc</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-
-      <!-- title-->
-      <div class="icon title text-left">
-        <a href="resume/aresume-digital.pdf" title="Resume">
-          Lexical&nbsp;Unit
-        </a>
-      </div>
-
-      <!-- top layer, rio image -->
-      <div class="top">
-        <img
-          class="pic main-image img-responsive"
-          alt="rio"
-          src="www/img/rio.jpg"
-        />
-      </div>
-
-      <!-- bottom layer, alternate image -->
-      <div class="bottom invis">
-        <img
-          class="pic alt-image img-responsive"
-          alt="tycho"
-          src="www/img/tycho.jpeg"
-        />
-      </div>
-
-      <!-- dryguy button -->
-      <div class="dryguy_wrapper">
-        <a onclick="toggle()" href="#">
-          <img class="dryguy" alt="dryguy" src="www/img/dryguy.gif" />
-          <span class="invis">source: http://mother3.fobby.net</span>
-        </a>
-      </div>
-
-      <!-- résumé link -->
-      <a class="resume-link" href="resume/aresume-digital.pdf" title="Resume"
-        >Résumé</a
-      >
-
-      <!-- alt-image subtitle -->
-      <div class="subtitle invis">Tycho</div>
-    </div>
-
-    <script type="text/javascript" src="www/js/jquery.min.js"></script>
-    <script type="text/javascript" src="www/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="www/js/lexicalunit.js"></script>
   </body>
 </html>

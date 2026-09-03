@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 62" width="46" height="62"
+     fill="none" stroke="#ffffff" stroke-width="3"
+     stroke-linecap="round" stroke-linejoin="round">
+  <!-- sheet of paper with a folded top-right corner -->
+  <path d="M4 5.5 H29 L42 18.5 V56.5 H4 Z" />
+  <path d="M29 5.5 V18.5 H42" />
+  <!-- text lines -->
+  <path d="M11 29 H35" />
+  <path d="M11 37 H35" />
+  <path d="M11 45 H26" />
+</svg>
