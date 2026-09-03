@@ -3,7 +3,7 @@
   "items": [
     {
       "author": "J. D. Salinger",
-      "desc": "The book has a number of stories in it but my favorite is A Perfect Day for Bananafish which is just one of the best dialog heavy stories ever written.",
+      "desc": "The book has a number of stories in it but my favorite is A Perfect Day for Bananafish which is just one of the best dialog-heavy stories ever written.",
       "hero": "hero-a-perfect-day-for-bananafish.jpg",
       "title": "A Perfect Day for Bananafish",
       "year": 1948
@@ -38,7 +38,7 @@
     },
     {
       "author": "Clive Barker",
-      "desc": "I think almost all of Barkers works are great but this one is by far my favorite. I love the way his prose is almost but not quiet poetry. Amazing world building and a strong character driven story.",
+      "desc": "I think almost all of Barker's works are great, but this one is by far my favorite. I love the way his prose is almost but not quite poetry. Amazing world building and a strong character driven story.",
       "hero": "hero-imajica.jpg",
       "title": "Imajica",
       "year": 1991
@@ -101,7 +101,7 @@
     },
     {
       "author": "Ryan North",
-      "desc": "My favorite comic book of all time. There's two volumes and I love both dearly. The premise is simple: What if King Midas's golden touch was real? Then years later a spaceship arrives intending to use his flesh as a weapon of mass destruction.",
+      "desc": "My favorite comic book of all time. There are two volumes and I love both dearly. The premise is simple: What if King Midas's golden touch was real? Then years later a spaceship arrives intending to use his flesh as a weapon of mass destruction.",
       "hero": "hero-the-midas-flesh.jpg",
       "title": "The Midas Flesh",
       "year": 2014
@@ -166,7 +166,7 @@
       "author": "Martha Wells",
       "desc": "",
       "hero": "hero-murderbot-diaries.jpg",
-      "title": "Murderbot Diaries",
+      "title": "The Murderbot Diaries",
       "year": 2017
     },
     {
