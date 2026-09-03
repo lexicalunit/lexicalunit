@@ -80,6 +80,9 @@ body {
   margin: 0;
   list-style: none;
   padding-top: 80px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 4px;
 }
 
 .menu-icons .icon {
