@@ -14,7 +14,9 @@ You can find my full work history on my [résumé](https://lexicalunit.com/resum
 
 <!-- SKILLS:START -->
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=py,ts,js,cpp,go,rust,ruby,scala,swift,django,nodejs,flask,fastapi,react,rails,pytorch,sklearn,aws,docker,kubernetes,terraform,postgres,redis,mongodb,elasticsearch,git,github,gitlab,graphql,gcp,latex,kafka&theme=dark&perline=8" alt="Skills" />
+  <a href="https://lexicalunit.com/resume/aresume-digital.pdf">
+    <img src="https://skillicons.dev/icons?i=py,ts,js,cpp,go,rust,ruby,scala,swift,django,nodejs,flask,fastapi,react,rails,pytorch,sklearn,aws,gcp,docker,kubernetes,terraform,postgres,redis,mongodb,elasticsearch,git,github,gitlab,graphql,latex,kafka&theme=dark&perline=8" alt="Skills" />
+  </a>
 </p>
 <!-- SKILLS:END -->
 

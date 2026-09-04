@@ -92,6 +92,10 @@ README_PATH = os.path.join(os.pardir, "README.md")
 SKILLS_START = "<!-- SKILLS:START -->"
 SKILLS_END = "<!-- SKILLS:END -->"
 
+# Where the badge links. This is the anon digital build published by
+# publish.sh, matching the resume link in the README prose.
+RESUME_URL = "https://lexicalunit.com/resume/aresume-digital.pdf"
+
 
 def update_readme_skills():
     """Regenerate the skillicons badge block in the top-level README.md."""
@@ -100,7 +104,9 @@ def update_readme_skills():
         [
             SKILLS_START,
             '<p align="center">',
-            f'  <img src="https://skillicons.dev/icons?i={icons}&theme=dark&perline=8" alt="Skills" />',
+            f'  <a href="{RESUME_URL}">',
+            f'    <img src="https://skillicons.dev/icons?i={icons}&theme=dark&perline=8" alt="Skills" />',
+            "  </a>",
             "</p>",
             SKILLS_END,
         ]
