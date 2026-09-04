@@ -47,10 +47,6 @@ jobs:
           plugin_languages_sections: most-used
           plugin_languages_details: percentage
 
-          # Contribution calendar, current year only.
-          plugin_calendar: yes
-          plugin_calendar_limit: 1
-
           # Lines of code added/removed.
           plugin_lines: yes
           plugin_lines_sections: base, repositories
