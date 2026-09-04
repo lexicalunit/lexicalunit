@@ -55,6 +55,13 @@ jobs:
           plugin_lines_sections: base, repositories
           plugin_lines_repositories_limit: 4
 
+          # nanodbc/nanodbc lives under the nanodbc org, so it never reaches
+          # the Repositories section (that only counts owned repos, and
+          # ownerAffiliations: ORGANIZATION_MEMBER is all-or-nothing). Feature
+          # it explicitly instead.
+          plugin_repositories: yes
+          plugin_repositories_featured: nanodbc/nanodbc
+
           plugin_achievements: yes
           plugin_achievements_display: compact
           plugin_achievements_threshold: B
