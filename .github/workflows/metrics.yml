@@ -26,7 +26,8 @@ jobs:
           base_indepth: yes
 
           config_timezone: America/Los_Angeles
-          config_display: columns
+          # regular = 480px, single stacked column (large = 960, columns = full width)
+          config_display: regular
 
           # imgb64() builds data URIs as `image/${ext}`, and file-type reports
           # "jpg" for JPEGs, so avatars come out labelled `data:image/jpg` --
