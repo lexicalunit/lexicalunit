@@ -61,7 +61,3 @@ jobs:
           # it explicitly instead.
           plugin_repositories: yes
           plugin_repositories_featured: nanodbc/nanodbc
-
-          plugin_achievements: yes
-          plugin_achievements_display: compact
-          plugin_achievements_threshold: B
