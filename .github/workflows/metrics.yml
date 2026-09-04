@@ -28,12 +28,13 @@ jobs:
           config_timezone: America/Los_Angeles
           config_display: columns
 
-          # Languages: most-used (all time) plus what I've actually touched lately.
+          # NB: the "recently-used" section crashes the whole run when any
+          # PushEvent in the feed has no payload.commits (upstream bug in
+          # plugins/languages/analyzer/recent.mjs). Leave it off.
           plugin_languages: yes
           plugin_languages_limit: 8
-          plugin_languages_sections: most-used, recently-used
+          plugin_languages_sections: most-used
           plugin_languages_details: percentage
-          plugin_languages_recent_days: 30
 
           # Isometric contribution calendar.
           plugin_isocalendar: yes
