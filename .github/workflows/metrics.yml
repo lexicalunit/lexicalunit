@@ -28,6 +28,16 @@ jobs:
           config_timezone: America/Los_Angeles
           config_display: columns
 
+          # imgb64() builds data URIs as `image/${ext}`, and file-type reports
+          # "jpg" for JPEGs, so avatars come out labelled `data:image/jpg` --
+          # not a registered MIME type. Browsers sniff past it, stricter
+          # renderers show a broken image. Runs in-page just before the SVG is
+          # serialized, so the correction persists into the output.
+          extras_js: |
+            document.querySelectorAll('img[src^="data:image/jpg;base64,"]').forEach(img => {
+              img.setAttribute("src", img.getAttribute("src").replace("data:image/jpg;", "data:image/jpeg;"))
+            })
+
           # NB: the "recently-used" section crashes the whole run when any
           # PushEvent in the feed has no payload.commits (upstream bug in
           # plugins/languages/analyzer/recent.mjs). Leave it off.
@@ -36,46 +46,15 @@ jobs:
           plugin_languages_sections: most-used
           plugin_languages_details: percentage
 
-          # Isometric contribution calendar.
-          plugin_isocalendar: yes
-          plugin_isocalendar_duration: full-year
-
-          # Full contribution history, every year since 2012.
+          # Contribution calendar, current year only.
           plugin_calendar: yes
-          plugin_calendar_limit: 0
-
-          # Coding habits: active hours/days, indent style, recent languages.
-          plugin_habits: yes
-          plugin_habits_from: 200
-          plugin_habits_days: 14
-          plugin_habits_facts: yes
-          plugin_habits_charts: yes
-
-          # Contributions to repos I don't own (nanodbc downstreams, OSS, etc).
-          plugin_notable: yes
-          plugin_notable_from: all
-          plugin_notable_types: commit, pull_request
+          plugin_calendar_limit: 1
 
           # Lines of code added/removed.
           plugin_lines: yes
           plugin_lines_sections: base, repositories
           plugin_lines_repositories_limit: 4
 
-          # Issue/PR follow-up ratios, mine and on my repos.
-          plugin_followup: yes
-          plugin_followup_sections: repositories, user
-
-          # Stars over time.
-          plugin_stargazers: yes
-          plugin_stargazers_charts_type: graph
-
-          # Topic icons from starred repos.
-          plugin_topics: yes
-          plugin_topics_mode: icons
-          plugin_topics_limit: 15
-
           plugin_achievements: yes
           plugin_achievements_display: compact
           plugin_achievements_threshold: B
-
-          plugin_stars: no
