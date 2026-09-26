@@ -13,7 +13,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: lowlighter/metrics@latest
+      - uses: lexicalunit/metrics@fix-org-and-deleted-user
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           user: lexicalunit
