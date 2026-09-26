@@ -13,7 +13,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: lexicalunit/metrics@master
+      - uses: lowlighter/metrics@master
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           user: lexicalunit
@@ -48,9 +48,14 @@ jobs:
           plugin_languages_details: percentage
 
           # Lines of code added/removed.
+          # NB: the plugin always runs in "organization" mode for users (it
+          # checks `data.account`, which is set for users too), so it counts
+          # every contributor and crashes on any whose account was deleted
+          # (author: null). atom-isort has one; skip it.
           plugin_lines: yes
           plugin_lines_sections: base, repositories
           plugin_lines_repositories_limit: 4
+          plugin_lines_skipped: atom-isort
 
           # nanodbc/nanodbc lives under the nanodbc org, so it never reaches
           # the Repositories section (that only counts owned repos, and
