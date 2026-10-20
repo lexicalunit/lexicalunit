@@ -3,7 +3,7 @@
 
 Serves the repository exactly like `python3 -m http.server` does, and adds a
 localhost-only JSON API under /api that can search metadata providers for
-artwork, resize it the same way www/img/*/fix.sh does, and edit the
+artwork, size it the same way www/img/*/fix.sh does, and edit the
 lists/<type>/data.json files in place.
 
 Nothing here is ever deployed: publish.sh rsyncs static files only, and the
@@ -17,6 +17,8 @@ API keys, if any, live in ~/.config/lexicalunit/studio.json:
 """
 
 import argparse
+import base64
+import binascii
 import functools
 import json
 import os
@@ -41,11 +43,14 @@ IMAGES = REPO / "www" / "img"
 CONFIG_PATH = Path.home() / ".config" / "lexicalunit" / "studio.json"
 TRASH = Path.home() / ".Trash"
 
-# Matches the resize in www/img/*/fix.sh: 300px wide, aspect preserved. The
-# extra -strip is not in fix.sh but is needed here: ImageMagick 6 fails to
-# write the output at all, silently and with no diagnostic, when the source
-# carries a malformed Exif segment, which plenty of provider artwork does.
-RESIZE_GEOMETRY = "300x"
+# Matches the resize in www/img/*/fix.sh: shrink only, so the long edge is at
+# most 1200px (sharp in the lists page's detail view on a high-DPI screen) and
+# smaller artwork is kept as is rather than upscaled. The extra -strip is not
+# in fix.sh but is needed here: ImageMagick 6 fails to write the output at
+# all, silently and with no diagnostic, when the source carries a malformed
+# Exif segment, which plenty of provider artwork does.
+RESIZE_GEOMETRY = "1200x1200>"
+JPEG_QUALITY = "85"
 MAX_IMAGE_BYTES = 15 * 1024 * 1024
 USER_AGENT = "lexicalunit-studio/1.0 (+https://lexicalunit.com)"
 NETWORK_TIMEOUT = 20
@@ -139,9 +144,29 @@ def check_slug(slug):
 # ------------------------------------------------------------------- images
 
 
+def decode_data_url(url):
+    """The admin UI sends images pasted from the clipboard as data: URLs."""
+    header, _, payload = url.partition(",")
+    if not re.fullmatch(r"data:image/[\w.+-]+;base64", header):
+        raise ApiError(HTTPStatus.BAD_REQUEST, "pasted data is not a base64 image")
+    try:
+        return base64.b64decode(payload, validate=True)
+    except binascii.Error:
+        raise ApiError(HTTPStatus.BAD_REQUEST, "pasted image is not valid base64")
+
+
 def fetch_image(url):
     """Download an image to a temp file, refusing anything that isn't one."""
-    if not urllib.parse.urlparse(url).scheme in ("http", "https"):
+    scheme = urllib.parse.urlparse(url).scheme
+    if scheme == "data":
+        body = decode_data_url(url)
+        if len(body) > MAX_IMAGE_BYTES:
+            raise ApiError(HTTPStatus.BAD_REQUEST, "image is larger than 15 MB")
+        handle, path = tempfile.mkstemp(prefix="studio-src-")
+        with os.fdopen(handle, "wb") as file:
+            file.write(body)
+        return Path(path)
+    if scheme not in ("http", "https"):
         raise ApiError(HTTPStatus.BAD_REQUEST, "image URL must be http(s)")
 
     request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
@@ -172,7 +197,10 @@ def install_image(url, type_, slug):
     resized = Path(tempfile.mkdtemp(prefix="studio-out-")) / hero_name(slug)
     try:
         result = subprocess.run(
-            ["convert", str(source), "-strip", "-resize", RESIZE_GEOMETRY, str(resized)],
+            [
+                "convert", str(source), "-strip", "-resize", RESIZE_GEOMETRY,
+                "-quality", JPEG_QUALITY, "-interlace", "Plane", str(resized),
+            ],
             capture_output=True,
             text=True,
         )
@@ -248,6 +276,26 @@ def get_json(url, data=None, headers=None):
         raise ApiError(HTTPStatus.BAD_GATEWAY, f"provider unreachable: {error}")
 
 
+# Extra per-title requests for providers whose search results carry only one
+# image but which have a full gallery a call away. Only the best few matches,
+# to keep a search quick.
+GALLERY_MATCHES = 3
+
+
+def tmdb_gallery(kind, id_, key):
+    """Every poster and backdrop TMDB has for a title, English or textless."""
+    url = f"https://api.themoviedb.org/3/{kind}/{id_}/images?" + urllib.parse.urlencode(
+        {"api_key": key, "include_image_language": "en,null"}
+    )
+    try:
+        payload = get_json(url)
+    except ApiError:
+        return []
+    posters = [f"https://image.tmdb.org/t/p/w780{p['file_path']}" for p in payload.get("posters", [])[:8]]
+    backdrops = [f"https://image.tmdb.org/t/p/w1280{b['file_path']}" for b in payload.get("backdrops", [])[:4]]
+    return posters + backdrops
+
+
 def candidate(title, year, images, source, author=None):
     images = [url for url in images if url]
     if not title or not images:
@@ -300,11 +348,13 @@ def search_movies(query, config):
         {"api_key": key, "query": query, "include_adult": "false"}
     )
     results = []
-    for movie in get_json(url).get("results", [])[:12]:
+    for rank, movie in enumerate(get_json(url).get("results", [])[:12]):
         images = []
-        for path, size in ((movie.get("poster_path"), "w500"), (movie.get("backdrop_path"), "w780")):
+        for path, size in ((movie.get("poster_path"), "w780"), (movie.get("backdrop_path"), "w1280")):
             if path:
                 images.append(f"https://image.tmdb.org/t/p/{size}{path}")
+        if rank < GALLERY_MATCHES:
+            images = list(dict.fromkeys(images + tmdb_gallery("movie", movie["id"], key)))
         year = (movie.get("release_date") or "")[:4]
         results.append(
             candidate(
@@ -321,19 +371,40 @@ def search_tvmaze(query, config):
     """TVmaze. No API key required, so shows work with no credentials at all."""
     url = "https://api.tvmaze.com/search/shows?" + urllib.parse.urlencode({"q": query})
     results = []
-    for match in get_json(url)[:12]:
+    for rank, match in enumerate(get_json(url)[:12]):
         show = match.get("show") or {}
-        image = show.get("image") or {}
+        images = [(show.get("image") or {}).get("original")]
+        if rank < GALLERY_MATCHES:
+            images = list(dict.fromkeys(images + tvmaze_gallery(show.get("id"))))
         year = (show.get("premiered") or "")[:4]
         results.append(
             candidate(
                 show.get("name"),
                 int(year) if year.isdigit() else None,
-                [image.get("original"), image.get("medium")],
+                images,
                 "TVmaze",
             )
         )
     return results
+
+
+def tvmaze_gallery(id_):
+    """A show's posters, then its backgrounds. Search only carries one image,
+    often a later season's poster, while this has the key art in full size.
+    Logos and thin banners are left out: neither works as a hero."""
+    try:
+        images = get_json(f"https://api.tvmaze.com/shows/{id_}/images")
+    except ApiError:
+        return []
+    order = {"poster": 0, "background": 1}
+    images = sorted(
+        (image for image in images if image.get("type") in order),
+        key=lambda image: (order[image["type"]], not image.get("main")),
+    )
+    return [
+        ((image.get("resolutions") or {}).get("original") or {}).get("url")
+        for image in images
+    ]
 
 
 def search_shows(query, config):
@@ -343,11 +414,13 @@ def search_shows(query, config):
         {"api_key": key, "query": query, "include_adult": "false"}
     )
     results = []
-    for show in get_json(url).get("results", [])[:12]:
+    for rank, show in enumerate(get_json(url).get("results", [])[:12]):
         images = []
-        for path, size in ((show.get("poster_path"), "w500"), (show.get("backdrop_path"), "w780")):
+        for path, size in ((show.get("poster_path"), "w780"), (show.get("backdrop_path"), "w1280")):
             if path:
                 images.append(f"https://image.tmdb.org/t/p/{size}{path}")
+        if rank < GALLERY_MATCHES:
+            images = list(dict.fromkeys(images + tmdb_gallery("tv", show["id"], key)))
         year = (show.get("first_air_date") or "")[:4]
         results.append(
             candidate(
@@ -406,6 +479,54 @@ def search_books(query, config):
     return results
 
 
+def search_steam(query, config):
+    """Steam store search. No API key; PC releases only.
+
+    The search hands back a tiny capsule, but every app has the same art at
+    616x353 (close to the lists page's 16:9) under a predictable name.
+    """
+    url = "https://store.steampowered.com/api/storesearch/?" + urllib.parse.urlencode(
+        {"term": query, "cc": "us", "l": "en"}
+    )
+    results = []
+    for app in get_json(url).get("items", [])[:12]:
+        tiny = app.get("tiny_image") or ""
+        results.append(
+            candidate(
+                app.get("name"),
+                None,
+                [tiny.replace("capsule_231x87", "capsule_616x353")] if tiny else [],
+                "Steam",
+            )
+        )
+    return results
+
+
+def search_apple_books(query, config):
+    """Apple Books, via the iTunes Search API. No API key.
+
+    Artwork URLs end in a size that the CDN renders on demand, so asking for a
+    1200px bounding box gets a full size cover (typically 800x1200).
+    """
+    url = "https://itunes.apple.com/search?" + urllib.parse.urlencode(
+        {"term": query, "media": "ebook", "country": "us", "limit": 12}
+    )
+    results = []
+    for book in get_json(url).get("results", []):
+        art = book.get("artworkUrl100") or ""
+        year = (book.get("releaseDate") or "")[:4]
+        results.append(
+            candidate(
+                book.get("trackName"),
+                int(year) if year.isdigit() else None,
+                [re.sub(r"/\d+x\d+bb\.jpg$", "/1200x1200bb.jpg", art)] if art else [],
+                "Apple Books",
+                author=book.get("artistName"),
+            )
+        )
+    return results
+
+
 # Parenthetical disambiguators Wikipedia adds to article titles, e.g.
 # "Nausicaä of the Valley of the Wind (film)" or "Blue Prince (2025 video game)".
 WIKI_DISAMBIGUATION = re.compile(
@@ -414,6 +535,26 @@ WIKI_DISAMBIGUATION = re.compile(
     re.IGNORECASE,
 )
 YEAR_IN_TEXT = re.compile(r"\b(1[89]\d{2}|2[01]\d{2})\b")
+FILLER_WORDS = {"the", "a", "an", "of", "and", "s"}
+
+
+def title_words(text):
+    text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode("ascii")
+    return set(re.findall(r"[a-z0-9]+", text.lower())) - FILLER_WORDS
+
+
+def resembles(title, query):
+    """Most of the query's words appear in the title, prefixes allowed so that
+    "alien" still finds "Aliens". Wikipedia's search pads its results with any
+    page that mentions the query, so on a title with no article image the rest
+    are pages about cast members or unrelated shows."""
+    wanted, have = title_words(query), title_words(title)
+    if not wanted:
+        return True
+    found = sum(
+        any(word.startswith(w) or w.startswith(word) for word in have) for w in wanted
+    )
+    return found / len(wanted) >= 0.6
 
 
 def search_wikipedia(query, config, hint=""):
@@ -446,6 +587,8 @@ def search_wikipedia(query, config, hint=""):
         description = (page.get("pageprops") or {}).get("wikibase-shortdesc", "")
         if title.endswith("(disambiguation)") or description.startswith("Topics referred"):
             continue
+        if not resembles(WIKI_DISAMBIGUATION.sub("", title), query):
+            continue
         year = YEAR_IN_TEXT.search(description)
         results.append(
             candidate(
@@ -469,8 +612,8 @@ PROVIDERS = {
     "anime": [search_anime, wikipedia_for("anime")],
     "movies": [search_movies, wikipedia_for("film")],
     "shows": [search_tvmaze, search_shows, wikipedia_for("TV series")],
-    "games": [search_games, wikipedia_for("video game")],
-    "books": [search_books, wikipedia_for("novel")],
+    "games": [search_games, search_steam, wikipedia_for("video game")],
+    "books": [search_apple_books, search_books, wikipedia_for("novel")],
 }
 
 # Optional providers, and the config key each one needs. Everything else works
@@ -510,6 +653,23 @@ def audit():
         orphans += [f"{type_}/{name}" for name in sorted(on_disk - referenced)]
         missing += [f"{type_}/{name}" for name in sorted(referenced - on_disk) if name]
     return orphans, missing
+
+
+def image_sizes(type_):
+    """{hero name: [width, height]} for every image a list has on disk."""
+    paths = sorted(image_dir(type_).glob("hero-*.jpg"))
+    if not paths:
+        return {}
+    result = subprocess.run(
+        ["identify", "-format", "%f %w %h\n", *map(str, paths)],
+        capture_output=True,
+        text=True,
+    )
+    sizes = {}
+    for line in result.stdout.splitlines():
+        name, width, height = line.rsplit(" ", 2)
+        sizes[name] = [int(width), int(height)]
+    return sizes
 
 
 # ---------------------------------------------------------------- handlers
@@ -552,6 +712,10 @@ def api_search(handler, query):
     if not results and notes:
         raise ApiError(HTTPStatus.BAD_GATEWAY, "; ".join(notes))
     return {"results": results, "notes": notes}
+
+
+def api_sizes(handler, query):
+    return {"sizes": image_sizes((query.get("type") or [""])[0])}
 
 
 def api_status(handler, query):
@@ -715,6 +879,7 @@ ROUTES = {
     ("GET", "config"): api_config,
     ("GET", "search"): api_search,
     ("GET", "status"): api_status,
+    ("GET", "sizes"): api_sizes,
 }
 
 

@@ -1,0 +1,808 @@
+/* Lists pages (/lists?type=...). Builds on site.css for the palette, base
+   reset, focus rings and reduced-motion handling. */
+
+:root {
+  --shell: 1440px;
+  --bar-h: 3.25rem;
+  --card-min: 172px;
+  --art-ratio: 2 / 3;
+}
+
+/* Games and anime ship landscape key art rather than posters. */
+[data-shape="wide"] {
+  --card-min: 252px;
+  --art-ratio: 16 / 9;
+}
+
+body {
+  padding-bottom: 5rem;
+}
+
+/* ------------------------------------------------------------- topbar --- */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  height: var(--bar-h);
+  border-bottom: 1px solid var(--line);
+}
+
+.topbar .wordmark {
+  font-size: 1.15rem;
+  white-space: nowrap;
+}
+
+.tabs {
+  display: flex;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  list-style: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.topbar nav {
+  align-self: stretch;
+  min-width: 0;
+}
+
+.tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tabs a {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 0.7rem;
+  color: var(--fg-dim);
+  font-size: 0.95rem;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.tabs a:hover {
+  color: var(--fg);
+}
+
+.tabs a[aria-current="page"] {
+  color: var(--fg);
+  border-bottom-color: var(--accent);
+}
+
+/* --------------------------------------------------------------- intro --- */
+
+.intro {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+  padding: 1.75rem 0 1rem;
+}
+
+.intro h1 {
+  margin: 0;
+  font-size: clamp(1.6rem, 4vw, 2.25rem);
+  letter-spacing: -0.02em;
+}
+
+.stats {
+  margin: 0;
+  color: var(--fg-dim);
+  font-size: 0.9rem;
+}
+
+.stats b {
+  color: var(--fg);
+}
+
+/* ------------------------------------------------------------ toolbar --- */
+
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  /* Bleed the backdrop out to the page gutters so cards never peek past it. */
+  margin: 0 calc(-1 * var(--gap));
+  padding: 0.65rem var(--gap);
+  background: rgba(11, 11, 13, 0.85);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.toolbar.is-stuck {
+  border-bottom-color: var(--line);
+}
+
+.control {
+  height: 2.25rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg-raised);
+  color: var(--fg);
+  font: inherit;
+  font-size: 0.9rem;
+  transition: border-color 0.2s ease;
+}
+
+.control:hover,
+.control:focus-within {
+  border-color: #3a3a46;
+}
+
+.search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 0 1 18rem;
+  min-width: 10rem;
+}
+
+.search svg {
+  position: absolute;
+  left: 0.7rem;
+  width: 15px;
+  height: 15px;
+  color: var(--fg-dim);
+  pointer-events: none;
+}
+
+.search input {
+  width: 100%;
+  height: 100%;
+  padding: 0 2rem 0 2.1rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  outline: none;
+}
+
+.search input::placeholder {
+  color: var(--fg-dim);
+}
+
+.search input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.search kbd {
+  position: absolute;
+  right: 0.55rem;
+  padding: 0 0.35rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--fg-dim);
+  font: inherit;
+  font-size: 0.75rem;
+  line-height: 1.3;
+  pointer-events: none;
+}
+
+.search:focus-within kbd,
+.search input:not(:placeholder-shown) ~ kbd {
+  display: none;
+}
+
+/* Decade filter: one row that scrolls sideways rather than wrapping. */
+.decades {
+  display: flex;
+  gap: 0.35rem;
+  flex: 1 1 0;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  mask-image: linear-gradient(to right, #000 calc(100% - 2rem), transparent);
+  -webkit-mask-image: linear-gradient(
+    to right,
+    #000 calc(100% - 2rem),
+    transparent
+  );
+  padding-right: 2rem;
+}
+
+.decades::-webkit-scrollbar {
+  display: none;
+}
+
+.chip {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  height: 2.25rem;
+  padding: 0 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--fg-dim);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.chip:hover {
+  color: var(--fg);
+  border-color: #3a3a46;
+}
+
+.chip[aria-pressed="true"] {
+  color: var(--bg);
+  background: var(--fg);
+  border-color: var(--fg);
+}
+
+.chip small {
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
+.sort {
+  padding: 0 2rem 0 0.75rem;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none' stroke='%238b8b96' stroke-width='1.5'%3E%3Cpath d='M1 1l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+}
+
+.views {
+  display: flex;
+  padding: 2px;
+  gap: 2px;
+}
+
+.views button {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--fg-dim);
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.views button:hover {
+  color: var(--fg);
+}
+
+.views button[aria-pressed="true"] {
+  color: var(--fg);
+  background: var(--line);
+}
+
+.views svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* --------------------------------------------------------------- items --- */
+
+.items {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(min(100%, var(--card-min)), 1fr)
+  );
+  gap: 1.5rem 1.1rem;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.divider {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  color: var(--fg-dim);
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+}
+
+.divider:first-child {
+  margin-top: 0;
+}
+
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.card {
+  position: relative;
+  min-width: 0;
+  animation: rise 0.4s ease both;
+  animation-delay: calc(min(var(--i, 0), 24) * 18ms);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.card-hit {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.art {
+  position: relative;
+  aspect-ratio: var(--art-ratio);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg-raised);
+  transition:
+    border-color 0.2s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+/* Art that doesn't match the list's shape is letterboxed over a blurred copy
+   of itself instead of being cropped or leaving bare bars. */
+.art::before {
+  content: "";
+  position: absolute;
+  inset: -12%;
+  background: var(--art) center / cover;
+  filter: blur(18px) brightness(0.6);
+}
+
+.art img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+}
+
+.art img.is-loaded {
+  opacity: 1;
+}
+
+.no-art {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border: 1px dashed var(--line);
+  border-radius: inherit;
+  color: var(--fg-dim);
+  font-size: 0.8rem;
+}
+
+.card-hit:hover .art,
+.card-hit:focus-visible .art {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px -12px rgba(0, 0, 0, 0.8);
+}
+
+.card-hit:hover .art img {
+  transform: scale(1.04);
+}
+
+.card-hit:focus-visible {
+  outline: none;
+}
+
+.card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.card-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font-weight: 700;
+  line-height: 1.25;
+  transition: color 0.2s ease;
+}
+
+.card-hit:hover .card-title {
+  color: var(--accent);
+}
+
+.card-meta {
+  color: var(--fg-dim);
+  font-size: 0.85rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-desc {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  margin: 0.2rem 0 0;
+  color: #b4b4be;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+/* Compact view: one dense row per item, full description, small thumb. */
+[data-view="list"] .items {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+
+[data-view="list"] .divider {
+  margin: 1.5rem 0 0.25rem;
+}
+
+[data-view="list"] .divider:first-child {
+  margin-top: 0;
+}
+
+[data-view="list"] .card {
+  border-bottom: 1px solid var(--line);
+}
+
+[data-view="list"] .card-hit {
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 0.5rem;
+  border-radius: 8px;
+  transition: background-color 0.15s ease;
+}
+
+[data-view="list"] .card-hit:hover,
+[data-view="list"] .card-hit:focus-visible {
+  background: var(--bg-raised);
+}
+
+[data-view="list"] .art {
+  flex: none;
+  width: 3rem;
+  border-radius: 6px;
+}
+
+[data-shape="wide"][data-view="list"] .art {
+  width: 6.5rem;
+}
+
+[data-view="list"] .card-hit:hover .art,
+[data-view="list"] .card-hit:focus-visible .art {
+  transform: none;
+  box-shadow: none;
+}
+
+[data-view="list"] .no-art {
+  font-size: 0;
+}
+
+[data-view="list"] .card-text {
+  flex: 1;
+}
+
+[data-view="list"] .card-title {
+  -webkit-line-clamp: 1;
+}
+
+[data-view="list"] .card-desc {
+  -webkit-line-clamp: unset;
+  max-width: 75ch;
+  margin: 0;
+}
+
+.empty {
+  padding: 4rem 1rem;
+  color: var(--fg-dim);
+  text-align: center;
+}
+
+.empty button {
+  margin-top: 0.75rem;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg-raised);
+  color: var(--fg);
+  font: inherit;
+  cursor: pointer;
+}
+
+.empty button:hover {
+  border-color: var(--accent);
+}
+
+/* -------------------------------------------------------------- detail --- */
+
+/* Fixed size whatever the item, so the close and prev/next buttons stay put
+   under the pointer while clicking through. The art panel takes the list's
+   own shape so the art fills it, and the text panel is a fixed size with the
+   description scrolling inside it when it runs long. */
+.detail {
+  --detail-h: min(44rem, calc(100dvh - 3rem));
+  --text-h: 17rem;
+  /* Just enough beside the poster for the text, so the poster leads. */
+  width: min(calc(var(--detail-h) * 2 / 3 + 26rem), calc(100vw - 2rem));
+  height: var(--detail-h);
+  max-height: none;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--bg-raised);
+  color: var(--fg);
+  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.9);
+  overflow: hidden;
+}
+
+/* Posters: art on the left, exactly as wide as a 2:3 poster at full height. */
+.detail[open] {
+  display: grid;
+  grid-template-columns: calc(var(--detail-h) * 2 / 3) minmax(0, 1fr);
+  animation: pop 0.22s ease both;
+}
+
+/* Key art: full width 16:9 on top, fixed text panel below. Narrowed as the
+   viewport gets shorter so the whole thing always fits on screen. */
+[data-shape="wide"] .detail {
+  --detail-w: min(
+    760px,
+    calc(100vw - 2rem),
+    (100dvh - 2rem - var(--text-h)) * 16 / 9
+  );
+  width: var(--detail-w);
+  /* 2px for the border, which box-sizing counts inside the box. */
+  height: calc(var(--detail-w) * 9 / 16 + var(--text-h) + 2px);
+}
+
+[data-shape="wide"] .detail[open] {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) var(--text-h);
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+}
+
+.detail::backdrop {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.detail-art {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+.detail-art::before {
+  content: "";
+  position: absolute;
+  inset: -12%;
+  background: var(--art) center / cover;
+  filter: blur(28px) brightness(0.5);
+}
+
+.detail-art img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.detail-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+  min-height: 0;
+  padding: 1.75rem;
+  overflow: hidden;
+}
+
+[data-shape="wide"] .detail-body {
+  gap: 0.5rem;
+  padding: 1.25rem 1.75rem;
+}
+
+.detail h2 {
+  margin: 0;
+  font-size: 1.6rem;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  padding-right: 2rem;
+}
+
+.detail-meta {
+  color: var(--fg-dim);
+}
+
+.detail-desc {
+  flex: 0 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  margin: 0.25rem 0 0;
+  color: #cfcfd6;
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.detail-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.detail-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1rem;
+  border-radius: 8px;
+  background: var(--fg);
+  color: var(--bg);
+  font-weight: 700;
+  transition: background-color 0.2s ease;
+}
+
+.detail-link:hover {
+  background: var(--accent);
+}
+
+.detail-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: auto;
+  color: var(--fg-dim);
+  font-size: 0.85rem;
+}
+
+.icon-button {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--fg);
+  font: inherit;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.icon-button:hover {
+  border-color: var(--accent);
+}
+
+.icon-button[disabled] {
+  opacity: 0.35;
+  cursor: default;
+  border-color: var(--line);
+}
+
+.detail-close {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  z-index: 1;
+  background: rgba(20, 20, 24, 0.8);
+}
+
+/* ------------------------------------------------------------- narrow --- */
+
+@media (max-width: 720px) {
+  :root {
+    --card-min: 140px;
+  }
+
+  [data-shape="wide"] {
+    --card-min: 220px;
+  }
+
+  .topbar {
+    gap: 1rem;
+  }
+
+  .topbar .wordmark {
+    font-size: 1rem;
+  }
+
+  .search {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .search kbd {
+    display: none;
+  }
+
+  .decades {
+    order: 3;
+    flex: 1 1 100%;
+  }
+
+  .items {
+    gap: 1.25rem 0.75rem;
+  }
+
+  .card-desc {
+    display: none;
+  }
+
+  [data-view="list"] .card-desc {
+    display: block;
+  }
+
+  .detail {
+    --detail-h: calc(100dvh - 2rem);
+    --text-h: 21rem;
+    width: calc(100vw - 2rem);
+  }
+
+  .detail-desc {
+    font-size: 0.95rem;
+  }
+
+  .detail[open] {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) var(--text-h);
+  }
+
+  .detail-body,
+  [data-shape="wide"] .detail-body {
+    padding: 1.25rem;
+  }
+}

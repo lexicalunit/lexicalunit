@@ -42,6 +42,6 @@ for i in *; do
     if [[ $i == $(basename "$0") || $i == hero-* ]]; then
         continue
     fi
-    run "convert '$i' -resize 300x 'hero-${i%%.*}.jpg'"
+    run "convert '$i' -strip -resize 1200x1200\\> -quality 85 -interlace Plane 'hero-${i%%.*}.jpg'"
     run "mv '$i' ~/.Trash"
 done

@@ -1,229 +1,42 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Best of the Best</title>
-    <style>
-      /* page styles */
-      @import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
-      body {
-        font-family: "Space Mono", monospace;
-        display: flex;
-        flex-direction: column;
-      }
-      a {
-        text-decoration: none;
-        color: inherit;
-      }
-      * {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-rendering: optimizelegibility;
-        letter-spacing: -0.25px;
-      }
-
-      /* main styles */
-      main .container {
-        max-width: 470px;
-        padding: 32px;
-        margin: 10px auto;
-        border: 1px solid #eee;
-        box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.06);
-      }
-      main ul {
-        padding-left: 5px;
-        list-style-type: none;
-      }
-      main li {
-        color: #4f4f4f;
-        margin-left: 16px;
-        margin-top: 24px;
-        position: relative;
-        font-size: 16px;
-        line-height: 20px;
-        border-radius: 5px;
-        padding: 1px 1px 1px 10px;
-      }
-      main li:hover {
-        background-color: #f0f0f0;
-      }
-      main li:before {
-        content: "";
-        display: block;
-        height: 10px;
-        width: 10px;
-        border-radius: 50%;
-        border: 2px solid #ddd;
-        position: absolute;
-        top: 4px;
-        left: -20px;
-      }
-      strong,
-      h2 {
-        color: #292929;
-      }
-      main ul.alternating-colors li:nth-child(odd):before {
-        border-color: #ff8772;
-      }
-      main ul.alternating-colors li:nth-child(even):before {
-        border-color: #9dd0ff;
-      }
-      button {
-        appearance: button;
-        width: 100%;
-        background-color: #000;
-        background-image: none;
-        border: 1px solid #000;
-        border-radius: 4px;
-        box-shadow:
-          #fff 4px 4px 0 0,
-          #000 4px 4px 0 1px;
-        box-sizing: border-box;
-        color: #fff;
-        cursor: pointer;
-        display: block;
-        margin: 0;
-        overflow: visible;
-        text-align: center;
-        text-transform: none;
-        touch-action: manipulation;
-        user-select: none;
-        -webkit-user-select: none;
-        /* vertical-align: middle; */
-        white-space: nowrap;
-      }
-      button:focus {
-        text-decoration: none;
-      }
-      button:hover {
-        text-decoration: none;
-      }
-      button:active {
-        box-shadow: rgba(0, 0, 0, 0.125) 0 3px 5px inset;
-        outline: 0;
-      }
-      button:not([disabled]):active {
-        box-shadow:
-          #fff 2px 2px 0 0,
-          #000 2px 2px 0 1px;
-        transform: translate(2px, 2px);
-      }
-      img {
-        margin: 5px auto;
-        display: block;
-        border: 1px solid black;
-      }
-      /* Stand-in for items that have no hero image yet. */
-      .no-hero {
-        margin: 5px auto;
-        width: 200px;
-        height: 300px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px dashed #ccc;
-        border-radius: 4px;
-        color: #a0a0a0;
-        font-size: 13px;
-      }
-      main li em {
-        display: block;
-        color: #6f6f6f;
-        font-style: normal;
-        font-size: 14px;
-      }
-
-      /* Sticky header styles */
-      .sticky-header a:hover {
-        color: #ff8772;
-      }
-      .sticky-header {
-        font-family: Inconsolata, monospace;
-        position: sticky;
-        top: 0;
-        width: 100%;
-        background-color: rgba(0, 0, 0, 0.8);
-        color: #fff;
-        z-index: 1000;
-        border-radius: 4px;
-      }
-      .sticky-header .container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px;
-      }
-      .sticky-header h1 {
-        font-size: 1.5rem;
-      }
-      .sticky-header nav ul {
-        list-style: none;
-        display: flex;
-        gap: 30px;
-      }
-      .sticky-header nav ul li a {
-        color: #fff;
-        text-decoration: none;
-      }
-      /* Hamburger menu styles */
-      .hamburger {
-        display: none;
-        flex-direction: column;
-        cursor: pointer;
-        gap: 5px;
-        padding: 10px;
-        background: transparent;
-        border: none;
-        box-shadow: none;
-        width: auto;
-      }
-      .hamburger:not([disabled]):active {
-        box-shadow: none;
-        transform: none;
-      }
-      .hamburger span {
-        width: 25px;
-        height: 3px;
-        background-color: #fff;
-        border-radius: 2px;
-        transition: 0.3s;
-      }
-      @media (max-width: 768px) {
-        .sticky-header h1 {
-          font-size: 1.2rem;
-        }
-        .hamburger {
-          display: flex;
-        }
-        .sticky-header nav {
-          display: none;
-          position: absolute;
-          top: 100%;
-          left: 0;
-          right: 0;
-          background-color: rgba(0, 0, 0, 0.95);
-          padding: 15px;
-        }
-        .sticky-header nav.open {
-          display: block;
-        }
-        .sticky-header nav ul {
-          flex-direction: column;
-          gap: 15px;
-          padding: 0;
-          margin: 0;
-        }
-        .sticky-header nav ul li {
-          text-align: center;
-        }
-      }
-    </style>
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/www/css/site.css" />
+    <link rel="stylesheet" href="/www/css/lists.css" />
     <script>
-      let asc = false;
+      const TYPES = ["games", "anime", "movies", "books", "shows"];
+      // Lists whose artwork is landscape key art rather than a poster.
+      const WIDE = ["games", "anime"];
+
       let data = [];
       let type = "games"; // default
+      let shown = []; // items currently on screen, in order, for the detail view
+
+      const params = new URLSearchParams(window.location.search);
+      const state = {
+        q: params.get("q") || "",
+        decade: params.get("decade") || "all",
+        sort: params.get("sort") || "newest",
+        view: params.get("view") || storedView() || "grid",
+      };
+
+      function storedView() {
+        try {
+          return localStorage.getItem("lists-view");
+        } catch {
+          return null;
+        }
+      }
 
       function esc(text) {
         return String(text ?? "").replace(
@@ -232,16 +45,42 @@
         );
       }
 
+      const slugify = (title) =>
+        title
+          .normalize("NFKD")
+          .replace(/[̀-ͯ]/g, "")
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-+|-+$/g, "");
+
+      // Same identity admin.js uses: the hero image slug, else the title.
+      const itemSlug = (item) =>
+        (/^hero-(.+)\.jpg$/.exec(item.hero || "") || [])[1] ||
+        slugify(item.title);
+
+      const decadeOf = (item) => Math.floor(item.year / 10) * 10;
+
+      const collator = new Intl.Collator(undefined, {
+        numeric: true,
+        sensitivity: "base",
+      });
+      const titleKey = (item) => item.title.replace(/^(the|an?)\s+/i, "");
+      const surname = (item) => (item.author || "").split(/\s+/).pop();
+      const byTitle = (a, b) => collator.compare(titleKey(a), titleKey(b));
+
+      const SORTS = {
+        newest: (a, b) => b.year - a.year || byTitle(a, b),
+        oldest: (a, b) => a.year - b.year || byTitle(a, b),
+        title: byTitle,
+        "title-desc": (a, b) => byTitle(b, a),
+        author: (a, b) =>
+          collator.compare(surname(a), surname(b)) || a.year - b.year,
+      };
+
       async function fetchData() {
         if (data.length === 0) {
-          // Get type from URL parameter
-          const urlParams = new URLSearchParams(window.location.search);
-          type = urlParams.get("type") || "games";
-
-          // Validate type
-          if (!["games", "anime", "movies", "books", "shows"].includes(type)) {
-            type = "games";
-          }
+          type = params.get("type") || "games";
+          if (!TYPES.includes(type)) type = "games";
 
           const response = await fetch(`${type}/data.json`);
           data = await response.json();
@@ -256,83 +95,317 @@
       }
 
       async function renderPage() {
-        const data = await fetchData();
+        await fetchData();
 
-        const pageTitle = document.querySelector("title");
-        pageTitle.innerHTML = data.title;
+        document.title = `${data.title} · Lexical Unit`;
+        document.querySelector("h1").textContent = data.title;
+        document.body.dataset.shape = WIDE.includes(type) ? "wide" : "tall";
+        document.querySelectorAll(".tabs a").forEach((a) => {
+          if (a.dataset.type === type) a.setAttribute("aria-current", "page");
+          else a.removeAttribute("aria-current");
+        });
 
-        const header = document.querySelector("h2");
-        header.innerHTML = data.title;
+        const hasAuthors = data.items.some((item) => item.author);
+        document.querySelector('.sort option[value="author"]').hidden =
+          !hasAuthors;
+        if (!SORTS[state.sort] || (state.sort === "author" && !hasAuthors)) {
+          state.sort = "newest";
+        }
+        document.querySelector(".sort").value = state.sort;
+        document.querySelector(".search input").value = state.q;
 
-        displayList();
+        renderDecades();
+        setView(state.view);
         populateList();
       }
 
-      function displayList() {
-        const output = document.querySelector(".output");
-        if (!output.querySelector("ul")) {
-          output.innerHTML = `<ul class="alternating-colors"></ul>`;
-        }
-
-        const button = document.querySelector(".sort-toggle");
-        button.innerHTML = asc ? "▲" : "▼";
-        button.setAttribute(
-          "aria-label",
-          asc ? "Sort oldest first" : "Sort newest first",
+      function visibleItems() {
+        return data.items.filter(
+          (item) => item.include !== false || window.adminMode,
         );
+      }
 
-        const ul = document.querySelector(".output ul");
-        ul.style.display = "flex";
-        ul.style.flexDirection = asc ? "column" : "column-reverse";
+      function renderDecades() {
+        const counts = new Map();
+        for (const item of visibleItems()) {
+          const decade = decadeOf(item);
+          counts.set(decade, (counts.get(decade) || 0) + 1);
+        }
+        if (state.decade !== "all" && !counts.has(Number(state.decade))) {
+          state.decade = "all";
+        }
+        const chip = (value, label, count) =>
+          `<button type="button" class="chip" data-decade="${value}"
+             aria-pressed="${String(state.decade) === String(value)}">
+             ${label} <small>${count}</small></button>`;
+        document.querySelector(".decades").innerHTML = [
+          chip("all", "All", visibleItems().length),
+          ...[...counts.keys()]
+            .sort((a, b) => a - b)
+            .map((decade) => chip(decade, `${decade}s`, counts.get(decade))),
+        ].join("");
+      }
+
+      function matches(item, words) {
+        const haystack =
+          `${item.title} ${item.author || ""} ${item.year} ${item.desc}`.toLowerCase();
+        return words.every((word) => haystack.includes(word));
       }
 
       function populateList() {
-        const sortedItems = [...data.items].sort((a, b) =>
-          asc ? a.year - b.year : b.year - a.year,
-        );
-        const fragment = document.createDocumentFragment();
-        const ul = document.querySelector(".output ul");
+        const all = visibleItems();
+        const words = state.q.toLowerCase().split(/\s+/).filter(Boolean);
+        shown = all
+          .filter(
+            (item) =>
+              state.decade === "all" || decadeOf(item) === Number(state.decade),
+          )
+          .filter((item) => matches(item, words))
+          .sort(SORTS[state.sort]);
 
-        sortedItems.forEach((item) => {
-          if (item.include === false && !window.adminMode) return;
-          const li = document.createElement("li");
-          // Identity for admin.js: the hero image name, or the title until the
-          // item has one.
-          li.dataset.item = item.hero || item.title;
-          const query = `"${item.title}" ${item.author || ""} ${data.query}`;
-          const link =
-            `https://www.google.com/search?` +
-            `&btnI=I%27m+Feeling+Lucky&gbv=1&` +
-            `q=${encodeURIComponent(query)}`;
-          const art = item.hero
-            ? `<img alt="${esc(item.title)}" src="${data.images}/${item.hero}" />`
-            : `<div class="no-hero">no image yet</div>`;
-          li.innerHTML = `
-            <a href="${link}" target="_blank" rel="noopener noreferrer">
-              <strong>${esc(item.title)} — ${item.year}</strong>
-              ${item.author ? `<em>${esc(item.author)}</em>` : ""}
-              ${art}
-              <p>${esc(item.desc)}</p>
-            </a>
-          `;
-          fragment.appendChild(li);
+        // Chronological sorts get a heading per decade, unless the decade
+        // filter already narrowed things down to one.
+        const dividers =
+          ["newest", "oldest"].includes(state.sort) && state.decade === "all";
+        const fragment = document.createDocumentFragment();
+        let lastDecade = null;
+
+        shown.forEach((item, index) => {
+          if (dividers && decadeOf(item) !== lastDecade) {
+            lastDecade = decadeOf(item);
+            const count = shown.filter((i) => decadeOf(i) === lastDecade).length;
+            fragment.appendChild(
+              Object.assign(document.createElement("li"), {
+                className: "divider",
+                textContent: `${lastDecade}s · ${count}`,
+              }),
+            );
+          }
+          fragment.appendChild(renderCard(item, index));
         });
 
-        ul.replaceChildren(fragment);
+        document.querySelector(".items").replaceChildren(fragment);
+        document.querySelector(".empty").hidden = shown.length > 0;
+        document.querySelector(".empty-query").textContent = state.q
+          ? `“${state.q}”`
+          : "those filters";
+
+        const years = all.map((item) => item.year);
+        document.querySelector(".stats").innerHTML =
+          shown.length === all.length
+            ? `<b>${all.length}</b> picks · ${Math.min(...years)}–${Math.max(...years)}`
+            : `Showing <b>${shown.length}</b> of ${all.length}`;
+
+        syncUrl();
         if (window.onListRendered) window.onListRendered();
       }
 
-      function toggleSort() {
-        asc = !asc;
-        displayList();
+      function artUrl(item) {
+        // admin.js bumps artVersion after an edit: a replaced image keeps its
+        // file name, and the browser would otherwise show the cached old one.
+        const version = window.artVersion ? `?v=${window.artVersion}` : "";
+        return encodeURI(`${data.images}/${item.hero}`) + version;
       }
 
-      function toggleMenu() {
-        const nav = document.querySelector(".sticky-header nav");
-        nav.classList.toggle("open");
+      function renderCard(item, index) {
+        const li = document.createElement("li");
+        li.className = "card";
+        li.style.setProperty("--i", index);
+        // Identity for admin.js: the hero image name, or the title until the
+        // item has one.
+        li.dataset.item = item.hero || item.title;
+        const art = item.hero
+          ? `<img alt="" src="${artUrl(item)}" loading="lazy" decoding="async"
+               onload="this.classList.add('is-loaded')" />`
+          : `<span class="no-art">no image yet</span>`;
+        const meta = [item.year, item.author].filter(Boolean).map(esc);
+        li.innerHTML = `
+          <button type="button" class="card-hit" data-index="${index}">
+            <span class="art" style="--art: url('${item.hero ? artUrl(item) : ""}')">${art}</span>
+            <span class="card-text">
+              <span class="card-title">${esc(item.title)}</span>
+              <span class="card-meta">${meta.join(" · ")}</span>
+              ${item.desc ? `<span class="card-desc">${esc(item.desc)}</span>` : ""}
+            </span>
+          </button>
+        `;
+        return li;
       }
 
-      window.addEventListener("DOMContentLoaded", renderPage);
+      function syncUrl() {
+        const next = new URLSearchParams({ type });
+        if (state.q) next.set("q", state.q);
+        if (state.decade !== "all") next.set("decade", state.decade);
+        if (state.sort !== "newest") next.set("sort", state.sort);
+        if (state.view !== "grid") next.set("view", state.view);
+        history.replaceState(null, "", `?${next}${location.hash}`);
+      }
+
+      function setView(view) {
+        state.view = view === "list" ? "list" : "grid";
+        document.body.dataset.view = state.view;
+        document.querySelectorAll(".views button").forEach((button) => {
+          button.setAttribute(
+            "aria-pressed",
+            String(button.dataset.view === state.view),
+          );
+        });
+        try {
+          localStorage.setItem("lists-view", state.view);
+        } catch {}
+      }
+
+      // -------------------------------------------------------- detail view
+
+      let detailIndex = -1;
+
+      function openDetail(index) {
+        const item = shown[index];
+        if (!item) return;
+        detailIndex = index;
+        const dialog = document.querySelector(".detail");
+        const query = `"${item.title}" ${item.author || ""} ${data.query}`;
+        const link =
+          `https://www.google.com/search?` +
+          `&btnI=I%27m+Feeling+Lucky&gbv=1&` +
+          `q=${encodeURIComponent(query)}`;
+
+        const art = dialog.querySelector(".detail-art");
+        art.style.setProperty("--art", item.hero ? `url('${artUrl(item)}')` : "none");
+        art.innerHTML = item.hero
+          ? `<img alt="${esc(item.title)}" src="${artUrl(item)}" />`
+          : `<span class="no-art">no image yet</span>`;
+        dialog.querySelector("h2").textContent = item.title;
+        dialog.querySelector(".detail-meta").textContent = [
+          item.year,
+          item.author,
+        ]
+          .filter(Boolean)
+          .join(" · ");
+        const desc = dialog.querySelector(".detail-desc");
+        desc.textContent = item.desc;
+        desc.hidden = !item.desc;
+        const anchor = dialog.querySelector(".detail-link");
+        anchor.href = link;
+        anchor.firstChild.textContent = /trailer/.test(data.query)
+          ? "Watch trailer "
+          : "Look it up ";
+        dialog.querySelector(".detail-count").textContent =
+          `${index + 1} / ${shown.length}`;
+        dialog.querySelector(".detail-prev").disabled = index === 0;
+        dialog.querySelector(".detail-next").disabled =
+          index === shown.length - 1;
+
+        history.replaceState(null, "", `${location.search}#${itemSlug(item)}`);
+        if (!dialog.open) dialog.showModal();
+      }
+
+      function stepDetail(delta) {
+        const next = detailIndex + delta;
+        if (next >= 0 && next < shown.length) openDetail(next);
+      }
+
+      // ------------------------------------------------------------- wiring
+
+      function wire() {
+        const input = document.querySelector(".search input");
+        let typing;
+        input.addEventListener("input", () => {
+          clearTimeout(typing);
+          typing = setTimeout(() => {
+            state.q = input.value.trim();
+            populateList();
+          }, 120);
+        });
+        input.addEventListener("keydown", (event) => {
+          if (event.key === "Escape" && input.value) {
+            input.value = "";
+            state.q = "";
+            populateList();
+          }
+        });
+
+        document.querySelector(".decades").addEventListener("click", (event) => {
+          const chip = event.target.closest(".chip");
+          if (!chip) return;
+          const value = chip.dataset.decade;
+          state.decade =
+            value === state.decade || value === "all" ? "all" : value;
+          renderDecades();
+          populateList();
+        });
+
+        document.querySelector(".sort").addEventListener("change", (event) => {
+          state.sort = event.target.value;
+          populateList();
+        });
+
+        document.querySelector(".views").addEventListener("click", (event) => {
+          const button = event.target.closest("button");
+          if (!button) return;
+          setView(button.dataset.view);
+          syncUrl();
+        });
+
+        document.querySelector(".items").addEventListener("click", (event) => {
+          const hit = event.target.closest(".card-hit");
+          if (hit) openDetail(Number(hit.dataset.index));
+        });
+
+        document.querySelector(".empty button").addEventListener("click", () => {
+          state.q = "";
+          state.decade = "all";
+          input.value = "";
+          renderDecades();
+          populateList();
+        });
+
+        const dialog = document.querySelector(".detail");
+        dialog.querySelector(".detail-prev").addEventListener("click", () => stepDetail(-1));
+        dialog.querySelector(".detail-next").addEventListener("click", () => stepDetail(1));
+        dialog.querySelector(".detail-close").addEventListener("click", () => dialog.close());
+        // A click that lands on the dialog element itself is on the backdrop.
+        dialog.addEventListener("click", (event) => {
+          if (event.target === dialog) dialog.close();
+        });
+        dialog.addEventListener("keydown", (event) => {
+          if (event.key === "ArrowLeft") stepDetail(-1);
+          if (event.key === "ArrowRight") stepDetail(1);
+        });
+        dialog.addEventListener("close", () => {
+          history.replaceState(null, "", location.search);
+          const card = document.querySelector(
+            `.card-hit[data-index="${detailIndex}"]`,
+          );
+          if (card) card.focus({ preventScroll: false });
+        });
+
+        // "/" jumps to search from anywhere that isn't already a text field.
+        document.addEventListener("keydown", (event) => {
+          if (
+            event.key === "/" &&
+            !dialog.open &&
+            !event.target.closest("input, textarea, select, dialog")
+          ) {
+            event.preventDefault();
+            input.focus();
+          }
+        });
+
+        // Give the toolbar a rule once it is pinned over the cards.
+        const toolbar = document.querySelector(".toolbar");
+        new IntersectionObserver(([entry]) => {
+          toolbar.classList.toggle("is-stuck", !entry.isIntersecting);
+        }).observe(document.querySelector(".sentinel"));
+      }
+
+      window.addEventListener("DOMContentLoaded", async () => {
+        wire();
+        await renderPage();
+        // Deep link: /lists?type=movies#alien opens that item.
+        const slug = decodeURIComponent(location.hash.slice(1));
+        if (slug) openDetail(shown.findIndex((item) => itemSlug(item) === slug));
+      });
 
       // Local authoring tools (tools/studio.py). admin.js probes /api/config
       // and stays invisible unless the studio server is answering, so this is
@@ -349,40 +422,95 @@
     </script>
   </head>
   <body>
-    <header class="sticky-header">
-      <div class="container">
-        <h1>Lexical Unit</h1>
-        <button
-          class="hamburger"
-          onclick="toggleMenu()"
-          aria-label="Toggle menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-        <nav>
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/lists?type=games">Best Games</a></li>
-            <li><a href="/lists?type=anime">Best Anime</a></li>
-            <li><a href="/lists?type=movies">Best Movies</a></li>
-            <li><a href="/lists?type=books">Best Books</a></li>
-            <li><a href="/lists?type=shows">Best Shows</a></li>
+    <div class="shell">
+      <header class="topbar">
+        <a class="wordmark" href="/">Lexical&nbsp;Unit</a>
+        <nav aria-label="Lists">
+          <ul class="tabs">
+            <li><a data-type="games" href="/lists?type=games">Games</a></li>
+            <li><a data-type="anime" href="/lists?type=anime">Anime</a></li>
+            <li><a data-type="movies" href="/lists?type=movies">Movies</a></li>
+            <li><a data-type="books" href="/lists?type=books">Books</a></li>
+            <li><a data-type="shows" href="/lists?type=shows">Shows</a></li>
           </ul>
         </nav>
+      </header>
+
+      <main>
+        <div class="intro">
+          <h1>Best of the Best</h1>
+          <p class="stats"></p>
+        </div>
+
+        <div class="sentinel"></div>
+        <div class="toolbar" role="search">
+          <label class="search control">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <circle cx="7" cy="7" r="5" />
+              <path d="M11 11l3.5 3.5" stroke-linecap="round" />
+            </svg>
+            <span class="visually-hidden">Search</span>
+            <input type="search" placeholder="Search" autocomplete="off" />
+            <kbd>/</kbd>
+          </label>
+
+          <div class="decades" aria-label="Filter by decade"></div>
+
+          <label>
+            <span class="visually-hidden">Sort by</span>
+            <select class="sort control">
+              <option value="newest">Newest first</option>
+              <option value="oldest">Oldest first</option>
+              <option value="title">Title A–Z</option>
+              <option value="title-desc">Title Z–A</option>
+              <option value="author">Author</option>
+            </select>
+          </label>
+
+          <div class="views control" role="group" aria-label="Layout">
+            <button type="button" data-view="grid" title="Grid" aria-label="Grid view">
+              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                <rect x="1" y="1" width="6" height="6" rx="1.5" />
+                <rect x="9" y="1" width="6" height="6" rx="1.5" />
+                <rect x="1" y="9" width="6" height="6" rx="1.5" />
+                <rect x="9" y="9" width="6" height="6" rx="1.5" />
+              </svg>
+            </button>
+            <button type="button" data-view="list" title="List" aria-label="List view">
+              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                <rect x="1" y="2" width="14" height="2.5" rx="1" />
+                <rect x="1" y="6.75" width="14" height="2.5" rx="1" />
+                <rect x="1" y="11.5" width="14" height="2.5" rx="1" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <ul class="items"></ul>
+
+        <div class="empty" hidden>
+          <p>Nothing matches <span class="empty-query"></span>.</p>
+          <button type="button">Clear filters</button>
+        </div>
+      </main>
+    </div>
+
+    <dialog class="detail" aria-labelledby="detail-title">
+      <div class="detail-art"></div>
+      <div class="detail-body">
+        <h2 id="detail-title"></h2>
+        <span class="detail-meta"></span>
+        <p class="detail-desc"></p>
+        <div class="detail-actions">
+          <a class="detail-link" target="_blank" rel="noopener noreferrer">Look it up <span aria-hidden="true">↗</span></a>
+          <div class="detail-nav">
+            <span class="detail-count"></span>
+            <button type="button" class="icon-button detail-prev" aria-label="Previous">‹</button>
+            <button type="button" class="icon-button detail-next" aria-label="Next">›</button>
+          </div>
+        </div>
       </div>
-    </header>
-    <main>
-      <div class="container">
-        <h2 style="display: inline-block">Best of the Best</h2>
-        <button
-          class="sort-toggle"
-          type="button"
-          onclick="toggleSort()"
-        ></button>
-        <div class="output"></div>
-      </div>
-    </main>
+      <button type="button" class="icon-button detail-close" aria-label="Close" autofocus>×</button>
+    </dialog>
   </body>
 </html>
