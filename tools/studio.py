@@ -483,23 +483,45 @@ def search_steam(query, config):
     """Steam store search. No API key; PC releases only.
 
     The search hands back a tiny capsule, but every app has the same art at
-    616x353 (close to the lists page's 16:9) under a predictable name.
+    616x353 (close to the lists page's 16:9) under a predictable name. The
+    best few matches also get their store page's gallery: 1920x1080
+    screenshots and the 1920x620 library banner.
     """
     url = "https://store.steampowered.com/api/storesearch/?" + urllib.parse.urlencode(
         {"term": query, "cc": "us", "l": "en"}
     )
     results = []
-    for app in get_json(url).get("items", [])[:12]:
+    for rank, app in enumerate(get_json(url).get("items", [])[:6]):
         tiny = app.get("tiny_image") or ""
-        results.append(
-            candidate(
-                app.get("name"),
-                None,
-                [tiny.replace("capsule_231x87", "capsule_616x353")] if tiny else [],
-                "Steam",
-            )
-        )
+        images = [tiny.replace("capsule_231x87", "capsule_616x353")] if tiny else []
+        year = None
+        if rank < GALLERY_MATCHES:
+            details = steam_details(app.get("id"))
+            # DLC, soundtracks and tools match a search as well as the game.
+            if details.get("type") not in (None, "game"):
+                continue
+            images += steam_gallery(app.get("id"), details)
+            found = YEAR_IN_TEXT.search((details.get("release_date") or {}).get("date") or "")
+            year = int(found.group()) if found else None
+        results.append(candidate(app.get("name"), year, images, "Steam"))
     return results
+
+
+def steam_details(app_id):
+    url = "https://store.steampowered.com/api/appdetails?" + urllib.parse.urlencode(
+        {"appids": app_id, "cc": "us", "l": "en"}
+    )
+    try:
+        entry = get_json(url).get(str(app_id)) or {}
+    except ApiError:
+        return {}
+    return entry.get("data") or {} if entry.get("success") else {}
+
+
+def steam_gallery(app_id, details):
+    shots = [shot.get("path_full") for shot in details.get("screenshots") or []][:6]
+    hero = f"https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/{app_id}/library_hero.jpg"
+    return shots + ([hero] if details else [])
 
 
 def search_apple_books(query, config):
